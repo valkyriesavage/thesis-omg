@@ -1,0 +1,108 @@
+\documentclass{ucbthesis}
+\usepackage{biblatex}
+\usepackage{url}
+
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+pdftitle={Fabbed to Sense : a thesis by Valkyrie A. Savage},
+pdfauthor={Valkyrie A. Savage},
+pdfkeywords={},
+bookmarksnumbered,
+pdfstartview={FitH},
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+breaklinks=true,
+}
+
+% Double spacing, if you want it.
+% \def\dsp{\def\baselinestretch{2.0}\large\normalsize}
+% \dsp
+
+% If the Grad. Division insists that the first paragraph of a section
+% be indented (like the others), then include this line:
+% \usepackage{indentfirst}
+
+\bibliography{references}
+
+\hyphenation{mar-gin-al-ia}
+
+\begin{document}
+\input{inputmacros}
+
+% Declarations for Front Matter
+
+\title{Fabbed to Sense: Co-Design of Geometry and Sensing Algorithms for Interactive Objects}
+\author{Valkyrie Savage}
+\degreesemester{Fall}
+\degreeyear{2015}
+\degree{Doctor of Philosophy}
+\chair{Professor Bj\"orn Hartmann}
+\othermembers{Professor Carlo S\'equin \\
+Professor Eric Paulos\\
+Professor Paul Wright}
+\numberofmembers{4}
+\prevdegrees{B.A., B.S. (Indiana University Bloomington) 2010}
+\field{Computer Science}
+\campus{Berkeley}
+
+\maketitle
+\approvalpage
+\copyrightpage
+
+\include{abstract}
+
+\begin{frontmatter}
+
+\begin{dedication}
+\null\vfil
+\begin{center}
+To ???\\\vspace{12pt}
+And why?
+\end{center}
+\vfil\null
+\end{dedication}
+
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+
+\begin{acknowledgements}
+Many, many thanks are due the committee for their dedication and time in helping guide me through both the preparation of this document and the journey of graduate school itself. \valkyrie{elaborate on Bjoern ;p}
+
+My collaborators at various times, including Berkeley undergraduates Xiaohan Zhang, Colin Chang, and Jingyi Li; Autodesk researchers Ryan Schmidt, Tovi Grossman, and George Fitzmaurice; Adobe researchers Dan Goldman, Gautham Mysore, and Wilmot Li; and MIT-student-cum-Stanford-professor Sean Follmer; have aided me at every turn. Without them this work would naturally not have been possible.
+
+I also owe a karmic debt to all Juggers, from the Berkeley Riot and elsewhere, with whom I have interacted over the past year and a half. Lacking a community with such a sense of play, I doubt I would have maintained my sanity long enough to complete this opus.
+
+Of course, I thank my parents (Howard and Angela Savage), my sister (Venus Savage), and my husband (Evan Savage) for believing in me. $\heartsuit$
+\end{acknowledgements}
+
+\end{frontmatter}
+
+\pagestyle{headings}
+
+% (Optional) \part{First Part}
+
+\include{introduction}
+\include{fabrication}
+\include{relatedwork}
+\include{midas}
+\include{lamello}
+\include{sauron}
+\include{conclusion}
+
+% \appendix
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,120 @@
+% !TEX root = thesis.tex
+\chapter{Introduction}
+
+\begin{quote}
+Design is not just what it looks like and feels like. Design is how it works.
+
+--- Steve Jobs
+\end{quote}
+
+Our environment is replete with products that have dedicated physical user interfaces like game controllers, musical instruments or personal medical devices. While the ubiquity of smart phones has led to a rise in touchscreen applications, retaining physicality has important benefits such as tactile feedback and high performance manipulation \cite{klemmer-bodies}. For example, gamers prefer physical input for speed and performance, musicians for virtuosity and control. Rapid additive manufacturing technologies enable designers and makers (henceforth we refer to both groups jointly as ``makers'') to quickly turn CAD models of such future devices into tangible prototypes. While such printed form prototypes can convey the look and feel of a physical device, they are fundamentally passive in that they do not sense or respond to manipulation by a user. Building integrated prototypes that also exhibit interactive behavior requires adding electronic sensing components and circuitry to the mechanical design.
+
+Existing research has developed electronic toolkits that lower the threshold of making physical prototypes interactive \cite{arduino,greenberg-phidgets}. However, such toolkits still require makers to manually assemble printed parts and sensors. Such assembly may also require significant changes to a 3D model (e.g., to add fasteners or split an enclosure into two half shells). Detailed electro-mechanical co-design is time-consuming and cumbersome and mismatched with the spirit of rapid prototyping. Alternatively, makers may instrument the environment with motion capture \cite{akaoka-displayobjects} or depth cameras \cite{wilson-depth} to add interactivity, but these approaches limit makers to testing prototypes inside the lab in small, restricted areas.
+
+\emph{We aim to uncover the most cost-effective, fast, and flexible ways of sensing rapid-prototyped input devices.} This suggests several requirements:
+\begin{enumerate}
+\item \textbf{cost-effective} : neither the fabrication means and techniques required for sensing nor the sensor itself should be prohibitively expensive to makers, and environmental sensors (e.g., those in an average smart phone) should be leveraged where possible. We focus on \emph{single-sensor} techniques, where sensing of multiple user inputs can be achieved by affixing a sensing apparatus to a single point. \valkyrie{those aren't exactly the same; reword}
+\item \textbf{fast} : fabrication and assembly of senseable devices should not take significantly longer than comparable passive devices, and necessary digital modifications should be performed automatically when complex or be reduced to templates when simple.
+\item \textbf{flexible} : the means of sensing a prototype object should not impose undue burden on the possible designs of that object. Sensing techniques should accommodate a wide variety of input types (e.g., buttons, sliders, and dials) and body types (e.g., convex, concave, 3D).
+\end{enumerate}
+We propose a novel way of ensuring these properties: we create and modify digital design files, then fabricate them using digital fabrication machines. This creates a \emph{link between the digital and physical models}, which we leverage to improve our sensing capabilities.
+
+\section{Contributions}
+
+This thesis explores the realm of physically prototyping tangible input devices using digital fabrication machines. We have built several prototype design and sensing systems designed to test different parts of the design space. Thus, this thesis makes the following contributions:
+
+\begin{enumerate}
+\item \valkyrie{a summary of today's fabrication machine capabilities and how they tie to sensing systems?}
+\item Midas, a method to create custom-shaped, flexible capacitive touch sensors by synthesizing sensor pads and auto-routing connections, as well as instructions for assembly and use, from a high-level graphical specification \begin{enumerate}
+    \item a design tool using this method to enable users to to fabricate, program, and share touch-sensitive prototypes
+    \item an evaluation demonstrating Midas’s expressivity and utility to designers
+    \end{enumerate}
+\item Lamello, a technique which integrates algorithmically-generated audio-producing tine structures into movable components, creating passive tangible inputs that do not require training examples for accurate sensing. \begin{enumerate}
+    \item an evaluation which demonstrates that the fundamental frequencies of these generated tine structures can be accurately predicted
+    \item a design pipeline which predicts tine frequencies and senses user manipulation of components in real time
+    \item a discussion of information encoding techniques useful for this technique \valkyrie{not really a contribution? just a summary...}
+    \end{enumerate}
+\item Sauron, a design tool enabling users to
+rapidly turn 3D models of input devices into interactive 3D printed prototypes where a single camera senses input \begin{enumerate}
+    \item a method for tracking human input on physical components using a single camera placed inside a hollow object
+    \item two algorithms for analyzing and modifying a 3D model’s internal geometry to increase the range of manipulations that can be detected by a single camera.
+    \item an informal evaluation of our implementation of these techniques usable on models constructed in a professional CAD tool.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Dissertation Sketch}
+
+This section presents a brief sketch of the structure of this dissertation by chapters.
+
+This dissertation first investigates the capabilities of modern digital fabrication machines and discusses single-sensor techniques compatible with those capabilities. Second, a solid foundation of related work is laid out. We then discuss three instances of analysis and design tools that help users design, fabricate, assemble, and \emph{use} input devices sensed in a variety of ways; for each technique we demonstrate its flexibility for use in many types of input devices. Finally, we conclude with suggestions for future work.
+
+\subsection{Fabrication \& Sensing (Chapter 2)}
+
+This chapter explores modern digital fabrication machines and the properties that can be employed in objects they fabricate. We discriminate properties that are commonly available in hobbyist machines from those that require a high-end professional machine.
+
+Chapter 2 further discusses single-sensor techniques compatible with those capabilities, as well as what makes each technique promising or challenging. This thesis ultimately selects a few points to further examine in this space.
+
+\subsection{Related Work (Chapter 3)}
+
+We situate this thesis in the realm of what's been done.
+
+\subsubsection{Graphics/Optimization}
+Link to graphics/optimization - most related, allows linking of digital model to physical object with prediction of properties
+
+\subsubsection{Sensing Digitally-Fabricated Devices}
+Link to ways of sensing 3D printed devices - acoustruments, T\&A, etc., with a description of why ML is terrible
+
+\subsubsection{Prototyping}
+Link to prototyping research - how are prototypes made? programmed? low-fi, high-fi?
+
+\subsection{Designing and Fabricating Custom Capacitive Touch Sensors (Chapter 4)}
+
+\valkyrie{Bjoern's these things are really long, and include photos and stuff. basically... will need more detail.}
+
+Our first exploration examines fabrication of 2D conductive materials sensed capacitively.
+
+Midas pushes towards a world in which prototyping physical interactive devices is as easy as prototyping GUI devices. It builds upon the drag-and-drop paradigm for creating interactive parts, and generates 2D fabricatable design files. These files can then be made from a conductive material and sensed using an automatically-configured microcontroller board. Midas also offers support for programming the input devices designed via PBD and websockets.
+
+very popular
+
+thin
+
+easy to fab
+
+
+\subsection{Passive Acoustic Sensing for Tangible Input Components (Chapter 5)}
+
+Second, this thesis dives into an examination of acoustic-based sensing for devices fabricated in 2D, 3D, or a combination. The Lamello project investigates the use of tine-like structures for repeatable and predictable audio frequency generation. These tines can be printed at interaction points (e.g., under the path of a human input slider) such that they are struck when a user manipulates input components. The mechanical vibrations created by striking the tines can be detected with a contact microphone and classified using frequency analysis.
+
+Our experiments confirm that these structures behave in predictable ways in spite of the non-uniform nature of the materials that comprise them. We also discuss, using several exemplars, techniques for integrating the tines into existing input component designs, as well as information encoding principles for tine generation.
+
+mechanical input (not flat)
+
+fab in 2d or 3d
+
+no line of sight constraints
+
+\subsection{Embedded Single-Camera Sensing of Printed Physical User Interfaces (Chapter 6)}
+
+Finally, we explore full 3D input devices sensed using computer vision. Sauron is a design and sensing toolkit for creating 3D printed input devices---which can include components like joysticks or dials---which can be sensed with a single embedded camera. The Sauron tool makes automatic modifications to allow for this sensing, reconfiguring the \emph{interior} parts of the inputs and performing interference simulation.
+
+very flexible
+
+mechanical input (not flat)
+
+easier to model/sense nuances than acoustics
+
+\subsection{Conclusion \& Future Work (Chapter 7)}
+
+The final piece of this thesis reviews the contributions described and discusses the most promising combinations of fabricatable properties and sensing techniques to be next explored in future work.
+
+\section{Statement of Multiple Authorship and Prior Publication}
+
+The research presented in this dissertation was not undertaken by me alone. While I initiated
+and led all projects described herein, I must acknowledge the contributions of my talented group of collaborators: without their efforts, this research could not have been realized in its current scope.
+
+In particular, Midas's routing features were implemented by Xiaohan Zhang, and the video was created by Lora Oehlberg. Andrew Head performed much debugging and audio testing on the Lamello project, and that project benefited from the wisdom of my collaborators Dan Goldman (who provided the initial idea), Gautham Mysore, and Wilmot Li at Adobe. Sauron's computer vision was implemented by Colin Chang, and many thanks are due Mark Oehlberg for assisting in the creation of the necessary circuitboards for that project.
+
+My advisor, Bj\"orn Hartmann, provided invaluable advice and guidance on all projects detailed in this document.
+
+This dissertation is partially based on papers previously published in ACM conference proceedings; I am the primary author on all publications. In particular, Midas was published at UIST 2012 \cite{Savage-midas}; Lamello at CHI 2014 \cite{Savage-lamello}; and Sauron at UIST 2013 \cite{Savage-sauron}.
