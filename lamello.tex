@@ -1,35 +1,196 @@
 \chapter{Lamello: Tone-Based Acoustic Sensing of Fabricated Mechanisms}
 
-\section{Introduction}
+\section{Preamble}
+Moving towards more complex user interactions and sensing mechanisms, this chapter describes Lamello, which predicts the vibrational frequencies of 3D geometry and links those predictions to an acoustic sensing system. Lamello can be used to design interfaces with rich tangible feedback provided by mechanical input components that can be manipulated by users.
 
 How is Lamello related to other projects in thesis?
 
-How are capacitive interfaces important?  How are they seen today?
+We describe \emph{Lamello}, an approach for creating tangible input components that recognize user interaction via passive acoustic sensing. Lamello employs comb-like structures with varying-length tines at interaction points (e.g., along slider paths). Moving a component generates tine strikes; a real-time audio processing pipeline analyzes the resultant sounds and emits high-level interaction events. Our main contributions are in the co-design of the tine structures, information encoding schemes, and audio analysis. We demonstrate 3D printed Lamello-powered buttons, sliders, and dials. 
 
-\subsection{The Geometry-Sensing Link}
+\section{Introduction}
+How are mechanical interfaces important?  How are they seen today?
 
-How does linking geometry to sensing help in this case?
+Tangible input components like buttons and sliders
+have advantages over ``flat'' interfaces like touch screens. They are critical for eyes-free interaction and muscle memory, and can improve task speed and precision \cite{Klemmer-bodies}.  Such devices typically comprise integrated assemblies of electronics, enclosures, and microcontroller code.
 
-\subsection{Users}
+Recently, researchers have begun to explore acoustically sensing interactions -- such as scratching -- with digitally-fabricated objects that encode information in surface textures~\cite{Harrison-acousticbarcodes,Murray-Smith-stane}. In this paper, we extend this line of work from sensing surface features to sensing interactions with tangible components that users can push, slide, and turn.
 
-\section{The Lamello Toolkit}
+Our technique, Lamello, integrates algorithmically-generated tine structures into movable components to create passive tangible inputs (Figure \ref{fig:pretty-components}). Manipulating these inputs creates sounds which can be captured using an inexpensive contact microphone and interpreted using real-time audio signal processing. Lamello predicts the fundamental frequency of each tine based on its geometry: thus, recognition does not require training examples. The decoded high-level events can then be forwarded to interactive applications. The name ``Lamello'' is derived from the Lamellophone family of instruments, which create sound through vibrating tongues of varying lengths. 
 
-\subsection{Designing with Lamello}
+Recognizing mechanically-generated sound for input has important limitations---only movement generates sound, so steady state cannot be sensed---but also appealing characteristics: Components can be fabricated from a single material (e.g., 3D printed ABS plastic), and ``wiring'' only requires attaching a microphone. In this paper, we provide design and fabrication guidelines, and demonstrate several components that use the Lamello approach. Our evaluation indicates that training-free recognition is possible, though our recognizer only has useful accuracy for a subset of tested tines.
 
-\subsection{Implementation}
+    \subsection{The Geometry-Sensing Link}
+    Lamello uses a predictive model which connects the geometry of a cantilevered beam (i.e., the ``tines'' used in this project) to a fundamental frequency when vibrated. We demonstrate the model, which assumes the beam is uniform, to be useful, in spite of the fact that tines fabricated on a 3D printer are not composed of uniform material. This pre-print modelling of frequencies allows training-free sensing of fabricated input devices using a microphone.
+    
+\section{Designing with Lamello}
+    \valkyrie{the thing about lamello is that of course it doesn't have a cad tool in the same way. this will be interesting to write.} A design example. A designer wishes to test out a passive environmental input device for light controls. This input should be in the form of a slider, unpowered, and sensed using an existing sensor.
+    
+    The designer opens Google SketchUp, a freely-available, beginner-friendly CAD tool. He doesn't have much experience with SketchUp, but he can successfully construct a series of thin extrusions along a surface (Lamello offers scripts that can generate these extrusions automatically in openSCAD, however they can be built by hand in another program as long as they conform to a set of guidelines). These ``tines'' have varying dimensions, which he notes down. Once he finishes with the tines, he imports an STL file containing the geometry for the slider striker and track. He virtually snaps these into place such that the striker can excite the tines after printing.
+    
+    He sends his slider design to a 3D printer for fabrication. While it prints, he enters the dimensions he noted down and the material he's using (in this case, ABS plastic in his 3D printer) into a simple GUI interface which predicts the resonant frequencies of the tines. He copy/pastes these values into the sensing software. \valkyrie{obviously it should be a part of the sensing software. c'mon.} \valkyrie{this story is actually easier to tell if he uses openSCAD, since we can automatically generate all this shit on the backend. rewrite to use openSCAD.}
+    
+    When his slider comes out of the printer, he sets it on the table next to his laptop and starts the Lamello sensing software. As he slides the striker past tines, the sound is detected by the microphone in his laptop, which displays an illustration of the slider, with detected tine strikes highlighted. \valkyrie{agh, we should make a phone app for this to be compelling. maybe use another example (or code in android??)}. He takes the OSC output of the software and uses it to control his lighting system.
+    
+    \valkyrie{this would be a cool demo, actually. can we get a phillips smart bulb or w/e those are called?}
 
-\subsubsection{The Lamello CAD tool}
+    \subsection{Users}
+    
+    Lamello targets makers, who are somewhat familiar with 3D modeling tools (e.g., SolidWorks or Google SketchUp for solid modeling, or openSCAD for programmatic design generation) and 3D printing.
+    
+    Lamello can generate tine sets automatically; input component geometry---that is, everything that is \emph{not} a tine, like the track and header of a slider---can be derived from its library. The tines and additional geometry must right now be combined by hand. For more control, power users with a more sophisticated understanding of solid modeling programs can generate their own tines by hand (and use Lamello to predict their final frequencies), or create new types of input component geometry to use with their tines.
+    
+    Once a designer fabricates an input device, the process of preparing it for sensing is simple: he simply places it near a microphone. Users do not need any experience with coding or audio. Lamello automatically predicts the frequencies of tines generated using our scripts, and provides a GUI interface to predict frequencies for hand-built tine geometries. The sensing software only needs the frequency and ordering information from the tines (again, this ordering information can be automatically-derived if a user uses our scripts) \valkyrie{then why wouldn't they use our scripts?}.
+    
+    To use the output of the sensing tool to control a program, users can either use a record-and-reply style of interaction (for example, using a graphical tool like OSCulator which requires no programming) or accept OSC messages in their own software for more nuanced control.
 
-\subsubsection{The Lamello Hardware}
+    \subsection{Manuals and Instruction Sets to Assist in Assembly}
+
+        \subsubsection{Post-Proc}
+
+        \subsubsection{Setting up Sensing}
+
+        \subsubsection{Using Sensing Data}
+
+\section{Implementation}
+
+    \subsection{The Lamello CAD tool}
+    
+    Lamello relies mainly on just two components: an openSCAD script which generates tine geometry, and a python script which predicts the fundamental frequency of a tine based on its geometry. These tools can be executed together (the openSCAD script automatically calls the python script) or separately (in the case that a user creates his own tine geometry by hand).
+    
+        \subsubsection{Tine Geometry Generation}
+    
+        Through the process of testing and refining our own designs for geometry, we extracted several high-level requirements for tines, described below. These requirements are enshrined in a simple geometry generation script, which we implemented in openSCAD. The script only requires that the user input the number of tines to be generated and the shape in which to generate them: the output is a 3D object which has that many tines of differing fundamental frequencies, which are arranged either linearly or radially. \valkyrie{definitely need a figure, haha}
+    
+        \emph{Generating sounds with tines}
+
+        To generate sounds, we embed tine structures in input components (Figure \ref{fig:pretty-components}). Our tines are rectangular beams, attached at their base to the component and free to deflect at their top. Interacting with a component causes tine plucks; these vibrate the body of the component and are captured by a contact microphone.
+Tines can be arranged in configurations supporting different interactions (e.g., sliding, rotating, pressing).
+
+
+            \valkyrie{remove this from here and integrate better below}\textbf{Acoustic uniqueness:} Different tines should generate unique, distinguishable sounds: we achieve this by systematically varying tine geometry. We model a vibrating tine as an ideal cantilevered beam of uniform density in free vibration~\cite{Meirovitch-analytical}: 
+
+            \begin{center}
+             $f_0 = \frac{1.875^2 \sqrt{\frac{E\frac{bh^3}{12}}{\rho (bh)L^4}}}{2\pi}$Hz
+            \end{center}
+
+            Fundamental frequency ($f_0$) is governed by several variables: tine breadth ($b$), height ($h$), and length ($L$), as well as material properties (density $\rho$, Young's Modulus $E$). Our designs keep $b$ and $h$ constant, varying $L$ to achieve different frequencies.
+
+            Our prototypes are 3D printed, resulting in non-uniform material deposition. To test the applicability of our model, we compared predicted and observed $f_0$ for several tines printed on two uPrint SE Plus FDM printers using Stratasys ABSplus-P430 thermoplastic. We find an appropriate material parameter by minimizing the error between observations and measurements. Fitted $E$ values ranged from $9500$ to $15500$ based on print orientation and particular printer.  The remaining error $\mu= 69.0Hz$ ($\sigma= 112.5Hz$) shows our model usefully applies to printed tines. Estimation of $f_0$ can be further improved by measuring post-print with calipers.
+
+            \textbf{Physical and fabrication constraints:} A tine which is too thin can break or hit adjacent tines when struck, reducing recognition accuracy.  A too-thick tine requires greater striking force, interfering with a user's experience.
+In our experience, ABS tines need $1$:$25 < thickness:length < 1$:$2$ to have appropriate stiffness for classification.  Tine performance also depends on print orientation: on fused-deposition modeling machines, a tine is most reliable with its length laid in the printer's XY plane, as it is thus filled by a continuous extrusion.  
+When printed in Z, tines can break as layers at the bottom of the tine separate from the base.
+Filleting can mitigate this problem, but may reduce the accuracy of the vibration model in predicting $f_0$.  We fabricated tines with $f_0$ between $400Hz$ ($4mm$ x $50mm$ x $6mm$) and $4000Hz$ ($7.25mm$ x $6.0mm$ x $1.2mm$).  
+Minimum tine size is determined by printer limitations: our printers have Z resolution $0.254mm$ and minimum XY feature size $1.194mm$.
+
+            \textbf{Alternative fabrication techniques:} Other printing or fabrication processes may not be orientation dependent. We have laser cut tines from Polyoxymethylene (Delrin) sheets, integrating these tine strips into 3D printed components.  Tine sizes are similar, as laser cutting caused heat deflection in smaller feature sizes. Smaller tine sizes and higher frequencies may be achievable using different fabrication processes, e.g., injection molding or MEMS micromachining.
+
+            \textbf{Encoding information:} We use unique $f_0$s to differentiate buttons and directions on a D-pad. For position sensing, $f_0$ can increase across the range of motion (Figure \ref{fig:sliders} left). If more distinctions are needed than can be reliably recognized by varying $f_0$, we create de Bruijn patterns~\cite{DeBruijn-seqproof} (Figure \ref{fig:sliders} right).  A de Bruijn sequence $D(k,n)$ is one which, given an alphabet size $k$ and a subsequence length $n$, contains each subsequence exactly once: we can uniquely infer sequence position from $n$ recognitions.
+This requires fewer $f_0$s, but more contiguous tine recognitions to determine user input.
+
+        \subsubsection{Integration of tines into larger components}
+
+        We augmented several traditional input components: buttons, sliders, dials, and joysticks. Each has a ``striker" attached to the user-facing ``handle'' (Figure \ref{fig:allcomponents}).  These strikers overlap with tine ends by $0.25-1mm$, balancing clear signal generation with easy interaction. Through testing, we determined that a triangular striker profile works best.
+The button has a rib around its shaft that strikes a tine when a user depresses it.  The slider has a wiper that overlaps with the tops of tines (tines have different lengths, but are top-aligned).  The dial works similarly, arranged radially rather than linearly.  The D-pad derives from the button: a striker strikes a tine on the base as the user moves the handle up, down, left, or right.
+
+        \subsubsection{Tine Frequency Prediction}
+        
+        
+
+        We model a vibrating tine as an ideal cantilevered beam of uniform density in free vibration~\cite{Meirovitch-analytical}: 
+
+            \begin{center}
+             $f_0 = \frac{1.875^2 \sqrt{\frac{E\frac{bh^3}{12}}{\rho (bh)L^4}}}{2\pi}$Hz
+            \end{center}
+
+            Fundamental frequency ($f_0$) is governed by several variables: tine breadth ($b$), height ($h$), and length ($L$), as well as material properties (density $\rho$, Young's Modulus $E$). Our script's generated tine designs keep $b$ and $h$ constant, varying $L$ to achieve different frequencies. This makes the strength required to strike each tine roughly equal, though a designer could make some tines thicker (and thus harder to strike) than others if desired.
+
+            Our prototypes are 3D printed, resulting in non-uniform material deposition. To test the applicability of our model, we compared predicted and observed $f_0$ for several tines printed on two uPrint SE Plus FDM printers using Stratasys ABSplus-P430 thermoplastic. We find an appropriate material parameter by minimizing the error between observations and measurements. Fitted $E$ values ranged from $9500$ to $15500$ based on print orientation and particular printer.  The remaining error $\mu= 69.0Hz$ ($\sigma= 112.5Hz$) shows our model usefully applies to printed tines. Estimation of $f_0$ can be further improved by measuring post-print with calipers. \valkyrie{remove this from above and integrate better here}
+
+    This prediction of fundamental frequency can also be run separately on user-entered tine geometries.
+
+    \subsection{The Lamello Hardware}
+    
+    On the hardware side, Lamello requires both the fabricated input components and the sensing mechanism (i.e., the microphone).
+    
+    \subsubsection{Audio Generation and Processing}
+
+There are two main challenges in developing a passive acoustic sensing technique that supports a variety of input controls: designing the physical mechanisms for generating sounds and developing recognition algorithms that can interpret those sounds in the intended manner (Figure \ref{fig:system}). 
+
+\emph{Generating sounds with tines}
+
+\valkyrie{gotta remove this part, somewhat. it's above now.}To generate sounds, we embed tine structures in input components (Figure \ref{fig:pretty-components}). Our tines are rectangular beams, attached at their base to the component and free to deflect at their top. Interacting with a component causes tine plucks; these vibrate the body of the component and are captured by a contact microphone.
+Tines can be arranged in configurations supporting different interactions (e.g., sliding, rotating, pressing).
+
+
+\textbf{Acoustic uniqueness:} Different tines should generate unique, distinguishable sounds: we achieve this by systematically varying tine geometry. We model a vibrating tine as an ideal cantilevered beam of uniform density in free vibration~\cite{Meirovitch-analytical}: 
+
+\begin{center}
+ $f_0 = \frac{1.875^2 \sqrt{\frac{E\frac{bh^3}{12}}{\rho (bh)L^4}}}{2\pi}$Hz
+\end{center}
+
+Fundamental frequency ($f_0$) is governed by several variables: tine breadth ($b$), height ($h$), and length ($L$), as well as material properties (density $\rho$, Young's Modulus $E$). Our designs keep $b$ and $h$ constant, varying $L$ to achieve different frequencies.
+
+Our prototypes are 3D printed, resulting in non-uniform material deposition. To test the applicability of our model, we compared predicted and observed $f_0$ for several tines printed on two uPrint SE Plus FDM printers using Stratasys ABSplus-P430 thermoplastic. We find an appropriate material parameter by minimizing the error between observations and measurements. Fitted $E$ values ranged from $9500$ to $15500$ based on print orientation and particular printer.  The remaining error $\mu= 69.0Hz$ ($\sigma= 112.5Hz$) shows our model usefully applies to printed tines. Estimation of $f_0$ can be further improved by measuring post-print with calipers.
+
+\textbf{Physical and fabrication constraints:} A tine which is too thin can break or hit adjacent tines when struck, reducing recognition accuracy.  A too-thick tine requires greater striking force, interfering with a user's experience.
+In our experience, ABS tines need $1$:$25 < thickness:length < 1$:$2$ to have appropriate stiffness for classification.  Tine performance also depends on print orientation: on fused-deposition modeling machines, a tine is most reliable with its length laid in the printer's XY plane, as it is thus filled by a continuous extrusion.  
+When printed in Z, tines can break as layers at the bottom of the tine separate from the base.
+Filleting can mitigate this problem, but may reduce the accuracy of the vibration model in predicting $f_0$.  We fabricated tines with $f_0$ between $400Hz$ ($4mm$ x $50mm$ x $6mm$) and $4000Hz$ ($7.25mm$ x $6.0mm$ x $1.2mm$).  
+Minimum tine size is determined by printer limitations: our printers have Z resolution $0.254mm$ and minimum XY feature size $1.194mm$.
+
+\textbf{Alternative fabrication techniques:} Other printing or fabrication processes may not be orientation dependent.
+We have laser cut tines from Polyoxymethylene (Delrin) sheets, integrating these tine strips into 3D printed components.  Tine sizes are similar, as laser cutting caused heat deflection in smaller feature sizes. Smaller tine sizes and higher frequencies may be achievable using different fabrication processes, e.g., injection molding or MEMS micromachining.
+
+\textbf{Encoding information:} We use unique $f_0$s to differentiate buttons and directions on a D-pad.
+For position sensing, $f_0$ can increase across the range of motion (Figure \ref{fig:sliders} left). If more distinctions are needed than can be reliably recognized by varying $f_0$, we create de Bruijn patterns~\cite{DeBruijn-seqproof} (Figure \ref{fig:sliders} right).  A de Bruijn sequence $D(k,n)$ is one which, given an alphabet size $k$ and a subsequence length $n$, contains each subsequence exactly once: we can uniquely infer sequence position from $n$ recognitions.
+This requires fewer $f_0$s, but more contiguous tine recognitions to determine user input.
+
+\subsubsection{Integration of tines into larger components}
+
+We augmented several traditional input components: buttons, sliders, dials, and joysticks. Each has a ``striker" attached to the user-facing ``handle'' (Figure \ref{fig:allcomponents}).  These strikers overlap with tine ends by $0.25-1mm$, balancing clear signal generation with easy interaction. Through testing, we determined that a triangular striker profile works best.
+The button has a rib around its shaft that strikes a tine when a user depresses it.  The slider has a wiper that overlaps with the tops of tines (tines have different lengths, but are top-aligned).  The dial works similarly, arranged radially rather than linearly.  The D-pad derives from the button: a striker strikes a tine on the base as the user moves the handle up, down, left, or right.
+
+\subsubsection{Audio processing pipeline}
+The audio signal of a tine strike is characterized by an initial transient---a short high energy sound across a wide range of frequencies---followed by free vibration with a local long-decay energy peak at the tine's resonant frequency (Figure \ref{fig:transient}). Conceptually, our recognizer detects a transient, finds the dominant resonant frequency after the transient passes, and compares it to predicted tine frequencies.
+
+Our audio processing pipeline, written in Python, uses basic frequency-domain features for classification. We sample our contact microphone at $16000Hz$.  Our frames are 2048 samples ($128ms$), and our hop length (offset between successive, overlapping frames) is 800 samples ($50ms$), for a frame overlap of 61\%. Analyzing a frame takes $5ms$, plus additional latency incurred by sound hardware. In addition to the real-time audio stream, our recognition algorithm also takes an ordered list of $(id_i,{f_0}_i)$ tuples describing the tine ordering and fundamental frequencies of a component as input.
+
+For each frame, we first determine if a tine strike is present using a standard onset detector (with an empirically-determined amplitude threshold). Once an onset is detected, we wait 2 frame hops for the transient response to pass.
+We classify the subsequent frame (computation time: $5ms$).  Our best-case onset-to-classification latency is therefore $2 * 50ms + 5ms = 105ms$.   In practice, we have seen latency of $107.3ms$ ($\sigma$=$9.67ms$).  
+Our sound card and the \emph{PySoundCard}
+driver introduce latency as they collect and report blocks: one could reduce overhead with optimized sound drivers and sample block sizes.
+
+
+To classify, we compute a Fast Fourier Transform on the window, then normalize FFT bin values to represent fractions of overall audio energy. For each tine $id_i$, we generate a new metric:  the dot product of the scaled FFT and a Gaussian centered at the bin for ${f_0}_i$, representing the fraction of audio energy $e_i$ in the neighborhood of ${f_0}_i$. To account for lower energy at higher frequencies, we use a scaling factor proportional to the frequency and a $\sigma$ for the Gaussians empirically determined per component, giving an adjusted list of ${e_i}_{adj}$. 
+
+Mapping a recognized tine identity $id_R=argmax({e_i}_{adj})$ to user actions is straightforward. For buttons and joysticks, $id_R$ maps directly to a discrete input (press, up, down, left, or right). Similarly, for dials and sliders that encode position with linearly increasing tine lengths, $id_R$ maps to a unique position. For dials and sliders that use a de Bruijn sequence $D(k, n)$, we use each sequence of $n$ recognized tines to determine the corresponding position within the sequence. For buttons and joysticks, $id_R=argmax(p_R)$ maps these tine probabilities directly to a discrete input event (press, up, down, left, or right).
 
 \section{Evaluation}
 
-\subsection{User Study}
+    \subsection{Cost-Effective}
+    Lamello-based components do not require dedicated sensing hardware of any kind: they can be sensed using microphones already present in laptops or smartphones. The components themselves are also cheap: ABS plastic for 3D printing costs approximately \$$50/kg$, and each of our example inputs weighs roughly an ounce.
+    
+    \subsection{Fast}
+    Input components built using this technique do not require post-processing. The time from design to functioning input is limited mainly by the speed of the 3D printer (while each of our sliders required only 2 hours to print, the joystick took 8). Once the print is completed and the support material removed, the technique does not require training---it relies on $f_0$s predicted from geometry rather than empirically determined---, and the components can be usd right away.
 
-\subsection{Design Examples}
+    \subsection{Flexible}
+    We successfully used Lamello to create a variety of input components: buttons, sliders, dials, and joysticks. By combining and modifying their primitive actions (pushing, sliding, turning, and rocking), a designer could employ Lamello to sense components like scroll wheels or direction pads.
 
 \section{Discussion}
 
-\subsection{Sweet Spots}
+Initial experiments with Lamello are encouraging: components augmented with tines are easy to print and use, and tines produce unique, predictable frequencies. However, classification accuracy still needs improvement, and may require a new approach for $f_0>2kHz$. We identified several sources of errors to address in future work:
 
-\subsection{Limitations}
+\textbf{Striker mechanism:} Finger-plucked tines having higher recognition rates than striker-actuated tines suggests that striker-created noise contributes to misclassifications.
+
+\textbf{Signal attenuation:} While microphones placed at opposite ends of a printed slider produce similar overall accuracy, tines are more correctly classified by the closer microphone.  Though we could not directly correlate microphone distance and signal RMS energy, this suggests minimizing distance between microphone and tines may improve accuracy.
+
+\textbf{Resonance and harmonics:} Struck tines exhibit an energy peak at the predicted $f_0$, but their frequency spectrum is considerably more complex due to harmonics, component resonance, and other unmodeled material effects (e.g., the layered construction of 3D prints). Competing with non-fundamental vibrations is most problematic for short tines, which have lower energy.  Future work can also probe optimal frequency distributions to avoid overlap between tine harmonics.
+
+    \subsection{Sweet Spots}
+
+    Lamello is uniquely suited to creating simple, unpowered inputs in environments where microphones are already present. This includes applications in the Internet of Things or Smart Home.
+    
+    \subsection{Limitations}
+
+        The Lamello approach can only detect position \emph{changes}---it cannot sense static configurations, nor can we currently distinguish between the two directions in which a tine can be struck.  In the future, we envision a library of parametric models added to larger tangible devices: we plan to leverage existing microphones in smartphones and tablets for sensing. This would open applications beyond prototyping (e.g., custom controllers for tablet games), but will require more sophisticated signal processing to filter out environmental noise and to deinterlace multiple input components manipulated simultaneously.
