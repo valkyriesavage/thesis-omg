@@ -1,5 +1,11 @@
 \chapter{Midas: Capacitive Sensing of Custom 2D Layouts}
 
+\begin{quote}
+So Midas, king of Lydia, swelled at first with pride when he found he could transform everything he touched to gold...
+
+--- Claudian, \emph{In Rufinem}
+\end{quote}
+
 \section{Preamble}
 
 We begin our exploration of the interlink between sensing and geometry at the simple end of our spectra: Midas links 2D geometry, fabricated from conductive material, to capacitance sensing. This chapter focuses on interfaces created on the surface of flat, ruled, and developable 3D objects, where interaction is triggered by a user's direct touch.
@@ -14,7 +20,7 @@ Ubiquitous, cheap microprocessors have led to a vast increase in consumer produc
 
 While the rise of the iPhone and subsequent touchscreen-based smartphones has been the most visible use of touch input, these devices rely on software to prototype and create interactions. An app designer can create an interactive graphical user interface using on-screen prototyping tools, purely software with no hardware required. For devices where touch input is not co-located with screen output, for example when a designer wants inputs on the back of a screen (for example to avoid the fat finger problem \cite{baudisch-nanotouch}) or on a device with no screen at all, prototyping becomes much more complicated.
 
-\valkyrie{change this next sentence... need to focus more on the interaction i think.}Digital fabrication processes like 3D printing and CNC machining make it easier to prototype the \emph{form} of such products, enabling designers to go directly from a digital 3D model to a physical object. In addition, user interface prototyping tools have lowered the threshold to connect sensors to graphical user interfaces. \valkyrie{this next bit could be powerful for the thesis intro}However, one main limitation of current toolkits such as Phidgets~\cite{greenberg-phidgets}, d.tools~\cite{hartmann-dtools}, .NET Gadgeteer~\cite{villar-gadgeteer} or Arduino~\cite{arduino} is their reliance on pre-packaged, off-the-shelf sensors such as momentary switches or slide potentiometers. Using pre-packaged sensors has important drawbacks. It {\em constrains exploration}: pre-defined physical form factors restrict the space of realizable designs. For example, available buttons can be too bulky or too small, or sliders may be too long or too short. Most sensors also lack {\em physical flexibility}: they are not easily applied to non-planar surfaces or added to existing objects. Finally, a large {\em gulf of execution} remains between digital design files and physical prototypes: sensors must be manually placed and wired one-by-one. This process is tedious and error-prone; physical prototypes can easily deviate from digital design files if a wire is incorrectly placed or forgotten. While recent research has introduced tools to create touch sensors of different shapes~\cite{holman-tactiletape,hudson-boxes,wimmer-tdr}, their efforts focus on rapidly-constructable, low-fidelity prototypes. In contrast, our work leverages digital design tools and enables designers to use the growing range of fabrication processes to create custom, durable, replicable, iterable, and shareable touch sensors.
+\valkyrie{change this next sentence... need to focus more on the interaction i think.}Digital fabrication processes like 3D printing and CNC machining make it easier to prototype the \emph{form} of such products, enabling designers to go directly from a digital 3D model to a physical object. In addition, user interface prototyping tools have lowered the threshold to connect sensors to graphical user interfaces. \valkyrie{this next bit could be powerful for the thesis intro}However, one main limitation of current toolkits such as Phidgets~\cite{greenberg-phidgets}, d.tools~\cite{hartmann-dtools}, .NET Gadgeteer~\cite{villar-gadgeteer}, or Arduino~\cite{arduino} is their reliance on pre-packaged, off-the-shelf sensors such as momentary switches or slide potentiometers. Using pre-packaged sensors has important drawbacks. It {\em constrains exploration}: pre-defined physical form factors restrict the space of realizable designs. For example, available buttons can be too bulky or too small, or sliders may be too long or too short. Most sensors also lack {\em physical flexibility}: they are not easily applied to non-planar surfaces or added to existing objects. Finally, a large {\em gulf of execution} remains between digital design files and physical prototypes: sensors must be manually placed and wired one-by-one. This process is tedious and error-prone; physical prototypes can easily deviate from digital design files if a wire is incorrectly placed or forgotten. While recent research has introduced tools to create touch sensors of different shapes~\cite{holman-tactiletape,hudson-boxes,wimmer-tdr}, their efforts focus on rapidly-constructable, low-fidelity prototypes. In contrast, our work leverages digital design tools and enables designers to use the growing range of fabrication processes to create custom, durable, replicable, iterable, and shareable touch sensors.
 
 We take inspiration from the success of the aforementioned GUI editors. These editors enable designers to specify layout, size, and characteristics of widgets. They also isolate designers from specifying the ``plumbing" that connects widgets to event callbacks. {\em Midas seeks to make the creation of physical touch-sensing interfaces as fluid as the creation of graphical user interfaces in GUI editors.}
 
@@ -196,6 +202,8 @@ writes JavaScript functions to receive touch events.
 
 \section{Implementation}
 
+In this section, we describe the Midas design tool, the hardware it uses for sensing, and fabrication techniques for manufacturing compatible sensors. 
+
     \subsection{The Midas CAD tool}
     
     We discuss the key parts of the Midas CAD tool: generating sensor pads and routing pads to the touch controller.
@@ -303,24 +311,24 @@ features, but is not yet available to many end users. As
 a proof of concept, we produced a touch sensor on an LPKF
 circuit board milling machine, and one on a Silhouette Cameo paper cutter (see Figure \ref{fig:lpkf}).
 
-\subsubsection{Event Output}
+\subsubsection{Debugging}
+
+Midas offers basic debugging support. The interface displays incoming touch information from the microcontroller, highlighting activated sensors.  We have also implemented basic regular expression filtering on the touch stream to help the user identify potential problems.  A time-stamp and code representing each touch event is stored in a stream.  When a sensor is ``stuck on'' for more than $10$ seconds, Midas reports that that sensor may be touching another wire.  When a touch sensor ``flickers'' on and off more than twice within $500ms$, Midas suggests that there may be a faulty connection from that sensor to the microcontroller.
+
+\subsection{Event Output}
 Once the user has assigned interface scripts to sensors, Midas listens for events from the touch controller. When a touch event matches the key of a saved interaction, that interaction's associated script is executed.
 
-\emph{Record-And-Replay}
+\subsubsection{Record-And-Replay}
 
 In record-and-replay, the user selects a sensor and records a sequence of mouse and keyboard actions that should be played back when the sensor is touched. Early prototypes of Midas used Sikuli for this purpose---a scripting language based on computer vision analysis of screenshots~\cite{yeh-sikuli}. While more robust than hardcoded click locations, Sikuli was designed for automation scripts rather than interactive control, and the latency of invoking and executing scripts was too high. Our current prototype uses the Java Robot API~\cite{robots} to captures and replay both mouse clicks and keyboard events. We share this approach with the BOXES system~\cite{hudson-boxes}.
 
-\emph{WebSocket Communication with Web Applications}
+\subsubsection{WebSocket Communication with Web Applications}
 
 Record-and-replay is restricted to applications running on the same machine as the sensor editor, and it is limited to mouse and keyboard event injection. To surmount this limitation, Midas can also export touch events to remote clients via a built-in server using the WebSockets API. For example, an application running on a smart phone can open a WebSocket connection to Midas and receive a callback for any Midas button, slider or pad event. The callback function receives an event object describing which sensor changed state, and the value of the new state (e.g., on/off, or slider value).
 
 Our WebSockets server is implemented in node.js using the socket.io library. We chose WebSockets because it offers full-duplex communication at low latencies, and, more importantly, is supported by modern web browsers. This means designers can author user interfaces that respond to Midas touch input in HTML and JavaScript. There are two main benefits to these technologies: (1) many designers are already familiar with them from web design; (2) developed interfaces can be deployed on any device with a compatible browser, even if that device does not offer a way to directly connect external hardware. For example, it is difficult to directly connect sensors to Apple's iPhone or iPad.
 
 With our WebSockets architecture (Figure~\ref{fig-socket}), designers open a browser and enter the URL of an HTML file they have placed in the Midas server directory. This file opens a socket connection from the phone browser to Midas. When Midas receives events from the touch controller, it forwards them to the client, which can then show visual feedback.
-
-\emph{Debugging}
-
-Midas offers basic debugging support. The interface displays incoming touch information from the microcontroller, highlighting activated sensors.  We have also implemented basic regular expression filtering on the touch stream to help the user identify potential problems.  A time-stamp and code representing each touch event is stored in a stream.  When a sensor is ``stuck on'' for more than $10$ seconds, Midas reports that that sensor may be touching another wire.  When a touch sensor ``flickers'' on and off more than twice within $500ms$, Midas suggests that there may be a faulty connection from that sensor to the microcontroller.
 
 
 \section{Evaluation}
@@ -373,7 +381,7 @@ we created a papercraft pinball machine which can control a pinball game on a la
 
     \subsection{Sweet Spots}
     
-    Midas is well-suited to prototyping particular kinds of objects. It allows facile testing and iteration on unusual types of touch interactions, for example on the backside of devices: touch screens allow input and output, but adhering a smartphone-like screen to every location a designer wants to sense a touch input is prohibitive. Additionally, unique sensor shapes, like stars or check marks, can be tested with Midas much more simply than with custom-shaped touchscreens.
+    Midas is well-suited to prototyping particular kinds of objects. It allows facile testing and iteration on unusual types of touch interactions, for example on the backside of devices: touch screens allow input and output, but adhering a smartphone-like screen to every location a designer wants to sense a touch input is prohibitive. Additionally, unique sensor shapes, like stars or check marks, can be tested with Midas much more simply than with custom-fabricated touchscreens.
     
     Midas opens opportunities for custom sensors on the surfaces of flat or ruled objects, as well as 3D objects that are developable. While pre-fabricated sensors, such as those used for prototyping with Arduino \cite{arduino} or d.tools \cite{hartmann-dtools}, can enable prototyping on flat surfaces, they are typically not flexible and thus cannot be applied to non-flat surfaces. As Midas-generated sensors are flexible, they work well in these situations, and can even be used to sense touch on the surface of flexible and foldable materials like paper. Additionally, Midas allows designers to specify the real size that they desire for their inputs without needing to rely on a kit of pre-made sensors.
 
@@ -381,12 +389,17 @@ we created a papercraft pinball machine which can control a pinball game on a la
     
     The current Midas prototype has some important limitations. A few are inherent to our chosen approach, while others could be mitigated with additional engineering.
 
-First, the current manufacturing process places certain physical constraints on realizable designs. Both the accuracy of the vinyl cutter on copper and challenges in weeding and transferring cut designs currently restrict traces to approximately $2mm$ minimum thickness. Our inexpensive cutter also has difficulties with acute angles such as those in the interdigitated slider, however we have demonstrated manufacture with higher-quality cutters and alternative techniques that mitigate this issue.
+\subsubsection{Physical Constraints on Realizable Designs}
+The current manufacturing process places certain physical constraints on realizable designs. Both the accuracy of the vinyl cutter on copper and challenges in weeding and transferring cut designs currently restrict traces to approximately $2mm$ minimum thickness. Our inexpensive cutter also has difficulties with acute angles such as those in the interdigitated slider, however we have demonstrated manufacture with higher-quality cutters and alternative techniques that mitigate this issue.
 
-Second, the touch sensing chips we use have limited capacity. In addition, continuous sliders use different hardware resources than other inputs and therefore need to be treated differently by the designer. The QT1106 has 7 discrete sensing channels and can support one continuous slider; the MPR121 has 13 discrete channels. The sensor editor keeps track of resources required by the current design and notifies designers if they exceed the capacity of the touch controller. While we currently do not support using multiple touch controllers for a single project, a future circuit board revision could offer such support. 
+\subsubsection{Touch Sensing Chips have Limited Capacity}
+The touch sensing chips we use have limited capacity. In addition, continuous sliders use different hardware resources than other inputs and therefore need to be treated differently by the designer. The QT1106 has 7 discrete sensing channels and can support one continuous slider; the MPR121 has 13 discrete channels. The sensor editor keeps track of resources required by the current design and notifies designers if they exceed the capacity of the touch controller. While we currently do not support using multiple touch controllers for a single project, a future circuit board revision could offer such support. 
 
-Third, our touch controller must be tethered to a computer. This reduces mobility: prototypes cannot currently be tested outside the lab. Direct connections to mobile devices or integrated wireless radios could address this constraint. This has since been investigated by Ramakers, et al. \cite{ramakers-paperpulse}, who additionally expanded the logical expressions available to 
+\subsubsection{Touch Controller Must be Tethered to a Computer}
+Our touch controller must be tethered to a computer. This reduces mobility: prototypes cannot currently be tested outside the lab. Direct connections to mobile devices or integrated wireless radios could address this constraint. This has since been investigated by Ramakers, et al. \cite{ramakers-paperpulse}, who additionally expanded the logical expressions available to designers who want to program fully-contained interactive behavior \valkyrie{how to situate?}.
 
-Fourth, Midas does not offer on-device output; a designer must have access to a screen. Use of WebSockets allows this screen to be on any device connected to the Internet. Since Midas was originally published, the question of custom thin-form touchscreen displays has been investigated by Olberding, et al. \cite{olberding-printscreen}.
+\subsubsection{No On-Device Output}
+Midas does not offer on-device output; a designer must have access to a screen. Use of WebSockets allows this screen to be on any device connected to the Internet. Since Midas was originally published, the question of custom thin-form touchscreen displays has been investigated by Olberding, et al. \cite{olberding-printscreen}.
 
-Finally, the sensor editor supports only flat, ruled, and developable device surfaces. Future work could investigate the creation of a plugin for a CAD tool that would aid designers in creating more complex 3D sensor surfaces.
+\subsubsection{Does not Support all Object Surfaces}
+The sensor editor supports only flat, ruled, and developable device surfaces. Future work could investigate the creation of a plugin for a CAD tool that would aid designers in creating more complex 3D sensor surfaces.

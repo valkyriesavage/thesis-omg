@@ -2,17 +2,23 @@
 
 
 \begin{quote}
-The design of human-machine dialogues is, at least in part, the design of
-artificial languages for [human-machine] communication. [W]e can analyze the
-manipulations of an input device as sentences. Input devices are
-those devices that allow some portion of these potential sentences actually to
-be realized and communicated from human to machine.
+If you think in terms of a year, plant a seed; if in terms of ten years, plant trees; if in terms of 100 years, teach the people.
 
---- Stuart Card, et al.
-
+--- Confucius
 \end{quote}
+\valkyrie{c'mon, need a better quote.}
+
+\valkyrie{Consider using Klemmer's framework as an inspiration here. Consider organizing just around sensing principles and not worrying about enumerating machine properties in the same way. Don't necessarily use 5 human senses, but consider looking into a list of "common sensor types" that can be leveraged for organizational purposes. Still want to have a section about what machines can/can't do today, but probably easier to just keep these as shorter definitions and not worry about organizing them hierarchically or anything. should I combine RW and this chapter together?????}
+
+%\begin{quote}
+%The design of human-machine dialogues is, at least in part, the design of artificial languages for [human-machine] communication. [W]e can analyze the manipulations of an input device as sentences. Input devices are those devices that allow some portion of these potential sentences actually to be realized and communicated from human to machine.
+
+%--- Stuart Card, et al.
+%\end{quote}
 
 This chapter outlines the multitude of digital fabrication techniques currently available, as well as potential characteristics of the artifacts that each process can create. We then align these properties to sensing techniques, describing a space of possible geometry/sensing links for input device design and fabrication.
+
+\valkyrie{organize around 5 human senses?? this leaves out things like magnetic sensing (but we can have an ``other'' bucket?)}
 
 \section{Definitions}
 
@@ -46,11 +52,11 @@ First, we briefly define uncommon words and machines that will be discussed in t
 
 \section{Digital Fabrication}
 
-Digital fabrication machines are those which can take as input a digital design file, in 2D or 3D, and output a physical realization of that design; these machines stand in contrast to traditional crafting techniques (which take no design file) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for subtle variations between instances without additional cost. For example, doctors can now create custom 3D printed replacement joints that fit patients' bodies \cite{findref}.
+Digital fabrication machines are those which can take as input a digital design file, in 2D or 3D, and output a physical realization of that design; these machines stand in contrast to traditional crafting techniques (which are guided by the craftsperson, and take no design file) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, doctors can now create custom 3D printed replacement joints that fit patients' bodies \cite{findref}.
 
-The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can create stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs that are fully 3D inside and out. These machines allow their manufactured products to achieve various structural and material properties. We examine these achievable properties, describing both those that are simple (and which can be created by $1$ machine and material) as well as those that are most sophisticated (requiring $3+$ materials or machines) (see Table \ref{table:properties}).
+The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs that are fully 3D inside and out. These machines allow their manufactured products to achieve various structural and material properties. We examine these achievable properties, describing possible geometries, materials/properties, and assembly characteristics (see Table \ref{table:properties}).
 
-\valkyrie{maybe we just want to group by machine rather than sophistication? or we can group by property rather than machine? that is the story we actually want to tell.}
+\valkyrie{You can just, I guess, give a short definition of what each of these properties are, and then make a good table that shows which machines can create which geometries.}
 
 \begin{table}
 \begin{center}
@@ -75,7 +81,7 @@ The joint interests of industry, academia, and hobbyist makers have led to a flo
 & transparent & \\
 \end{tabular}
 \end{center}
-\caption{Digital fabrication enables fabrication of a wide variety of geometries with different material and structural properties. \valkyrie{I still hate this table. maybe just write the words first and match the table to it.}}
+\caption{Digital fabrication enables fabrication of a wide variety of geometries with different material and structural properties. \valkyrie{I still hate this table. Could work as something more like the other table (i.e., made in illustrator, with pix).}}
 \label{table:properties}
 \end{table}
 
@@ -89,42 +95,61 @@ Digital fabrication machines can support any complexity of geometry, from 2D ima
 
 \subsubsection{2.5D geometry}
 
-A slight jump from 2D is 2.5D: a 2D shape with additional \emph{depth} information. The canonical machines to create 2.5 objects are laser cutters (which can take multiple passes or vary laser 
+A slight jump from 2D is 2.5D: a 2D shape with additional \emph{depth} information. The canonical machines to create 2.5 objects are laser cutters (which can take multiple passes or vary laser strength to create different depths).
 
-\subsection{Simple Fabrication}
-Beginning with simple processes, digital fabrication includes several types of machines, like inkjet printers, laser cutters, and vinyl cutters. We define ``simple fabrication'' as requiring only $1$ machine and $1$ material, but these materials can be as diverse as paper, wood, plastic, or metal. Although the physical requirements (machines and materials) for these types of artifacts are simple, their final properties can be quite complex. \valkyrie{shouldn't 3D printers be in here? single-material ones, anyway?}
+\subsubsection{3D external geometry}
 
-\emph{Additive} fabrication methods, like laying down ink on paper or extruding plastic onto a bed, are 
+\subsubsection{3D internal geometry}
 
-\subsection{Moderate Fabrication}
+\subsection{Materials and Properties}
 
-\subsection{Sophisticated Fabrication}
+\subsubsection{Plastic (hard)}
+
+\subsubsection{Plastic (flexible)}
+
+\subsubsection{Plastic (transparent)}
+
+\subsubsection{Metal (conductive)}
+
+\subsubsection{Metal (inert)}
+
+\subsubsection{Wood}
+
+\subsubsection{Vinyl (flexible)}
+
+\subsubsection{Paper}
+
+\subsection{Assembly Characteristics}
 
 \section{Single-Sensor Sensing Techniques}
 
 The essence of Human Computer Interaction is a computer understanding a person's interactions. Thus, while many of the input techniques here could be used in, for example, machine-to-machine communication, we describe how a person's actions might create a usable control signal.
 
-A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions. Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.
+A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
+\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
+We organize our discussion around five categories of common sensors: contact, non-contact, electrical, environmental, and biological. In these five categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, and pulse sensors.
 
-\begin{table}
-\begin{center}
-\begin{tabular}{rll}
-\textbf{TECHNIQUE} & \textbf{SENSOR} & \textbf{COMPATIBLE PROPERTIES} \\
-0D electrical & switches & ? \\
-1D electrical & capacitance sensor, slider, hall effect, photocell, FSR, bend sensor, rangefinder & \\
-2D electrical & arrays of 1D sensors & \\
-3D electrical & accelerometer & \\
-aural & mic & \\
-vision & camera & \\
-ML & & \\
-\end{tabular}
-\end{center}
-\caption{There are techniques. We can use them. \valkyrie{need a better list of techniques. also need to organize better... :( could organize by "thing sensed": contact, distance, movement, acceleration, position, change in position... in fact, we can actually just schlep the whole table from design space of input devices??? holy shit, yes. do it. ask bjoern how permissions work. \cite{card-input}}}
-\label{table:sensing}
-\end{table}
+\valkyrie{In this section, again just give short definitions of what each sensor type does?}
 
+\subsection{Contact sensors}
 
+\subsection{Non-contact sensors}
 
-\subsection{Machine Learning}
+\subsection{Electrical sensors}
 
-These sensing techniques require extensive use of machine processing on multiple input data sources: machine learning in this sense can involve active techniques such as creating classifiers swept capacitive \cite{sato-touche} or acoustic \cite{ono-touchandactivate,laput-acoustruments} frequencies; as well as passive approaches involving air \cite{slyper-softrobots} or 
+\subsection{Environmental sensors}
+
+\subsection{Biological sensors}
+
+\section{Promising Overlaps}
+
+The spaces of both machines and sensors are vast, so we describe some ways to think about combining them to actually fabricate sensing objects. \valkyrie{need to talk about every X in table? definitely need to talk generically about how you are defining something as "promising" here. :)}
+
+\begin{figure}
+\begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
+      Lining up the possibilities of fabricatable properties with sensor types, we can see several areas that are promising for further exploration. We also identify pairings that have been explored previously, as well as pairings explored in this thesis. \valkyrie{for previously explored, probably want to in some way tie to the works (i.e., with refs in figure).}
+      }\end{minipage}},rotate=90,center}
+      \includegraphics[scale=.8]{figures/sensing-fab.pdf}%
+  \end{adjustbox}
+\label{fig:sensing-fab}
+\end{figure}

@@ -1,3 +1,72 @@
-\chapter{Future Work}
+\chapter{Conclusions \& Future Work}
 
-Lots of things. Including, open-sourcing!
+\begin{quote}
+When I look into the future, it's so bright it burns my eyes.
+
+--- Oprah Winfrey
+\end{quote}
+
+This thesis has presented techniques for leveraging and modifying digital geometry of objects to aid in creating fast, cheap, and flexible prototyping tools. We conclude with a restatement of our contributions, as well as pointers to future work.
+
+\section{Restatement of Contributions}
+
+We presented a design space describing how to interlink geometry and sensing for digitally-fabricated prototype objects, as well as a series of explorations in promising areas of the design space. Specifically, we contributed:
+\begin{enumerate}
+\item \valkyrie{a summary of today's fabrication machine capabilities and how they tie to sensing systems?}
+\item Midas, a method to create custom-shaped, flexible capacitive touch sensors by synthesizing sensor pads and auto-routing connections, as well as instructions for assembly and use, from a high-level graphical specification \begin{enumerate}
+    \item a design tool using this method to enable users to to fabricate, program, and share touch-sensitive prototypes.
+    \item an evaluation demonstrating Midas’s expressivity and utility to designers.
+    \end{enumerate}
+\item Lamello, a technique which integrates algorithmically-generated audio-producing tine structures into movable components, creating passive tangible inputs that do not require training examples for accurate sensing. \begin{enumerate}
+    \item a design pipeline which predicts tine frequencies (and an evaluation that they can be accurately predicted) and senses user manipulation of components in real time
+    \item a discussion of information encoding techniques useful for this technique \valkyrie{not really a contribution? just a summary... should this contribution be a library of parts, instead?}
+    \end{enumerate}
+\item Sauron, a design tool enabling users to
+rapidly turn 3D models of input devices into interactive 3D printed prototypes where a single camera senses input \begin{enumerate}
+    \item a method for tracking human input on physical components using a single camera placed inside a hollow object
+    \item two algorithms for analyzing and modifying a 3D model’s internal geometry to increase the range of manipulations that can be detected by a single camera.
+    \item an informal evaluation of our implementation of these techniques usable on models constructed in a professional CAD tool.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Future Work}
+
+Over the course of describing this thesis's contributions, we have pointed to a variety of limitations and possible improvements per-project. In general, we see open sourcing the projects and making their prototypes more mobile to be interesting engineering and research tasks. All three projects use sensing types common to today's mobile smart phones (capacitive touch, microphone-based audio, and camera-based video), and additional engineering could better leverage those and other sensors already available to designers from within their environment.
+
+Beyond per-project improvements, we have laid out a design space for linking geometry to sensing. Midas, Lamello, and Sauron each represent a single point in this design space, and fuller exploration of the space may lead to companion projects to those described here. In particular, the advent of multi-material polyjet 3D printers seems to open a wide variety of options for exploring colors, transparency, and flexibility as features in a sensing design space, and the Voxel8 \cite{voxel8} printer, which can lay arbitrary conductive materials and plastic together in a single pass, points to opportunities to explore induction or magnetism as sensing operations.
+
+Overall, we recognize that there are several assumptions made by the projects presented in this dissertation. Namely, our projects leverage a \emph{single fabrication machine} \valkyrie{lamello doesn't have to} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer. We discuss possibilities opened by willfully subverting each of these assumptions in turn.
+
+\subsection{Cooperation among fabrication machines}
+
+The projects described in this dissertation have largely focused on single fabrication machines working to create a finished prototype object. We also see opportunities for combining the abilities of several machines, whether to speed up the prototyping process or to investigate unique properties that allow exploration of the machines and sensors design space.
+
+    \subsubsection{For celerity}
+
+    While 3D printers allow for near-infinite flexibility in the forms that they are able to create, they still run very slowly. This can be compared to laser cutters, which offer significant speedups in exchange for only producing 2- or 2.5D prototypes (or limited 3D prototypes, see \cite{mueller-laserorigami}). Some prior work has investigated speeding up fabrication through integration of lasercut and 3D printed pieces \cite{beyer-platener}, or use of building blocks with 3D printed parts \cite{mueller-fabrickation}; however, these speedups do not make any use of their knowledge of the completed object post-fabrication.
+
+    \subsubsection{For properties}
+    
+    Speed is a factor worth considering, but by leveraging multiple machines designers can additionally access a larger variety of properties. Plastic can offer a sturdy base with configurable haptics \cite{torres-hapticprint}, while inkjet-printed circuitry can provide a slide-in base for electronics. Lasercut or cnc-milled wood may pair well with delicate paper to create shape-changing interfaces \cite{yao-pneui}.
+
+\subsection{Branching prototypes}
+
+One important benefit of digital models of prototypes is that they become like code: they can be stored, shared, replicated, versioned, and unit-tested. Version-control website github \cite{github} in 2013 added a built-in viewer for STL files in user repositories on the site, offering a powerful tool for those who wished to version their physical designs. However, each design is hand-crafted by the designer. In the future, we would like to explore tools which can create likely \emph{spaces} of prototype designs given an initial seed from a designer, and which then allow testing multiple similar designs in parallel. Given the nature of the sensing performed by the toolkits presented, this type of small multiples testing should be as straightforward as re-attaching the sensing module to the new prototype; sensing interfaces and interactivity definitions are sufficiently divorced from the designer as to be portable across multiple physical instantiations of a design \valkyrie{that won't make sense to anyone but you}.
+
+\subsection{Machine-optimized prototype designs}
+
+While describing a design space and smartly selecting points in it to test in parallel seems cool \valkyrie{obviously reword}, another opportunity lies in automatic generation of digital interfaces to suit particular people and/or tasks. This is similar in theory to Cogtool \cite{john-cogtool}, which allows designers of web applications to demonstrate tasks for their interfaces, then optimizes the interface to make completion of those tasks as quick as possible for end-users.
+
+We believe that there is significant territory to be explored in modeling users' individual capabilities as relevant to tangible input devices, as well as understanding how to create optimal inputs devices suited to specific tasks.
+
+    \subsubsection{To suit particular users}
+
+    Individual users have wide-ranging abilities and preferences, especially when it comes to something as personal as the hands. In addition, mobility-impaired users may have special requirements for input devices. Traditional mass-produced input devices are designed to be comfortable for $95$\% of target users, however the advent of digital fabrication allows for one-off objects with no startup costs like those associated with tooling in traditional manufacturing. Thus, we can measure the capabilities of a single person (How large are Giorgia's hands? How far can Ethan bend his thumbs? How fast can Shiry pinch her fingers together?), and use our results to design for that person specifically. Such measurements might inform dimensions (e.g., overall size of an input device), locations (e.g., spacing between buttons), or even sensitivity (e.g., matched to user grip strength).
+
+    \subsubsection{To suit particular tasks}
+    
+    Our lives contain a variety of general-purpose input devices, like the mice and keyboards that we find at our desks, or the video game controllers we use when we unwind. As described above, with digital fabrication machines we can imagine a future in which each input device is uniquely suited to a single task: we can ask questions about a task, and how a particular person approaches it (What abilities does Pat tend to use most when playing League of Legends? How often does Friedrich scroll through documents while editing them, compared to insert/delete tasks?), and use these to inform the layout (e.g., more frequently-used functions close to dominant hand/fingers) or sensitivity (e.g., a lighter push will activate a time-critical function, versus a more substantial push necessary for an irreversible function) of input devices.
+
+\section{Closing Remarks}
+
+As computing moves off the desktop and into the world, we see an exploration of many varieties of input devices designed to suit new tasks. These new devices necessitate a new kind of prototyping, that does not rely fully on software but which can help create functional physical objects in a fast, cheap, and flexible way. Over the course of this dissertation, we have described digital fabrication as a means of accomplishing this: by linking a digital design to a completed physical object, we can shorten the drudgery associated with each iteration cycle. The research presented in this dissertation empowers designers to better envision and realize a broader range of such alternative futures for the post-desktop computing age. \valkyrie{harhar, that last sentence is bjoern's}
