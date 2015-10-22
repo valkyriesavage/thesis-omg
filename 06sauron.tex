@@ -23,7 +23,14 @@ Rapid additive manufacturing technologies enable designers and makers (we will r
 Existing research has developed electronic toolkits that lower the threshold of making physical prototypes interactive \cite{arduino, greenberg-phidgets, hartmann-dtools}.
 However, such toolkits still require designers to manually assemble printed parts and sensors. Such assembly may also require significant changes to a 3D model (e.g., to add fasteners or split an enclosure into two half shells). Detailed electro-mechanical co-design is time-consuming and cumbersome, and is mismatched with the spirit of rapid prototyping. Alternatively, designers may instrument the environment with motion capture \cite{akaoka-displayobjects} or depth cameras \cite{wilson-depthtouch} to add interactivity, but these approaches limit designers to testing prototypes inside the lab in small, restricted areas.
 
-Our research goal is to facilitate the creation of \emph{functional} physical interface prototypes on commodity 3D printers with minimal additional instrumentation or assembly (Figure~\ref{fig:teaser}). In this chapter, we present an embedded machine vision-based approach for sensing human input on 3D-printed physical prototypes. Our system, Sauron, enables designers to 3D print a complete interactive device in a single step. After printing, designers add a miniature camera with integrated ring light to their prototype. After an interactive registration step, Sauron can track the motion and position of buttons, sliders, joysticks, and other input devices through machine vision performed on the user's computer, and forward input events to other applications.
+\begin{figure}
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/sauron/fig1-gamecontroller.jpg}
+\caption{With Sauron, designers create a 3D CAD model of an input device and place a virtual camera in the model. Once printed, they attach a matching physical camera to sense user input on the device.}
+\label{fig:sauron-teaser}
+\end{figure}
+
+Our research goal is to facilitate the creation of \emph{functional} physical interface prototypes on commodity 3D printers with minimal additional instrumentation or assembly (Figure~\ref{fig:sauron-teaser}). In this chapter, we present an embedded machine vision-based approach for sensing human input on 3D-printed physical prototypes. Our system, Sauron, enables designers to 3D print a complete interactive device in a single step. After printing, designers add a miniature camera with integrated ring light to their prototype. After an interactive registration step, Sauron can track the motion and position of buttons, sliders, joysticks, and other input devices through machine vision performed on the user's computer, and forward input events to other applications.
 
 Sensing all input components on a device with complex shape can be challenging, as components may be outside the viewing frustum of a single camera, or blocked by the device's geometry. To address such challenges, we introduce automatic visibility analysis and model modification 
 to translate human input into visible movement that can be accurately tracked with standard computer vision algorithms. We first determine which components will be visible to the camera by placing a virtual camera into a CAD model during the design phase. For components that are not visible, Sauron can modify the component model's internal geometry to extend motion into the camera's viewing frustum using parameterized extrusions. Next, Sauron uses raytracing to determine how optical mirrors may be placed to make motion visible in cases where geometry modification fails because of mechanical interference. We implement these techniques by extending commercial parametric CAD software.
@@ -58,22 +65,30 @@ Our main contribution is a design tool enabling users to rapidly turn 3D models 
     Sauron targets mechanical engineers and other users comfortable with physical/product/industrial design and with 3D modeling, but who may not have proficiency in sensing design or programming. Our prototype is built to interact with a specific professional CAD tool, but the techniques described in this chapter could realistically be implemented to work with any of a number of modeling tools (e.g., openSCAD, Rhino).
 
     \subsection{Design Walkthrough}
-    We will describe the process of designing and fabricating models for single-camera sensing with a running example: a designer wishes to prototype a new video game controller with buttons, a joystick, and a direction pad. She wants to explore ergonomics -- how the controller feels to hold and how it will feel during gameplay. She follows the steps in Figure \ref{fig:step-by-step}.
+    We will describe the process of designing and fabricating models for single-camera sensing with a running example: a designer wishes to prototype a new video game controller with buttons, a joystick, and a direction pad. She wants to explore ergonomics -- how the controller feels to hold and how it will feel during gameplay. She follows the steps in Figure \ref{fig:sauron-step-by-step}.
+    
+    
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/sauron/fig2-process.jpg}
+\caption{When designing with Sauron, a designer begins with his model (A), then inserts a virtual camera and runs quick check for visibility (B).  A full model modification pass (C) performs extrusions and suggests mirror placement to bring invisible controls into the camera's view.  He fabricates his design (D), then colors the inside and inserts the camera and mirrors (E).  The computer vision software tracks the motion of components (F) and forwards events on to control software, such as a game.}
+\label{fig:sauron-step-by-step}
+\end{figure}
 
 
-\subsubsection{Modeling} The designer creates a 3D model of her controller in a CAD tool like SolidWorks, placing buttons and joysticks from a library of available controls Sauron provides (Figure \ref{fig:step-by-step}A). Each library element is parameterized and customizable.
+\subsubsection{Modeling} The designer creates a 3D model of her controller in a CAD tool like SolidWorks, placing buttons and joysticks from a library of available controls Sauron provides (Figure \ref{fig:sauron-step-by-step}A). Each library element is parameterized and customizable.
 
 \subsubsection{Adding a virtual camera} Using the Sauron CAD plug-in, she adds a 3D model of Sauron's camera to his assembly. This camera can be positioned anywhere on the model's surface, pointing inwards, into the interior of the hollow model. The designer then adds mount points for the camera so it can be attached with screws once she fabricates her controller.
 
-\subsubsection{Visibility analysis} Sauron provides a ``quick check'' feature which allows the designer to quickly determine if components are directly within view of the camera or if they will require model modifications (Figure \ref{fig:step-by-step}B). %additional processing (extrusion or mirrors). 
+\subsubsection{Visibility analysis} Sauron provides a ``quick check'' feature which allows the designer to quickly determine if components are directly within view of the camera or if they will require model modifications (Figure \ref{fig:sauron-step-by-step}B). %additional processing (extrusion or mirrors). 
 In our example, the joystick and direction pad in front of the camera are visible, so they are colored green. The bumper and rear buttons are not: they lie outside the camera's field of view and are marked red. 
 
-\subsubsection{Model modification} To make the remaining components visible to the camera, the Sauron plugin automatically extrudes the interior portion of the bumper buttons to extend into the camera's field of view (Figure \ref{fig:step-by-step}C). The rear buttons cannot be extended, as the extrusions would intersect the controller's shell. Detecting this interference, Sauron casts rays from the camera into the 3D scene, reflecting them off the interior of the body, and determines locations where placement of two small mirrors will make the rear buttons visible in the camera image. The plugin visualizes these locations to guide the designer during manual assembly.
+\subsubsection{Model modification} To make the remaining components visible to the camera, the Sauron plugin automatically extrudes the interior portion of the bumper buttons to extend into the camera's field of view (Figure \ref{fig:sauron-step-by-step}C). The rear buttons cannot be extended, as the extrusions would intersect the controller's shell. Detecting this interference, Sauron casts rays from the camera into the 3D scene, reflecting them off the interior of the body, and determines locations where placement of two small mirrors will make the rear buttons visible in the camera image. The plugin visualizes these locations to guide the designer during manual assembly.
 
 \subsubsection{Fabrication and assembly} %Sauron then automatically removes the camera model before generating a file of the entire model suitable for fabrication. 
-The designer sends her file (without the camera model) to her 3D printer (Figure \ref{fig:step-by-step}D). Once the print is completed, an automatically generated instruction sheet guides her through the process of marking the interior of input components, e.g., with black marker (Figure \ref{fig:step-by-step}E). Last, he screws the camera into its mounts. 
+The designer sends her file (without the camera model) to her 3D printer (Figure \ref{fig:sauron-step-by-step}D). Once the print is completed, an automatically generated instruction sheet guides her through the process of marking the interior of input components, e.g., with black marker (Figure \ref{fig:sauron-step-by-step}E). Last, he screws the camera into its mounts. 
 
-\subsubsection{Registration and testing} Finally, the designer registers the components with the vision system one at at time: her CAD tool prompts her which component to move, and she moves each through its full range of motion to configure its component-specific recognizers. The system then tracks each component separately (in Figure \ref{fig:step-by-step}E \& F, components are: extruded bumper buttons on top; joystick and d-pad in the middle, reflected rear buttons in mirrors below). Once all the components are registered, she is ready to test her controller.
+\subsubsection{Registration and testing} Finally, the designer registers the components with the vision system one at at time: her CAD tool prompts her which component to move, and she moves each through its full range of motion to configure its component-specific recognizers. The system then tracks each component separately (in Figure \ref{fig:sauron-step-by-step}E \& F, components are: extruded bumper buttons on top; joystick and d-pad in the middle, reflected rear buttons in mirrors below). Once all the components are registered, she is ready to test her controller.
 Sauron sends input event data as OpenSoundControl messages, a format that software tools can understand and map to game controller events. Sauron can also deliver events over WebSockets to applications written in HTML and JavaScript.
 
 \section{Implementation}
@@ -87,15 +102,33 @@ In this section, we describe Sauron's camera, CAD component architecture, algori
     
 
 \subsubsection{Physical and Virtual Cameras}
-Sauron uses a single camera to sense input on a physical device. In order to determine visibility of input components inside the CAD environment, Sauron uses a virtual camera that matches the physical camera's measurements and optical characteristics. We empirically measured the field of view of the camera with a geometric test pattern, and we then generated model geometry corresponding to this field of view as a reference for designers (Figure \ref{fig:hardware}).
+Sauron uses a single camera to sense input on a physical device. In order to determine visibility of input components inside the CAD environment, Sauron uses a virtual camera that matches the physical camera's measurements and optical characteristics. We empirically measured the field of view of the camera with a geometric test pattern, and we then generated model geometry corresponding to this field of view as a reference for designers (Figure \ref{fig:sauron-hardware}).
 
-Our current implementation uses a 640x480 USB camera with a retrofitted 110 degree M12 lens (Sentech STC-MC36USB-L2.3). The interior of the model is illuminated by a ring light with eight surface-mount white LEDs. This hardware may be too bulky for handheld devices; however, there are no technological barriers to miniaturization. We have also built prototypes using a commercial pipe inspection camera (Figure \ref{fig:inspectioncam}) which is much smaller, but suffered from a low video frame rate and shallow depth of field .
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/camera-front-and-side.jpg}
+\caption{Left: Sauron's USB camera and ring light.  Right: Our virtual model of the camera and its field of view.}
+\label{fig:sauron-hardware}
+\vspace{0.2in}
+\includegraphics[width=3.25in]{figures/sauron/pipe-camera2.jpg}
+\caption{The hardware can be miniaturized, as in this pipe inspection camera with integrated LEDs.}
+\label{fig:sauron-inspectioncam}
+\end{figure}
+
+Our current implementation uses a 640x480 USB camera with a retrofitted 110 degree M12 lens (Sentech STC-MC36USB-L2.3). The interior of the model is illuminated by a ring light with eight surface-mount white LEDs. This hardware may be too bulky for handheld devices; however, there are no technological barriers to miniaturization. We have also built prototypes using a commercial pipe inspection camera (Figure \ref{fig:sauron-inspectioncam}) which is much smaller, but suffered from a low video frame rate and shallow depth of field .
 
 
 \subsubsection{Component Library and Architecture }
-Sauron provides a library of components with buttons, sliders, scroll wheels, dials, trackballs, direction pads, and joysticks (Figure \ref{fig:components}). These components, when printed, will be tracked through contrasting material applied in a specific pattern or location. For many of the components, this location is in the base, which is tagged in our models. We require that designers use components with tagged geometry in their devices so our plugin understands which portions need to be visible to the camera as well as how to perform modifications. Our base components are parametric models for the SolidWorks CAD software.
+Sauron provides a library of components with buttons, sliders, scroll wheels, dials, trackballs, direction pads, and joysticks (Figure \ref{fig:sauron-components}). These components, when printed, will be tracked through contrasting material applied in a specific pattern or location. For many of the components, this location is in the base, which is tagged in our models. We require that designers use components with tagged geometry in their devices so our plugin understands which portions need to be visible to the camera as well as how to perform modifications. Our base components are parametric models for the SolidWorks CAD software.
 
-Because Sauron models are parametric, designers already have significant freedom in modifying them to suit their needs. As long as the tagged geometry (on the interior, facing the camera) is kept, the exterior of the models can be changed. As an example, a designer creating a video game controller may make some buttons oblong rather than circular: the long buttons on the side of the controller in Figure \ref{fig:step-by-step} were built from the same parametric model as the rear circular buttons.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/sauron/sauron-inputs.png}
+\caption{Sauron currently supports seven types of input components.  The various components have different types of motion trackable by Sauron, from binary up/down of a button, to one-dimensional slider input, to two-dimensional input from a trackball or joystick.  Extrusion features of components are highlighted in red.}
+\label{fig:sauron-components}
+\end{figure}
+
+Because Sauron models are parametric, designers already have significant freedom in modifying them to suit their needs. As long as the tagged geometry (on the interior, facing the camera) is kept, the exterior of the models can be changed. As an example, a designer creating a video game controller may make some buttons oblong rather than circular: the long buttons on the side of the controller in Figure \ref{fig:sauron-step-by-step} were built from the same parametric model as the rear circular buttons.
 
 To create a new Sauron-compatible component, the component must exhibit visible motion on the inside of a prototype that can be tracked by the camera. Second, the component must be paired with a suitable vision algorithm to extract its state from visible changes. These two requirements can be decoupled. 
 For example, both toggle switches and momentary switches can use the same algorithm extracting a single state bit from a change in position.
@@ -105,19 +138,49 @@ Users' CAD models are modified based on an analysis of which input components fa
 
 \emph{Extrusion}
 In order to perform modifications, our initial step is to extend the virtual camera's field of view feature to infinity while maintaining its angles. We revert this after all modification steps are complete. We determine visibility through collision detection between tagged model geometry and the virtual camera's field of view feature.
-When components are outside the field of view, e.g., on a side wall (Figure \ref{fig:extrusion}C), Sauron attempts to extend the component's base through extrusion (Figure \ref{fig:extrusion}A-B). This technique is not applicable to scroll wheels or trackballs. The model parts Sauron can extrude are shown in red in Figure~\ref{fig:components}.
+When components are outside the field of view, e.g., on a side wall (Figure \ref{fig:sauron-extrusion}C), Sauron attempts to extend the component's base through extrusion (Figure \ref{fig:sauron-extrusion}A-B). This technique is not applicable to scroll wheels or trackballs. The model parts Sauron can extrude are shown in red in Figure~\ref{fig:sauron-components}.
 
-To calculate extrusion depth, we first cast a ray from the component's base and determine if it intersects the field of view. If not, then we cannot reach the field of view with extrusion. We then measure the distance from the base along its normal to the field of view and update our extrusion to that depth. We next iterate through possible positions of the component (e.g., simulate a slider's motion along its track) and check that we are not intersecting any other components or the body of the device, and that we continue to meet the field of view. We iteratively extend our extrusion if we fall outside the cone and perform mechanical interference checks at all positions at each length. If we avoid collisions, the component has been successfully modified.  Failure cases of this algorithm are shown in Figure \ref{fig:extrusion-fails}.
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/fig6-extrude-and-dodecahedron.png}
+\caption{We measure the distance from the button to the virtual camera's field of view--highlighted in blue (A), then extrude the bottom of the button that distance (B).  This technique is useful when creating objects where input components on many faces point different directions, like this dodecahedral ball of buttons (C).}
+\label{fig:sauron-extrusion}
+\end{figure}
 
-Extrusion need not be limited to a single direction straight down from a component's base. We have built proof-of-concept components like the button in Figure \ref{fig:extrusion-multi}, which have multiple possible extrusion directions. This increases the applicability of extrusion to more complicated geometries. Our prototype does not automatically extrude such components yet, but a designer using the camera's virtual field of view reference can make these modifications manually.
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/extrusion-fails.png}
+\caption{Extrusion does not work in some cases.  The component's base may not point at the camera's field of view (A).  The component's base may point at the field of view, but be blocked by the main body (B).  One component's base (green), if extruded, would intersect the another component (red) (C).}
+\label{fig:sauron-extrusion-fails}
+\end{figure}
+
+
+To calculate extrusion depth, we first cast a ray from the component's base and determine if it intersects the field of view. If not, then we cannot reach the field of view with extrusion. We then measure the distance from the base along its normal to the field of view and update our extrusion to that depth. We next iterate through possible positions of the component (e.g., simulate a slider's motion along its track) and check that we are not intersecting any other components or the body of the device, and that we continue to meet the field of view. We iteratively extend our extrusion if we fall outside the cone and perform mechanical interference checks at all positions at each length. If we avoid collisions, the component has been successfully modified.  Failure cases of this algorithm are shown in Figure \ref{fig:sauron-extrusion-fails}.
+
+Extrusion need not be limited to a single direction straight down from a component's base. We have built proof-of-concept components like the button in Figure \ref{fig:sauron-extrusion-multi}, which have multiple possible extrusion directions. This increases the applicability of extrusion to more complicated geometries. Our prototype does not automatically extrude such components yet, but a designer using the camera's virtual field of view reference can make these modifications manually.
+
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/extrusion++.png}
+\caption{This prototype component (A) can be extruded in multiple directions to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
+}
+\label{fig:sauron-extrusion-multi}
+\end{figure}
 
 
 \emph{Visibility Check, Raytracing, and Mirror Placement}
 Designers can check visibility of their components by seeing whether they fall within the field of view geometry of the virtual camera. However, the virtual camera's field of view shown to the user has limited depth so it does not interfere with other modeling tasks. Using raycasting, Sauron  provides immediate visibility feedback by highlighting all components that are directly visible to the camera. We cast a ray from the center of the camera to the bottom of each component and determine whether that ray falls inside the field of view. If so, we perform the same check in the maximum and minimum positions of the component (e.g., we slide sliders to each end of their tracks). %In a full simulation we check more positions, but for quick check we find this is sufficient.
 
-We use raytracing to determine how to place mirrors for components where extrusion failed (Figure \ref{fig:raytracing}). The designer has to manually insert these during post-print assembly. %\bjoern{Redundant?}In cases where a component has been placed around a corner from the camera or is at an angle such that an extrusion would not cause it to meet the field of view cone, simple extrusion of the component's base will not suffice. We use mirrors to provide optical redirection: the mirror reflects light from the camera onto the component's base as well as reflecting the component's motion back to the camera.
+We use raytracing to determine how to place mirrors for components where extrusion failed (Figure \ref{fig:sauron-raytracing}). The designer has to manually insert these during post-print assembly. %\bjoern{Redundant?}In cases where a component has been placed around a corner from the camera or is at an angle such that an extrusion would not cause it to meet the field of view cone, simple extrusion of the component's base will not suffice. We use mirrors to provide optical redirection: the mirror reflects light from the camera onto the component's base as well as reflecting the component's motion back to the camera.
 
-Each ray is cast from the camera to the body of the device, and from there reflected  based on the surface normal of the body at the intersection point: i.e., we assume that during assembly the mirror will be placed tangent to the body's inner face. The reflected rays are traced to determine if they intersect any components which were not successfully modified in the extrusion step. If such a component is encountered by the reflected ray, the location on the body that it was reflected from is marked. This leaves a cloud of points per component, which informs the designer where to place mirrors during assembly (see Figure \ref{fig:step-by-step}). Our prototype traces a coarse grid of 
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/reflection.png}
+\caption{An illustration of the raytracing algorithm used for mirror placement.  Note that the button in the figure cannot be extruded to meet the field of view cone.  A mirror will be glued at the spots where the rays successfully reflect (seen in B) during assembly.}
+\label{fig:sauron-raytracing}
+\end{figure}
+
+Each ray is cast from the camera to the body of the device, and from there reflected  based on the surface normal of the body at the intersection point: i.e., we assume that during assembly the mirror will be placed tangent to the body's inner face. The reflected rays are traced to determine if they intersect any components which were not successfully modified in the extrusion step. If such a component is encountered by the reflected ray, the location on the body that it was reflected from is marked. This leaves a cloud of points per component, which informs the designer where to place mirrors during assembly (see Figure \ref{fig:sauron-step-by-step}). Our prototype traces a coarse grid of 
 20x20 rays because of limitations of the SolidWorks API, in which a single trace takes up to 250ms. A more efficient reimplementation can increase rays to one per camera pixel.
 
 The raytracing algorithm also finds occlusions. If a component %, after being extruded or ``found'' by a mirror, 
@@ -133,8 +196,14 @@ Mirrors can also be used to redirect motion to increase its visibility. For exam
 Due to the nature of our sensing approach, we require that designers' models be hollow and contain a hole of suitable size for the lighting and camera rig to be inserted. Many prototypes are designed to be hollow because such designs conserve printing material. However, this requirement places some restrictions on how other elements, e.g., an LCD screen, can be placed inside the model. 
 
 We also require a few steps of assembly to make the prototype suitable for use with our vision pipeline.
-To increase visibility of the input components versus the background, we require the addition of some distinctive material to the input components. This material can be printed in multi-color 3D printers. Alternatively, coloring the bottoms of the input components with a pen is sufficient. We use a silver permanent pen on dark model material or a black permanent pen on light model material (see Figure \ref{fig:distinctiveness}).
+To increase visibility of the input components versus the background, we require the addition of some distinctive material to the input components. This material can be printed in multi-color 3D printers. Alternatively, coloring the bottoms of the input components with a pen is sufficient. We use a silver permanent pen on dark model material or a black permanent pen on light model material (see Figure \ref{fig:sauron-distinctiveness}).
 
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/distinctive-materials.png}
+\caption{Components with reflective ink on black material (left) and black ink on white material (right).}
+\label{fig:sauron-distinctiveness}
+\end{figure}
 
 Because most current materials used for 3D printing are too brittle to create small compliant parts, users must add springs manually after printing (e.g., to restore buttons after being pressed). This limitation is not unique to Sauron. We designed our buttons to allow for insertion of springs using tweezers. Any mirrors will need to be inserted as well. We use small craft mirrors which we affix to the printed device's interior surface with epoxy.
 
@@ -144,13 +213,27 @@ Sauron generates a basic set of step-by-step instructions, automatically display
 A computer vision pipeline tracks user manipulations of components once they have been printed.
 We run each camera frame through a series of steps: binarization, connected components detection, and previous frame differencing. This highlights movement of components between frames.
 
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/vision-slider.png}
+\caption{Sauron's SolidWorks plugin highlights each model component in turn and asks the designer to move it.  The vision software creates a bounding box as the component moves through its range and also saves any information required by the component type.  For example, to determine slider position later the vision software saves the two most extreme tracked center points (the red and green dots).}
+\label{fig:sauron-vision-process}
+\end{figure}
+
 \emph{Registration}
-Users have to register components before they can be tracked. During the registration process, regions of interest for each component are determined. A designer is prompted by SolidWorks to actuate each of his components in turn, and a bounding region is created that encompasses all the points through which the component moved (Figure \ref{fig:vision-process}). These regions determine the relative position of the component within its bounds during the testing phase.
+Users have to register components before they can be tracked. During the registration process, regions of interest for each component are determined. A designer is prompted by SolidWorks to actuate each of his components in turn, and a bounding region is created that encompasses all the points through which the component moved (Figure \ref{fig:sauron-vision-process}). These regions determine the relative position of the component within its bounds during the testing phase.
 
 In future work, we would like to explore more detailed simulation in the CAD environment. This could eliminate the physical registration phase by either generating and printing visual markers (and using sensing similar to \cite{doering-composition}) in a contrasting material, or by predicting the position of the components in the camera's image and sending that information to the vision software.
 
 \emph{Tracking}
-After registration, different detection algorithms apply to each input component. The techniques we use for each component are visualized in Figure \ref{fig:vision}. For {\em buttons}, we extract one bit of status from movement of its tracked blob. The direction pad generalizes this approach to track four cardinal directions, while the {\em joystick} tracks movement of X and Y axes separately. We find the absolute position of a {\em slider} in a unit interval by finding its blob on a line connecting the minimum and maximum positions observed during calibration (see also Figure \ref{fig:vision-process}). The {\em dial} tracks position as orientation of a blob around an elliptical path, while {\em scroll wheel} and {\em trackball} use optical flow to determine amount and direction of relative movement.
+After registration, different detection algorithms apply to each input component. The techniques we use for each component are visualized in Figure \ref{fig:sauron-vision}. For {\em buttons}, we extract one bit of status from movement of its tracked blob. The direction pad generalizes this approach to track four cardinal directions, while the {\em joystick} tracks movement of X and Y axes separately. We find the absolute position of a {\em slider} in a unit interval by finding its blob on a line connecting the minimum and maximum positions observed during calibration (see also Figure \ref{fig:sauron-vision-process}). The {\em dial} tracks position as orientation of a blob around an elliptical path, while {\em scroll wheel} and {\em trackball} use optical flow to determine amount and direction of relative movement.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/sauron/vision-all-components.png}
+\caption{The different types of components in the Sauron library require tailored computer vision tracking approaches to extract state information.}
+\label{fig:sauron-vision}
+\end{figure}
 
 We currently do not correct for perspective in our images, which leads to non-linear behaviors in components like the slider and dial. It would be possible to account for perspective analytically since we know position and orientation of a component with respect to the camera in the model. For example, a slider follows a known line through $(x_{min}, y_{min},z_{min})$ and $(x_{max},y_{max},z_{max})$   in the CAD model.
 %, and during the registration process a user provides $(u_{min},v_{min}),(u_{max},v_{max})$ for the image of a component in the camera's view. 
@@ -160,8 +243,14 @@ Given a slider located at $(u,v)$ in the image, we can find the point that is mu
 
 The vision component of our prototype is implemented in C++ and runs at interactive speeds (\textgreater 32fps) on a 2011 Macbook Pro. We rely on the open-source computer vision library OpenCV \cite{opencv} and OpenFrameworks \cite{openframeworks}.
 %, in particular its support for OpenCV \cite{opencv}. 
-Messages are passed between SolidWorks and OpenFrameworks via the OpenSoundControl (OSC) protocol. OSC messages are sent over UDP and contain an address (e.g., {\em ``/button/1''}) and payload (e.g., ``on'' or ``off''). Our prototype uses these messages to communicate processed events, to start and stop test mode, and to start and stop registration of a particular component (see Figure \ref{fig:arch}).
+Messages are passed between SolidWorks and OpenFrameworks via the OpenSoundControl (OSC) protocol. OSC messages are sent over UDP and contain an address (e.g., {\em ``/button/1''}) and payload (e.g., ``on'' or ``off''). Our prototype uses these messages to communicate processed events, to start and stop test mode, and to start and stop registration of a particular component (see Figure \ref{fig:sauron-arch}).
 
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/arch2outlined.pdf}
+\caption{SolidWorks and OpenFrameworks exchange messages via OpenSoundControl.  OpenFrameworks also sends OSC messages containing processed data to a WebSockets server to deliver events to a user's application.}
+\label{fig:sauron-arch}
+\end{figure}
 
 \subsection{Event Output}
 Sauron can deliver input events to application using either OpenSoundControl or WebSocket messages.
@@ -181,19 +270,26 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
 
     \subsection{Cost-Effective}
     
-    Sauron's sensing hardware for our prototype includes a repurposed webcam with a custom circuitboard to hold an integrated ring light: a setup costing roughly \$$35$. Our initial experiments indicate that existing cameras with ring lights (as in Figure \ref{fig:camera}) can also be used for sensing, without the need for custom electronics. In addition, a single sensing setup can be used for multiple prototypes, albeit not simultaneously, allowing amortization of cost over many projects.
+    Sauron's sensing hardware for our prototype includes a repurposed webcam with a custom circuitboard to hold an integrated ring light: a setup costing roughly \$$35$. Our initial experiments indicate that existing cameras with ring lights (as in Figure \ref{fig:sauron-hardware}) can also be used for sensing, without the need for custom electronics. In addition, a single sensing setup can be used for multiple prototypes, albeit not simultaneously, allowing amortization of cost over many projects.
     
     To work with our computer vision pipeline, prototype objects are hollow. This not only enables our sensing technique, but also saves materials. The fabricated prototypes we used for our research were created on a Stratasys uPrint SEPlus, at the cost of approximately \$$8/in^3$. Today, more and more hobbyist machines are capable of laying down the sacrificial support material that is necessary to create mechanisms in-place that do not require assembly, for roughly \$$50/kg$.
     
     \subsection{Fast}
     
-    We performed an informal evaluation with three mechanical engineers. All were proficient SolidWorks users. We first explained how Sauron works and demonstrated a printed prototype containing examples of all our input components. We then asked them to prototype a disk jockey (DJ) controller that could be tested with Sauron. Common functions on such controllers are volume and EQ control knobs, large ``scratch'' wheels for two audio channels, and a crossfader. We emphasized thinking aloud, as we wished to determine how the constraints of our vision-based system affected their design process. Participants did not run the plug-in itself during the modeling sessions due to time constraints, but we ran it on the resulting models and fabricated one of their designs (see Figure \ref{fig:djmixer}).
+    We performed an informal evaluation with three mechanical engineers. All were proficient SolidWorks users. We first explained how Sauron works and demonstrated a printed prototype containing examples of all our input components. We then asked them to prototype a disk jockey (DJ) controller that could be tested with Sauron. Common functions on such controllers are volume and EQ control knobs, large ``scratch'' wheels for two audio channels, and a crossfader. We emphasized thinking aloud, as we wished to determine how the constraints of our vision-based system affected their design process. Participants did not run the plug-in itself during the modeling sessions due to time constraints, but we ran it on the resulting models and fabricated one of their designs (see Figure \ref{fig:sauron-djmixer}).
+    
+    \begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/study.png}
+\caption{Our three user study participants prototyped DJ mixing boards using our component library.  Each had a very different strategy for ensuring the camera could see all components.  The assembly on the bottom (with interior cutaway view at right) was designed to have the camera inside reflecting off mirrors placed on the back wall.}
+\label{fig:sauron-study}
+\end{figure}
 
-    All of our participants modeled DJ mixing boards that could be successfully used with our vision-based sensing approach (Figure~\ref{fig:study}). They followed different approaches to place the camera -- though all showed concern for the aesthetics of their design and accordingly tried to mount the camera inside the main enclosure or otherwise out of the way. One user mounted the camera sideways (Figure~\ref{fig:study}A), but at a location such that the mixer's components would not occlude each other; another created a very deep box at the start, stating that he preferred ``to focus on the user side, rather than the camera because I don't care about the box size'' (Figure~\ref{fig:study}B). The most ingenious design mounted the camera on the top, pointing down, so that all components would be visible in a single large mirror placed at the bottom of the controller (Figure~\ref{fig:study}C). In aggregate, while users had to plan for the visibility constraints of camera sensing in their design, these constraints were not seen as overly burdensome.
+    All of our participants modeled DJ mixing boards that could be successfully used with our vision-based sensing approach (Figure~\ref{fig:sauron-study}). They followed different approaches to place the camera -- though all showed concern for the aesthetics of their design and accordingly tried to mount the camera inside the main enclosure or otherwise out of the way. One user mounted the camera sideways (Figure~\ref{fig:sauron-study}A), but at a location such that the mixer's components would not occlude each other; another created a very deep box at the start, stating that he preferred ``to focus on the user side, rather than the camera because I don't care about the box size'' (Figure~\ref{fig:sauron-study}B). The most ingenious design mounted the camera on the top, pointing down, so that all components would be visible in a single large mirror placed at the bottom of the controller (Figure~\ref{fig:sauron-study}C). In aggregate, while users had to plan for the visibility constraints of camera sensing in their design, these constraints were not seen as overly burdensome.
 
     One user wished that an interactive design checker was available to test his design iteratively for visibility. A complete model modification pass currently requires $\approx 5$ minutes to process a non-rectilinear model with 10 components, because of slow calls to the SolidWorks API. Based on this feedback we implemented the ``quick check'' feature which highlights components that are immediately within the viewing area without performing ray-tracing or extrusion.
 
-    Participants also successfully modified the library of parameterized components. One participant stated that it was important to her that the sensing portion of each component was decoupled from the user-facing portion. For example, the scratch wheels are large on the user's side to enable users to place their entire hand on them, while the internal dial diameter is small so it can be seen by the camera in its entirety (see Figure \ref{fig:study}C). The same user also wished that there was better documentation for the component library, describing how large holes for mounting needed to be.
+    Participants also successfully modified the library of parameterized components. One participant stated that it was important to her that the sensing portion of each component was decoupled from the user-facing portion. For example, the scratch wheels are large on the user's side to enable users to place their entire hand on them, while the internal dial diameter is small so it can be seen by the camera in its entirety (see Figure \ref{fig:sauron-study}C). The same user also wished that there was better documentation for the component library, describing how large holes for mounting needed to be.
 
 
     \subsection{Flexible}
@@ -202,22 +298,43 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
     
     \subsection{Analysis of Pre-Designed Models}
     To determine if designers working without our constraints in mind would create prototypes that are compatible with our vision-based system, we downloaded several online 3D models and analyzed them. The models, which comprised a deduplicated set of all models with keywords ``interactive'' or ``controller'' on the model-sharing site grabCAD.com, ranged from XBOX and Guitar Hero controllers to interactive desks with keyboards. None of the devices that we analyzed were designed for 3D printing, but rather for rendering or as engineering drawings.  Our first step in processing them was estimation of the internal geometry of the bodies, for which we assumed simple shelling (i.e., no internal supports, wall thickness approximately .1'', interior curves following the curves of the outside of the body). After this was done, we selected several candidate camera locations which would not interfere with what we understood to be the user-facing functions of the device, and we measured which components would be visible to the camera directly, which via extrusion, and which via reflection. 
+    
+    \begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/shallow-models.png}
+\caption{These models found online were too shallow to sense with Sauron---occlusion and curvature would prevent correct sensing with computer vision.}
+\label{fig:sauron-premade}
+\end{figure}
 
-    Out of 10 devices we analyzed, we believe that 7 of them could be successfully processed by Sauron. Three devices were too thin -- this caused serious occlusion problems between components. Their bodies also did not allow space for the inclusion of mirrors to solve the occlusion problem (Figure \ref{fig:premade}). One of the failing devices, a steering-wheel-style device, had two handle areas with buttons at their far ends and thin, continuously-curving surfaces bending away from the main body. Using just one mirror bounce, it would be impossible to see around these bends to the buttons at the ends.
+    Out of 10 devices we analyzed, we believe that 7 of them could be successfully processed by Sauron. Three devices were too thin---this caused serious occlusion problems between components. Their bodies also did not allow space for the inclusion of mirrors to solve the occlusion problem (Figure \ref{fig:sauron-premade}). One of the failing devices, a steering-wheel-style device, had two handle areas with buttons at their far ends and thin, continuously-curving surfaces bending away from the main body. Using just one mirror bounce, it would be impossible to see around these bends to the buttons at the ends.
 
 
     \subsection{Example Devices}
     We also fabricated three prototypes that display the range of interactive components our prototype system offers.
 
         \subsubsection{Ergonomic Mouse}
-        Our ergonomic mouse (see Figure \ref{fig:ergomouse}) has a trackball the user can manipulate with his thumb as well as two buttons and a scroll wheel. We configured the mouse to control the mouse cursor on a laptop using OSCulator. Due to large tolerances in our model, the scroll wheel tended to oscillate between ``up'' and ``down'' states after being released. This problem could either be addressed through modifications to the model or by double thresholding in our computer vision component.
-
+        Our ergonomic mouse (see Figure \ref{fig:sauron-ergomouse}) has a trackball the user can manipulate with his thumb as well as two buttons and a scroll wheel. We configured the mouse to control the mouse cursor on a laptop using OSCulator. Due to large tolerances in our model, the scroll wheel tended to oscillate between ``up'' and ``down'' states after being released. This problem could either be addressed through modifications to the model or by double thresholding in our computer vision component.
+        
+        
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/ergomouse.png}
+\caption{Our ergonomic mouse prototype has a trackball the user can manipulate with his thumb as well as two buttons and a scroll wheel. On the right is the camera's view of the inside of the mouse.}
+\label{fig:sauron-ergomouse}
+\end{figure}
 
         \subsubsection{DJ Mixer}
-        We constructed a DJ mixing board -- based on a study participant's design -- in two pieces to fit on our 3D printer's bed size. We converted the OSC messages sent out by Sauron's vision software to MIDI messages to control Traktor, a professional DJ application (see Figure \ref{fig:djmixer}). One issue this prototype raised was that disparities between the virtual and physical camera parameters affected visibility. While the components were designed to fit within the virtual camera's field of view, an offset between the lens axis and the center of the sensor on our (manually-modified) camera led to some components falling outside the physical field of view. We are confident that better calibration and measurement can overcome such problems.
+        We constructed a DJ mixing board---based on a study participant's design---in two pieces to fit on our 3D printer's bed size. We converted the OSC messages sent out by Sauron's vision software to MIDI messages to control Traktor, a professional DJ application (see Figure \ref{fig:sauron-djmixer}). One issue this prototype raised was that disparities between the virtual and physical camera parameters affected visibility. While the components were designed to fit within the virtual camera's field of view, an offset between the lens axis and the center of the sensor on our (manually-modified) camera led to some components falling outside the physical field of view. We are confident that better calibration and measurement can overcome such problems.
+        
+        \begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/DJ-controller-action.JPG}
+\caption{Our DJ mixing board, based on one of our users's designs, has sliders and two dial configurations: raised knobs for easy manipulation of volume, and a larger flat wheel for seeking and scratching songs.  The different types of dials share a sensing algorithm, however, as their interior parts are similar.}
+\label{fig:sauron-djmixer}
+\end{figure}
         
         \subsubsection{Game Controller}
-        We developed two versions of a video game controller, shown in Figures \ref{fig:teaser} and \ref{fig:step-by-step}. To test responsiveness, we built a simple browser-based game to accept data from Sauron's WebSockets server. The controller moves the player character around (joystick) and shoots fireballs (buttons). We found the game was playable, although detection of the joystick position was noisy. This seems to be due to the fact that the blobs tracked for the main base and the two flanks were lumped together when the joystick was in certain configurations, e.g., at extreme right. We believe this is not a fundamental issue and could be mitigated by iterating on the joystick's interior design or by using a higher-resolution camera.
+        We developed two versions of a video game controller, shown in Figures \ref{fig:sauron-teaser} and \ref{fig:sauron-step-by-step}. To test responsiveness, we built a simple browser-based game to accept data from Sauron's WebSockets server. The controller moves the player character around (joystick) and shoots fireballs (buttons). We found the game was playable, although detection of the joystick position was noisy. This seems to be due to the fact that the blobs tracked for the main base and the two flanks were lumped together when the joystick was in certain configurations, e.g., at extreme right. We believe this is not a fundamental issue and could be mitigated by iterating on the joystick's interior design or by using a higher-resolution camera.
 
 \section{Discussion}
 
@@ -225,7 +342,7 @@ Current Sauron prototypes are all tethered to a PC. There are opportunities to e
 
 We believe that an exciting use for Sauron is in the development of entirely novel input devices which are not supported by traditional electronics. One example is a curved slider: electronics typically measure either linear or rotary motion, but a slider on a curved or irregular track would be easily prototyped using Sauron.
 
-The creation of interactive prototypes also need not be limited to 3D printed plastic. Digital fabrication opens the doors to many new areas of exploration: any process which fabricates material according to a model created in software could be processed similarly. One such promising technology is laser cutting, where we already see the ability to create 3D models through sliceforms or layering of 2D cross-sections of an object. Laser Origami \cite{Mueller-laserorigami} has pushed the bounds further, and it is not difficult to imagine fully laser-cuttable mechanisms that could be tracked by Sauron.
+The creation of interactive prototypes also need not be limited to 3D printed plastic. Digital fabrication opens the doors to many new areas of exploration: any process which fabricates material according to a model created in software could be processed similarly. One such promising technology is laser cutting, where we already see the ability to create 3D models through sliceforms or layering of 2D cross-sections of an object. Laser Origami \cite{mueller-laserorigami} has pushed the bounds further, and it is not difficult to imagine fully laser-cuttable mechanisms that could be tracked by Sauron.
 
 For future work we hope to test our tool more extensively with designers in the context of a workshop or class. We are also planning to explore tools to simplify the physical design process for users unfamiliar with CAD tools. 
 
