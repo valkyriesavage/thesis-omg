@@ -11,23 +11,8 @@ This thesis has presented techniques for leveraging and modifying digital geomet
 \section{Restatement of Contributions}
 
 We presented a design space describing how to interlink geometry and sensing for digitally-fabricated prototype objects, as well as a series of explorations in promising areas of the design space. Specifically, we contributed:
-\begin{enumerate}
-\item \valkyrie{a summary of today's fabrication machine capabilities and how they tie to sensing systems?}
-\item Midas, a method to create custom-shaped, flexible capacitive touch sensors by synthesizing sensor pads and auto-routing connections, as well as instructions for assembly and use, from a high-level graphical specification \begin{enumerate}
-    \item a design tool using this method to enable users to to fabricate, program, and share touch-sensitive prototypes.
-    \item an evaluation demonstrating Midas’s expressivity and utility to designers.
-    \end{enumerate}
-\item Lamello, a technique which integrates algorithmically-generated audio-producing tine structures into movable components, creating passive tangible inputs that do not require training examples for accurate sensing. \begin{enumerate}
-    \item a design pipeline which predicts tine frequencies (and an evaluation that they can be accurately predicted) and senses user manipulation of components in real time
-    \item a discussion of information encoding techniques useful for this technique \valkyrie{not really a contribution? just a summary... should this contribution be a library of parts, instead?}
-    \end{enumerate}
-\item Sauron, a design tool enabling users to
-rapidly turn 3D models of input devices into interactive 3D printed prototypes where a single camera senses input \begin{enumerate}
-    \item a method for tracking human input on physical components using a single camera placed inside a hollow object
-    \item two algorithms for analyzing and modifying a 3D model’s internal geometry to increase the range of manipulations that can be detected by a single camera.
-    \item an informal evaluation of our implementation of these techniques usable on models constructed in a professional CAD tool.
-    \end{enumerate}
-\end{enumerate}
+
+\input{contributions}
 
 \section{Future Work}
 
@@ -35,7 +20,7 @@ Over the course of describing this thesis's contributions, we have pointed to a 
 
 Beyond per-project improvements, we have laid out a design space for linking geometry to sensing. Midas, Lamello, and Sauron each represent a single point in this design space, and fuller exploration of the space may lead to companion projects to those described here. In particular, the advent of multi-material polyjet 3D printers seems to open a wide variety of options for exploring colors, transparency, and flexibility as features in a sensing design space, and the Voxel8 \cite{voxel8} printer, which can lay arbitrary conductive materials and plastic together in a single pass, points to opportunities to explore induction or magnetism as sensing operations.
 
-Overall, we recognize that there are several assumptions made by the projects presented in this dissertation. Namely, our projects leverage a \emph{single fabrication machine} \valkyrie{lamello doesn't have to} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer. We discuss possibilities opened by willfully subverting each of these assumptions in turn.
+Overall, we recognize that there are several assumptions made by the projects presented in this dissertation. Namely, our projects leverage a \emph{single fabrication machine} \valkyrie{lamello doesn't have to} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer and sensed by a \emph{single} sensor. We discuss possibilities opened by willfully subverting each of these assumptions in turn.
 
 \subsection{Cooperation among fabrication machines}
 
@@ -66,6 +51,10 @@ We believe that there is significant territory to be explored in modeling users'
     \subsubsection{To suit particular tasks}
     
     Our lives contain a variety of general-purpose input devices, like the mice and keyboards that we find at our desks, or the video game controllers we use when we unwind. As described above, with digital fabrication machines we can imagine a future in which each input device is uniquely suited to a single task: we can ask questions about a task, and how a particular person approaches it (What abilities does Pat tend to use most when playing League of Legends? How often does Friedrich scroll through documents while editing them, compared to insert/delete tasks?), and use these to inform the layout (e.g., more frequently-used functions close to dominant hand/fingers) or sensitivity (e.g., a lighter push will activate a time-critical function, versus a more substantial push necessary for an irreversible function) of input devices.
+    
+\subsection{Multi-sensor Units}
+
+In the interest of reducing assembly time, all of our projects leverage a \emph{single} sensor in a single location. However, many commercially-available sensor bundles could offer additional types of data. For example, modern smartphones collect a wide array of sensors---e.g., microphone, camera, accelerometer, gyroscope, magnetometer---into a package that could easily be attached to a single point in a prototype; likewise, Texas Instruments' BLE SensorTag sports an ambient light sensor, humidity sensor, barometric pressure sensor, magnetometer, temperature sensor, and more \cite{ti-sensortag}. Affixing a block of multiple sensors to a single point adheres to the goal of assembly speed, and could allow for additional flexibility and precision in sensing.
 
 \section{Closing Remarks}
 

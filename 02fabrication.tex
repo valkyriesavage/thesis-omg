@@ -2,27 +2,16 @@
 
 
 \begin{quote}
-If you think in terms of a year, plant a seed; if in terms of ten years, plant trees; if in terms of 100 years, teach the people.
+One of the criticisms we get is, 'Does the world need more plastic crap?' But you have to look beyond the plastic crap, to the design, to the experience, to the empowering nature of [digital fabrication] and the community.
 
---- Confucius
+--- Bre Pettis
 \end{quote}
-\valkyrie{c'mon, need a better quote.}
-
-\valkyrie{Consider using Klemmer's framework as an inspiration here. Consider organizing just around sensing principles and not worrying about enumerating machine properties in the same way. Don't necessarily use 5 human senses, but consider looking into a list of "common sensor types" that can be leveraged for organizational purposes. Still want to have a section about what machines can/can't do today, but probably easier to just keep these as shorter definitions and not worry about organizing them hierarchically or anything. should I combine RW and this chapter together?????}
-
-%\begin{quote}
-%The design of human-machine dialogues is, at least in part, the design of artificial languages for [human-machine] communication. [W]e can analyze the manipulations of an input device as sentences. Input devices are those devices that allow some portion of these potential sentences actually to be realized and communicated from human to machine.
-
-%--- Stuart Card, et al.
-%\end{quote}
 
 This chapter outlines the multitude of digital fabrication techniques currently available, as well as potential characteristics of the artifacts that each process can create. We then align these properties to sensing techniques, describing a space of possible geometry/sensing links for input device design and fabrication.
 
-\valkyrie{organize around 5 human senses?? this leaves out things like magnetic sensing (but we can have an ``other'' bucket?)}
-
 \section{Definitions}
 
-First, we briefly define uncommon words and machines that will be discussed in this chapter.
+First, we briefly define uncommon words and machines that will be discussed in this chapter and the remainder of the thesis.
 
 \emph{additive fabrication} : in additive fabrication, material is deposited and a shape is built up, leaving no waste
 
@@ -40,7 +29,7 @@ First, we briefly define uncommon words and machines that will be discussed in t
 
 \emph{SLS} : SLS (selective laser sintering) 3D printers contain a bed of material (e.g., metal powder) which is melted by a laser and rapidly cools into a solid, fused form. Excess material can be brushed off and reused.
 
-\emph{PolyJet} : PolyJet printers have print heads similar to those of inkjet printers which sweep across the build area depositing material. Following the printer head is a UV light, which cures deposited material droplets.
+\emph{Polyjet} : Polyjet printers have print heads similar to those of inkjet printers which sweep across the build area depositing material. Following the printer head is a UV light, which cures deposited material droplets.
 
 \emph{vinyl cutter} : a vinyl cutter subtractively processes 2D materials with a 2-axis knife blade, cutting patterns into them. Vinyl cutters are typically used for thin, flexible materials.
 
@@ -52,42 +41,29 @@ First, we briefly define uncommon words and machines that will be discussed in t
 
 \section{Digital Fabrication}
 
-Digital fabrication machines are those which can take as input a digital design file, in 2D or 3D, and output a physical realization of that design; these machines stand in contrast to traditional crafting techniques (which are guided by the craftsperson, and take no design file) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, doctors can now create custom 3D printed replacement joints that fit patients' bodies \cite{findref}.
+Digital fabrication machines are those which can take as input a digital design file, in 2D or 3D, and output a physical realization of that design; these machines stand in contrast to traditional crafting techniques (which are guided by the craftsperson, and take no design file) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, even makers can now create custom 3D printed replacement joints and prosthetics that fit particular bodies, e.g., \cite{myers-sophie}.
 
-The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs that are fully 3D inside and out. These machines allow their manufactured products to achieve various structural and material properties. We examine these achievable properties, describing possible geometries, materials/properties, and assembly characteristics (see Table \ref{table:properties}).
+The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs that are fully 3D inside and out. These machines allow their manufactured products to achieve various structural and material properties. We examine these achievable properties, describing possible geometries, materials/properties, and assembly characteristics (see Figure \ref{table:properties}).
 
-\valkyrie{You can just, I guess, give a short definition of what each of these properties are, and then make a good table that shows which machines can create which geometries.}
+%\valkyrie{You can just, I guess, give a short definition of what each of these properties are, and then refer to that properties table..}
 
-\begin{table}
-\begin{center}
-\begin{tabular}{rll}
-\textbf{FEATURE}& \textbf{MANIFESTATION} & \textbf{POSSIBLE MACHINES} \\
-\textbf{geometry} & $2D$ & vinyl cutter, paper cutter, inkjet printer \\
-& $2.5D$ & laser cutter, CNC router \\
-& $3D$ external & CNC mill, 3D printer \\
-& $3D$ internal + external & 3D printer \\
-\textbf{materials} & plastic & laser cutter, 3D printer \\
-& metal & vinyl cutter, 3D printer, CNC mill \\
-& wood & laser cutter, CNC router \\
-& vinyl & vinyl cutter, laser cutter \\
-& paper & paper cutter, laser cutter \\
-\textbf{properties} & inert & \\
-& adhesive & \\
-& flexible & \\
-& stiff & \\
-& conductive & \\
-& blended & \\
-& multi-colored & \\
-& transparent & \\
-\end{tabular}
-\end{center}
-\caption{Digital fabrication enables fabrication of a wide variety of geometries with different material and structural properties. \valkyrie{I still hate this table. Could work as something more like the other table (i.e., made in illustrator, with pix).}}
+\begin{figure}
+\centering
+\includegraphics[width=5in]{figures/fab-properties.pdf}
+\caption{Additive and subtractive RP machines each have their own sweet spots of operation. Subtractive tools can process more types of materials, but additive ones offer more geometric and material blending flexibility.}
 \label{table:properties}
-\end{table}
+\end{figure}
 
 \subsection{Geometry Fabrication}
 
-Digital fabrication machines can support any complexity of geometry, from 2D images on paper (as an inkjet printer produces) to 3D projections of 4D objects (like Shapeways's Klein bottles printed in steel) (see Figure \ref{fig:range}. We describe the possibilities for the various geometries, as well as machines that could produce them. Note that we list machines at the edge of their range: for example, a CNC mill (listed under 3D external) can also make 2.5D or 2D objects.
+Digital fabrication machines can support any complexity of geometry, from 2D images on paper (as an inkjet printer produces) to 3D projections of 4D objects (like Shapeways's Klein bottles printed in steel) (see Figure \ref{fig:range}). We describe the possibilities for the various geometries, as well as machines that could produce them. Note that we list machines at the edge of their range: for example, a CNC mill (listed under 3D external) can also make 2.5D or 2D objects.
+
+\begin{figure}
+\centering
+\includegraphics[width=4in]{figures/range.png}
+\caption{The range of objects produceable via digital fabrication is huge: from 2D images on paper (left, from Amazon), to 3D projections of 4D objects (right, from Bathsheba on Shapeways).}
+\label{fig:range}
+\end{figure}
 
 \subsubsection{2D geometry}
 
@@ -99,57 +75,128 @@ A slight jump from 2D is 2.5D: a 2D shape with additional \emph{depth} informati
 
 \subsubsection{3D external geometry}
 
+External 3D geometry can all be handled and felt by a user. It can be produced, for example, via CNC milling.
+
 \subsubsection{3D internal geometry}
+
+Internal 3D geometry can only be produced via additive manufacturing, and it allows for designed cavities on the interior of objects manufactured as a single piece. This is typically accomplished by machines that have both a model material and a sacrificial support material: combining the two materials permits internal and external overhangs that may not be possible using only a single material. However, removal of this support material can be challenging, depending on the process used. See \cite{savage-sot} for a more complete treatment of support material and removal techniques.
 
 \subsection{Materials and Properties}
 
+Beyond geometric properties, the types of materials that can be processed using the various additive and subtractive RP machines is equally broad. Each material lends itself to certain types of manipulations, and different materials may be more easily formed by different machines.
+
 \subsubsection{Plastic (hard)}
+
+Hard plastics, like acrylonitrile butadiene styrene (more commonly known as ABS) and polylactic acid (known as PLA), are the materials du jour in the maker community. They come in the form of heatable, extrudable filaments for FFF machines (e.g., Makerbot, Printrbot, Reprap, uPrint). Hard plastics can also be additively processed with other 3D printing techniques, for example being cured by polyjet machines (ABS-like and Vero series for Objet machines) or SLA machines (Form1).
+
+Hard plastics can also be subtractively processed through milling and laser cutting, although many plastics are unsafe for laser vaporization (e.g., ABS plastic emits chlorine gas when lasercut).
 
 \subsubsection{Plastic (flexible)}
 
+Flexible plastics are less common than hard ones, though there are some notable materials here: thermoplastic polyurethane (sold as Ninjaflex) is a filament-style flexible material for use in FFF machines, and some polyjet machines likewise have support for flexible plastics (e.g., Tango series for Objet).
+
+Subtractive processing for flexible plastics is possible, though may be more challenging due to different shear parameters than stiffer materials. PVC plastic in the form of vinyl sheets can be cut to shape with a vinyl cutter.
+
 \subsubsection{Plastic (transparent)}
+
+Transparent plastics are not yet available for most maker-class machines, though many SLA-processed resins are optically translucent and polyjet machines offer optically transparent plastics (e.g., VeroClear for Objet). Laser cutters are suitable for processing sheets of transparent acrylic, as well.
 
 \subsubsection{Metal (conductive)}
 
+Conductive metal is relatively simple to process subtractively (e.g., milling circuitboards on a CNC router), even by vinyl cutters which can cut thin metal foils. Certain conductive metals, e.g., steel, can be directly laser-sintered in a high-heat process. Conductive-impregnated filaments for FFF machines do exist in limited use, but they are typically based on graphene (carbon) rather than metals. The new Voxel8 FFF 3D printer \cite{voxel8} uses a silver-based material for conductive purposes.
+
 \subsubsection{Metal (inert)}
+
+Inert metals are processed in essentially the same ways as conductive metals, although they have not been engineered for use in FFF filaments.
 
 \subsubsection{Wood}
 
-\subsubsection{Vinyl (flexible)}
+Wood-type materials are most commonly subtractively processed (e.g., by CNC routing). Newer processes are available to add wood in the form of sawdust to FFF-compatible filaments (e.g., woodfill by colorfabb), and also to laser sinter with wood chips \cite{materialise-wood}.
 
 \subsubsection{Paper}
 
+Paper is trivially subtractively processed. None of the four main 3D printing methods can use paper-based materials, though one subtractive/additive method uses stacks of cut paper to create 3D paper models (e.g., MCor IRIS).
+
 \subsection{Assembly Characteristics}
+
+Additive digital fabrication methods offer significant freedom in terms of assembly methods. Many types of printers can use multiple materials for the same part, and even blend them. This allows for fabricating parts of multiple colors or shore (hardness/softness) values, or simply creating parts which are pre-assembled and interlocked after support material is removed. 
 
 \section{Single-Sensor Sensing Techniques}
 
 The essence of Human Computer Interaction is a computer understanding a person's interactions. Thus, while many of the input techniques here could be used in, for example, machine-to-machine communication, we describe how a person's actions might create a usable control signal.
 
 A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
-\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
+%\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
 We organize our discussion around five categories of common sensors: contact, non-contact, electrical, environmental, and biological. In these five categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, and pulse sensors.
-
-\valkyrie{In this section, again just give short definitions of what each sensor type does?}
 
 \subsection{Contact sensors}
 
+Contact sensors are mainly used either to sense contact with an object (in the case of switches, capacitance, flex, or force sensing) or used while in contact with an object to sense other forces on it (as in load sensors, accelerometers, and gyroscopes). This kind of sensor can directly sense physical human input.
+
 \subsection{Non-contact sensors}
+
+Non-contact sensors, like the contact variety, can directly sense physical human input. They can, however, do so without being in contact with the human or the input device being sensed. Non-contact sensors rely on waves (e.g., visible for cameras, audible for microphones, radio for RFID) or fields (e.g., magnetic for hall effect) to sense interactions. 
 
 \subsection{Electrical sensors}
 
+Electrically-based sensors like volt-meters and potentiometers can be used as tools for internal monitoring of a circuit, but are also able to sense human input. A potentiometer attached to a knob, for example, will change its resistance value as a user manipulates the knob.
+
 \subsection{Environmental sensors}
+
+Environmental sensors, like pressure and altitude sensors, are generally used to sense ambient details, as opposed to human input. However, certain ambient details can be modified by human presence or activity: for example, human users can output sweat senseable via humidity sensors, and human presence may raise the local temperature of a area.
 
 \subsection{Biological sensors}
 
+Human bodies perform several semi-controllable processes: hearts beat, brains think, etc. Biological sensors detect these processes. They can be used for input by humans, but the user may require some training to be competent at creating distinct signals.
+
 \section{Promising Overlaps}
 
-The spaces of both machines and sensors are vast, so we describe some ways to think about combining them to actually fabricate sensing objects. \valkyrie{need to talk about every X in table? definitely need to talk generically about how you are defining something as "promising" here. :)}
+The spaces of both machines and sensors are vast, so we describe some ways to think about combining them to actually fabricate sensing objects.
 
 \begin{figure}
 \begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
-      Lining up the possibilities of fabricatable properties with sensor types, we can see several areas that are promising for further exploration. We also identify pairings that have been explored previously, as well as pairings explored in this thesis. \valkyrie{for previously explored, probably want to in some way tie to the works (i.e., with refs in figure).}
+      Lining up the possibilities of fabricatable properties with sensor types, we can see several areas that are promising for further exploration. We also identify pairings that have been explored previously, as well as pairings explored in this thesis. 1. Capricate \cite{schmitz-capricate}, 2. Flexibend \cite{chien-flexibend}, 3. Stane \cite{murray-smith-stane}, 4. Printed Optics \cite{willis-printedoptics}, 5a. Design by physical composition \cite{doering-composition}, 5b. Dynamic latex buttons \cite{harrison-buttons}, 6. Depth camera as touch sensor \cite{wilson-depthtouch}, 7. Pressure-sensing robot skins \cite{slyper-pressure}.
       }\end{minipage}},rotate=90,center}
       \includegraphics[scale=.75]{figures/sensing-fab.pdf}%
   \end{adjustbox}
 \label{fig:sensing-fab}
 \end{figure}
+
+\subsection{Principles}
+    
+    Several principles guide our selections. Namely,
+    \begin{itemize}
+      \item for materials: \begin{itemize}
+        \item the material ideally conducts (but at least does not insulate) the signal to be passed. For example, metal conducts electricity, and so is compatible with electrical sensing; paper conducts moisture, and thus could be used with humidity sensing; pulse can be sensed optically, so clear material may be compatible with pulse sensing.
+        \item a user's manipulating the material should generate a control signal senseable using the given sensor. For example, bending a flexible plastic generates a signal detectable by a flex sensor. %\valkyrie{actually different from above?. yes.}
+        \end{itemize}
+      
+      \item for geometry: \begin{itemize}
+        \item geometry should work with the sensing abilities of a given technology. For example, an object with a solid core would not allow fluids to sense for particulate sensing; allowing 3D internal geometry would make this sensing possible.
+        \item geometry needs to make it possible for a given type of signal to reach every part of an object without collision. For example, an ultrasonic rangefinder cannot "see across" a 2D fabricated object (as everything is on the same plane). \valkyrie{still chewing on this one...}
+        \end{itemize}
+      
+      \item for assembly characteristics: assembly characteristics of an object may be necessary in combination with particular materials properties to get additional sensing. For example, blending stiff and flexible plastics may allow for more unique degrees of sensing with a flex sensor.
+      
+      \item for sensors: to avoid complex machine learning, sensors should measure phenomena which can be mathematically modeled from digital design files. For example, the range from an ultrasonic rangefinder to a moving slider may be easier to model than the force generated by a user flexing a part with a Shore value of 35. \valkyrie{do we need this section? basically all the other sections reference sensor compatibility anyway.} \valkyrie{realistically, a caveat is that I know more about contact/non-contact/electrical sensors than I do about the other things. they are more commonly used in HCI as far as I'm aware, and maybe I just don't have the brain bendability to identify how they could be effectively leveraged using fab.}
+    \end{itemize}
+    
+    These principles give rise to the \textbf{x}s marked in Figure \ref{fig:sensing-fab}.
+    
+\subsection{The Most Promising Overlaps}
+
+    \valkyrie{choose a few things outside this thesis that we think are the best places to look next? maybe?}
+    
+\subsection{Overlaps Discussed in this Thesis}
+
+    \subsubsection{Conductive Metal + 2D Geometry + Capacitive Sensor}
+    
+    Chapter 4 describes Midas, a technique for creating custom capacitive touchpads CNC cut from adhesive copper foil. These can be affixed to everyday objects and sensed using a single capacitive touch controller.
+    
+    \subsubsection{Hard Plastic + 2D/3D Geometry + Microphone}
+    
+    Chapter 5 describes Lamello, a technique for creating tines from hard plastic; when struck each tine vibrates at a characteristic frequency which can be classified using a microphone.
+    
+    \subsubsection{3D Internal Geometry + Camera}
+    
+    Chapter 6 describes Sauron, a technique leveraging arbitrary internal geometries to create mechanical input devices that can be sensed by a single embedded camera.
