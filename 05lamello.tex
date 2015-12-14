@@ -14,7 +14,7 @@ Moving towards more complex user interactions and sensing mechanisms, this chapt
 We describe \emph{Lamello}, an approach for creating tangible input components that recognize user interaction via passive acoustic sensing. Lamello employs comb-like structures with varying-length tines at interaction points (e.g., along slider paths). Moving a component generates tine strikes; a real-time audio processing pipeline analyzes the resultant sounds and emits high-level interaction events. Our main contributions are in the co-design of the tine structures, information encoding schemes, and audio analysis. We demonstrate 3D printed Lamello-powered buttons, sliders, and dials. 
 
 \section{Introduction}
-\valkyrie{How are mechanical interfaces important?  How are they seen today?}
+%\valkyrie{How are mechanical interfaces important?  How are they seen today?}
 
 Tangible input components like buttons and sliders
 have advantages over ``flat'' interfaces like touch screens. They are critical for eyes-free interaction and muscle memory, and can improve task speed and precision \cite{klemmer-bodies}. Such devices typically comprise integrated assemblies of electronics, enclosures, and microcontroller code.
@@ -41,7 +41,7 @@ Recognizing mechanically-generated sound for input has important limitations---o
 Our evaluation indicates that training-free recognition is possible, though our recognizer only has useful accuracy for a subset of tested tines.
 
     \subsection{The Geometry-Sensing Link}
-    Lamello uses a predictive model which connects the geometry of a cantilevered beam (i.e., the ``tines'' used in this project) to a fundamental frequency when excited. We demonstrate the model, which assumes the beam is uniform, to be useful, in spite of the fact that tines fabricated on a 3D printer are not composed of uniform material. This pre-print modelling of frequencies allows training-free sensing of fabricated input devices using a microphone.
+    Lamello uses a predictive model which connects the geometry of a cantilevered beam (i.e., the ``tines'' used in this project) to a fundamental frequency when excited. We demonstrate the model, which assumes the beam is uniform, to be useful, in spite of the fact that tines fabricated on a 3D printer are not composed of uniform material. This pre-print modeling of frequencies allows training-free sensing of fabricated input devices using a microphone.
     
 \section{Designing with Lamello}
 
@@ -81,7 +81,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
     
     Lamello outputs its events in OSC format, which can be processed using a third-party GUI (e.g., OSCulator) or in code. To control his lighting system, our designer writes a quick script: he accepts the OSC output of the software, connecting positions to luminance of a bulb. He can then affix the Lamello component to the wall nearby the laptop.
     
-    \valkyrie{get a phillips smart bulb or w/e those are called and code this up. and shoot it.}
+    \valkyrie{get a phillips hue and code this up. and shoot it.}
     
 \section{Implementation}
 
@@ -91,7 +91,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
     
         \subsubsection{Tine Geometry Generation}
     
-        Through the process of testing and refining our own designs for geometry, we extracted several high-level requirements for tines, described below. These requirements are enshrined in a simple geometry generation script, which we implemented in openSCAD. The script only requires that the user input the number of tines to be generated and the shape in which to generate them: the output is a 3D object which has that many tines of differing fundamental frequencies, which are arranged either linearly or radially. \valkyrie{definitely need a figure}
+        Through the process of testing and refining our own designs for geometry, we extracted several high-level requirements for tines, described below. These requirements are enshrined in a simple geometry generation script, which we implemented in openSCAD. The script only requires that the user input the number of tines to be generated and the shape in which to generate them: the output is a 3D object which has that many tines of differing fundamental frequencies, which are arranged either linearly or radially.
 
         To generate sounds, we embed tine structures in input components (Figure \ref{fig:lamello-pretty-components}). Our tines are rectangular beams, attached at their base to the component and free to deflect at their top. Interacting with a component causes tine plucks; these vibrate the body of the component and are captured by a contact microphone.
         
@@ -175,7 +175,14 @@ Our evaluation indicates that training-free recognition is possible, though our 
 
     \subsubsection{Fabricating Lamello-compatible Components}
     
-    As mentioned, most of our prototype Lamello tines are 3D printed in FFF-extruded ABS plastic. While our $f_0$ predictive model works sufficiently well in spite of the non-uniformity of the material, tines printed in some orientations may break, and may need special calibration as their Young's Modulus ($E$) is likely to differ.
+    As mentioned, most of our prototype Lamello tines are 3D printed in FFF-extruded ABS plastic. While our $f_0$ predictive model works sufficiently well in spite of the non-uniformity of the material, tines printed in some orientations may break (see Figure \ref{fig:lamello-break}), and may need special calibration as their Young's Modulus ($E$) is likely to differ.
+    
+    \begin{figure}
+  \centering
+    \includegraphics[width=3in]{figures/lamello/fab.png}
+  \caption{Tines printed in some orientations may be prone to breaking: in particular, inter-layer adhesion is weaker than within-layer adhesion for 3D printing (left). Breakage can be mitigated by filleting tine corners instead of having them meet the body at right angles (right), but this can require additional details in the frequency prediction model.} 
+  \label{fig:lamello-break}
+\end{figure}
     
     Other printing or fabrication processes may not be orientation dependent. We have laser cut tines from Polyoxymethylene (Delrin) sheets, integrating these tine strips into 3D printed components using machine screws as fasteners. Tine sizes are similar between ABS-printed and lasercut objects, as laser cutting caused heat deflection in smaller feature sizes. Smaller tine sizes and higher frequencies may be achievable using different fabrication processes, e.g., injection molding or MEMS micromachining. We leave these investigations to future work.
     
@@ -195,7 +202,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
 
     \subsection{Flexible}
     We successfully used Lamello to create a variety of input components: buttons, sliders, dials, and joysticks. By combining and modifying their primitive actions (pushing, sliding, turning, and rocking), a designer could employ Lamello to sense components like scroll wheels or direction pads. \valkyrie{how to expand this section? maybe a diagram of how these primitives work and could combine into other input controls.}
-    To explore the utility of our technique, we used a Lamello slider and mouse emulation to control a Pong game. The achieved latency was sufficient for simple gameplay; however, Lamello may be better suited to provide input for applications such as volume or lighting control, where some latency and occasional misclassified events are acceptable. \valkyrie{do this. :(}
+    To explore the utility of our technique, we used a Lamello slider and mouse emulation to control a Pong game. The achieved latency was sufficient for simple gameplay; however, Lamello may be better suited to provide input for applications such as volume or lighting control (as described in Design Walkthrough, above), where some latency and occasional misclassified events are acceptable.
 
 \section{Discussion}
 
@@ -203,7 +210,11 @@ Initial experiments with Lamello are encouraging: components augmented with tine
 
     \subsection{Sweet Spots}
 
-    Lamello is uniquely suited to creating simple, unpowered inputs in environments where microphones are already present. This includes applications in the Internet of Things or Smart Home, as we described in the scenario above in \emph{Designing with Lamello}. \valkyrie{elaborate on this... ya silly.}
+    Lamello opens opportunities to design tangible, mechanical interfaces cheaply and quickly, without the need to train a machine learning model for sensing. This technique is uniquely suited to creating simple, unpowered inputs in environments where microphones, such as those in laptops or, with additional engineering, cell phones, are already present. This includes applications in the Internet of Things or Smart Home, as we described in the scenario above in \emph{Designing with Lamello}. These inputs can be made more durable or more cheap as required by the application: the same 3D models can be fabricated in a variety of materials as desired.
+    
+    Like Midas's inputs, Lamello designs can be sized appropriately for the situation: they are not pre-fabricated like sensors for Arduino \cite{arduino} or those used in d.tools \cite{hartmann-dtools}, but rather can be stretched or shrunk or otherwise customized to fit perfectly with a larger design or requirement.
+    
+    Fabrication of these devices is fast, and they don't require training.
     
     \subsection{Limitations}
     
