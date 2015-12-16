@@ -65,7 +65,8 @@ Our evaluation indicates that training-free recognition is possible, though our 
     
     \subsection{Design Walkthrough}
     
-    \valkyrie{the thing about lamello is that of course it doesn't have a cad tool in the same way. this will be interesting to write.} We discuss the design possibilities of Lamello using a concrete running example: a designer wishes to test out a passive environmental input device for light controls. This input should be in the form of a slider, unpowered, and sensed using a sensor already present in the environment. He has a laptop in his living room to control other aspects of his connected home, so he will use its built-in mic as his sensor.
+    %\valkyrie{the thing about lamello is that of course it doesn't have a cad tool in the same way. this will be interesting to write.} 
+    We discuss the design possibilities of Lamello using a concrete running example: a designer wishes to test out a passive environmental input device for light controls. This input should be in the form of a slider, unpowered, and sensed using a sensor already present in the environment. He has a laptop in his living room to control other aspects of his connected home, so he will use its built-in mic as his sensor.
     
      \subsubsection{Customizing a Library Component}
     The designer opens openSCAD, a free and open source, well-documented CAD tool. He doesn't have much experience with openSCAD, but he opens one of Lamello's library component files: the slider. He needs to be able to input at least 15 different lighting positions, and he wants the slider a bit larger than it is by default, so he changes the values of a few variables in the model. 
@@ -77,11 +78,16 @@ Our evaluation indicates that training-free recognition is possible, though our 
     
     When his slider comes out of the printer, he sets it on the table next to his laptop and starts the Lamello sensing software, where he enters the material the tines are made of (3D Printed ABS Plastic) to complete the frequency predictions for his model's tines. As he slides the striker past tines, the sound is detected by the microphone in his laptop, which displays an illustration of the slider, with detected tine strikes highlighted.
     
+    \begin{figure}
+  \centering
+    \includegraphics[width=\textwidth]{figures/lamello/andrew-light.png}
+  \caption{Our designer tests his lighting setup, holding the printed component in his hand with his laptop and microphone next to him, and observes as the lights change in brightness with each tine strike.} 
+  \label{fig:lamello-andrew}
+\end{figure}
+    
     \subsubsection{Defining Interactions}
     
-    Lamello outputs its events in OSC format, which can be processed using a third-party GUI (e.g., OSCulator) or in code. To control his lighting system, our designer writes a quick script: he accepts the OSC output of the software, connecting positions to luminance of a bulb. He can then affix the Lamello component to the wall nearby the laptop.
-    
-    \valkyrie{get a phillips hue and code this up. and shoot it.}
+    To control his lighting system, our designer writes a quick script: he scales the output tine number of his Lamello comb to the input range of luminance for his lightbulb, and forwards those events on to the IP address of the light control bridge. After testing (see Figure \ref{fig:lamello-andrew}), he can affix the Lamello component to the wall nearby the laptop.
     
 \section{Implementation}
 
@@ -151,7 +157,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
     
     \subsubsection{Lamello's Sensing Apparatus}
     
-    Lamello is designed to take advantage of sensors that already exist in an environment, specifically microphones. No custom hardware is necessary to sense Lamello-based inputs. Our initial tests leveraged cheap contact mics used for musical instruments clipped to the components, while we have since performed formal tests with thru-air microphones present in laptop computers \valkyrie{presumably achieving similar accuracy?}. Audio sensing additionally presents more of a challenge, as it necessitates time- and frequency-domain analysis on a device with non-negligible computational ability, unlike the simple thresholded on/off of Midas. We describe our algorithms below.
+    Lamello is designed to take advantage of sensors that already exist in an environment, specifically microphones. No custom hardware is necessary to sense Lamello-based inputs. Our initial tests leveraged cheap contact mics used for musical instruments clipped to the components, while we have since performed informal tests with thru-air microphones present in laptop computers. Audio sensing additionally presents more of a challenge, as it necessitates time- and frequency-domain analysis on a device with non-negligible computational ability, unlike the simple thresholded on/off of Midas. We describe our algorithms below.
 
     The audio signal of a tine strike is characterized by an initial transient---a short high energy sound across a wide range of frequencies---followed by free vibration with a local long-decay energy peak at the tine's resonant frequency (Figure \ref{fig:lamello-transient}). Conceptually, our recognizer detects a transient, finds the dominant resonant frequency after the transient passes, and compares it to predicted tine frequencies.
     
@@ -196,7 +202,14 @@ Our evaluation indicates that training-free recognition is possible, though our 
     The components themselves are also inexpensive, as ABS plastic for 3D printing costs approximately \$$50/kg$, and each of our example inputs weighs roughly an ounce. The polyoxymethylene sheets we experimented with for our laser cutter are approximately \$$10/ft^2$.
     
     \subsection{Fast}
-    Input components built using this technique do not require post-processing. The time from design to functioning input is limited mainly by the speed of the 3D printer (while each of our sliders required only 2 hours to print, the joystick took 8). Once the print is completed and the support material removed, the technique does not require training---it relies on $f_0$s predicted from geometry rather than empirically determined---, and the components can be used right away. In the case that designers elect to create their components by assembling lasercut tines with 3D printed mechanisms, the assembly requires simply snapping the tines in (in the case of the dial \valkyrie{figure!}) or attaching two screws for the slider (\valkyrie{figure!}).
+    Input components built using this technique do not require post-processing. The time from design to functioning input is limited mainly by the speed of the 3D printer (while each of our sliders required only 2 hours to print, the joystick took 8). Once the print is completed and the support material removed, the technique does not require training---it relies on $f_0$s predicted from geometry rather than empirically determined---, and the components can be used right away. In the case that designers elect to create their components by assembling lasercut tines with 3D printed mechanisms, the assembly requires simply snapping the tines in (in the case of the dial, see Figure \ref{fig:lamello-laser}, left) or attaching a few screws (for the slider, see Figure \ref{fig:lamello-laser}, right).
+    
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth]{figures/lamello/lamello-laser.png}
+  \caption{Lasercut tines can be integrated with 3D printed bodies. Left, lasercut dial tines can snap into a 3D printed body (lasercut tines are white, blue color added for clarity). Right, lasercut slider tines can be attached with clips or screws through their mounting holes.} 
+  \label{fig:lamello-laser}
+\end{figure}
     
     In future work, we hope to improve and deploy the Lamello CAD tool to gain insights about its legibility for users.
 
