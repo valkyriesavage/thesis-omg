@@ -331,8 +331,8 @@ We discuss the components of the Midas hardware: the mechanism of capacitive tou
     
     \begin{figure}[b]
     \centering
-\includegraphics[width=\textwidth]{figures/midas/dimatix.png}
-\caption{Example of a touch sensor manufactured through an alternative process of circuit board milling. \valkyrie{add image of the ITO-coated plastic one made on the paper cutter. (see slide deck)}} 
+\includegraphics[width=\textwidth]{figures/midas/otheroptions.png}
+\caption{Two example touch sensors fabricated with alternative processes: left, a hard sensor created on a circuit board mill. Right, a sensor cut from Indium Tin Oxide-coated transparent plastic..} 
 \label{fig:midas-dimatix}
 \end{figure}
 
@@ -340,7 +340,7 @@ Midas generates vector graphics files in SVG format for the
 electrode and mask layers. These files can be used to control
 digital fabrication processes. Our prototype currently
 cuts conductive, adhesive-backed copper foil on a commercial
-vinyl cutter—--a plotter with a cutting knife instead of a
+vinyl cutter---a plotter with a cutting knife instead of a
 pen. This medium has multiple advantages. First, it is cost-effective
 and readily available: vinyl cutters are in the same
 price range as laser printers (ours, a tabletop model with a
@@ -401,7 +401,7 @@ With our WebSockets architecture (Figure~\ref{fig:midas-socket}), designers open
     
     Midas enables touch-sensitive prototyping for roughly the cost of a laser printer. The vinyl cutter used for the Midas project, a tabletop model with a $35cm$ bed, cost \$$200$. Copper foil costs a few dollars per foot.
     
-    Alternatives to this fabrication method include cutting Indium Tin Oxide (ITO)-coated plastics, using silver ink in an inkjet printer, and fabrication using a circuitboard mill. ITO-coated plastics allow for transparent sensors; ITO costs roughly \$$.25/in^2$ and can be fabricated on an inexpensive paper cutter. Silver ink can be used in many existing inkjet printers, and costs \valkyrie{?}. Circuitboard milling has a high startup cost (a suitable machine can cost as little as \$$800$, and upwards beyond that), but the per-unit expense is low, about \$$17/ft^2$.
+    Alternatives to this fabrication method include cutting Indium Tin Oxide (ITO)-coated plastics, using silver ink in an inkjet printer, and fabrication using a circuitboard mill. ITO-coated plastics allow for transparent sensors; ITO costs roughly \$$.25/in^2$ and can be fabricated on an inexpensive paper cutter. Silver ink can be used in many existing inkjet printers, and costs roughly \$$1/mL$ or \$$2/ft^2$ of total coverage. Circuitboard milling has a high startup cost (a suitable machine can cost as little as \$$800$, and upwards beyond that), but the per-unit expense is low, about \$$17/ft^2$.
     
     On the sensor side, the full sensor setup we prototyped with cost \$$36$: \$$16$ for the Arduino Teensy microcontroller board, and \$$10$ for each of the capacitive sensing breakout boards. This cost could be reduced further with custom circuitboards (our setup was assembled from commercially-available boards for expediency), and the setup is can be easily detached from a prototype and reused in a new iteration or for a different project.
     
