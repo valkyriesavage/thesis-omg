@@ -5,8 +5,7 @@
 *.DS_Store
 *.bcf
 *.lof
-*.pdf
+00thesis.pdf
 *.run.xml
 *.toc
 *.pyc
-
