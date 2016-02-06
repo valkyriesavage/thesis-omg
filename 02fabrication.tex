@@ -51,15 +51,20 @@ First, we briefly define words and machines that will be discussed in this chapt
 
 Digital fabrication machines are those which can take as input a digital design file, in 2D, 2.5D, or 3D, and output a physical realization of that design. A design created in a computer-aided design (CAD) tool is processed by a computer-aided manufacturing (CAM) tool to create machine instructions to generate the object. This workflow stands in contrast to traditional crafting techniques (which do not require machine code) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, even makers can now create custom 3D printed replacement joints and prosthetics that fit particular bodies, e.g., a new hand for a young girl who wants to do monkey bars \cite{myers-sophie}.
 
-The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs where the designer has full 3D control over the external and internal geometry of object. These machines allow their manufactured products to achieve various structural and material properties. We examine these achievable properties, describing possible geometries, materials/properties, and assembly characteristics (see Figure \ref{table:properties}).
-
-%\valkyrie{You can just, I guess, give a short definition of what each of these properties are, and then refer to that properties table..}
+The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs where the designer has full 3D control over the external and internal geometry of object. These machines allow their manufactured products to achieve various material and structural properties. We examine materials properties of common digital fabrication inputs (see Figure \ref{table:fab-properties}), as well as the machines that can process them and the compositional properties they make possible (see Figure \ref{table:materials-machines}).
 
 \begin{figure}
 \centering
 \includegraphics[width=5in]{figures/fab-properties.pdf}
 \caption{Additive and subtractive RP machines each have their own sweet spots of operation. Subtractive tools can process more types of materials, but additive ones offer more compositional flexibility.}
-\label{table:properties}
+\label{table:fab-properties}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=5in]{figures/materials-machines.pdf}
+\caption{Additive and subtractive RP machines each have their own sweet spots of operation. Subtractive tools can process more types of materials, but additive ones offer more compositional flexibility.}
+\label{table:materials-machines}
 \end{figure}
 
 \subsection{Geometry Fabrication}
