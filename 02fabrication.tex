@@ -64,11 +64,70 @@ The joint interests of industry, academia, and hobbyist makers have led to a flo
 \label{table:fab-properties}
 \end{figure}
 
+\subsection{Materials and Properties}
+
+Beyond geometric properties, the types of materials that can be processed using the various additive and subtractive RP machines is equally broad. Each material lends itself to certain types of manipulations, and different materials may be more easily formed by different machines.
+
+\subsubsection{Appearance}
+
+Materials may have a wide variety of appearance characteristics. For example, plastics can be transparent, translucent, or opaque. Paper can have color patterns or be plain white. Appearance characteristics affect the way light travels through an object. \valkyrie{not sure what to say here??}
+
+\subsubsection{Rigidity}
+
+A material's rigidity affords particular kinds of actions. Flexible materials can be bent, while more rigid ones do not encourage bending actions.
+
+\subsubsection{Conductivity}
+
+Electrical properties may allow a material to be used as a part of a circuit. Metal is the only common material that is conductive, but material mixing (e.g., plastic filament with embedded graphite, or silver ink printed on paper's surface) can lead to conductive properties in materials that lack them.
+
+\subsubsection{Plastic}
+
+Hard plastics---mainly thermoplastics like acrylonitrile butadiene styrene (more commonly known as ABS) and polylactic acid (known as PLA)---are the materials du jour in the maker community. They come in the form of heatable, extrudable filaments for FFF machines (e.g., Makerbot, Printrbot, Reprap, uPrint). Hard plastics can also be additively processed with other 3D printing techniques, for example photocure plastics in polyjet machines (ABS-like and Vero series for Objet machines) and SLA machines (methacrylates in Form1), or thermoset plastics like epoxy in research systems (e.g., Harvard's system \cite{compton-epoxy}).
+
+Hard plastics can also be subtractively processed through milling and laser cutting, although many plastics are unsafe for laser vaporization (e.g., ABS plastic emits chlorine gas when lasercut).
+
+Flexible plastics are less common than hard ones, though there are some notable materials here: thermoplastic polyurethane (sold as Ninjaflex) is a filament-style flexible material for use in FFF machines, and some polyjet machines likewise have support for flexible plastics (e.g., Tango series for Objet).
+
+Subtractive processing for flexible plastics is possible, though may be more challenging due to different shear parameters than stiffer materials. PVC plastic in the form of vinyl sheets can be cut to shape with a vinyl cutter.
+
+Transparent plastics are not yet available for most maker-class machines, though many SLA-processed resins are optically translucent and polyjet machines offer optically transparent plastics (e.g., VeroClear for Objet). Laser cutters are suitable for processing sheets of transparent acrylic, as well.
+
+\subsubsection{Metal}
+
+Conductive metal is relatively simple to process subtractively (e.g., milling circuitboards on a CNC router), even by vinyl cutters which can cut thin metal foils. Certain conductive metals, e.g., steel, can be directly laser-sintered in a high-heat process. Conductive-impregnated filaments for FFF machines do exist in limited use, but they are typically based on graphene (carbon) rather than metals. The new Voxel8 FFF 3D printer \cite{voxel8} uses a silver-based material for conductive purposes.
+
+Inert metals are processed in essentially the same ways as conductive metals, although they have not been engineered for use in FFF filaments.
+
+\subsubsection{Wood}
+
+Wood-type materials are most commonly subtractively processed (e.g., by CNC routing). Newer processes are available to add wood in the form of sawdust to FFF-compatible filaments (e.g., woodfill by colorfabb), and also to laser sinter with wood chips \cite{materialise-wood}.
+
+\subsubsection{Paper}
+
+Paper is trivially subtractively processed. None of the four main 3D printing methods can use paper-based materials, though one subtractive/additive method uses stacks of cut paper to create 3D paper models (e.g., MCor IRIS).
+
+\subsection{Machine Abilities}
+
+The varying constructions and methods of additive and subtractive fabrication machines allow them to process particular materials in particular ways. We briefly describe geometric and compositional possibilities for a variety of digital fabrication techniques.
+
 \begin{figure}
 \centering
 \includegraphics[width=5in]{figures/materials-machines.pdf}
-\caption{Additive and subtractive RP machines each have their own sweet spots of operation. Subtractive tools can process more types of materials, but additive ones offer more compositional flexibility.}
+\caption{Additive and subtractive RP machines each have their own sweet spots of operation. Subtractive tools can process more types of materials, but additive ones offer more compositional and geometric flexibility.}
 \label{table:materials-machines}
+\end{figure}
+
+\subsection{Material Composition}
+
+Additive digital fabrication methods offer significant freedom in terms of assembly methods. While subtractive machines are typically limited to the original composition of the material (material is loaded in as a solid block and parts are removed from it), additive fabrication methods can create objects which are built of solid, sparse, or hollow material (see Figure \ref{fig:composition}). These material compositions give rise to opportunities to design acoustics, airflow, or other wave/fluid systems; additionally they give a designer fine-grained control over object strength and weight.
+
+Additive machines also permit deviation from a material's original characteristics in their ability to blend and use multiple types of stock material. This allows a polyjet machine to take as input black material and white material, and create as output either an object with both black and white material, or an object exhibiting a variety of shades of grey. Blending and the use of multiple materials allows for control of appearance, rigidity, and conductivity, as described above.
+
+\begin{figure}
+\centering
+\includegraphics[width=4in]{figures/infills.jpg}
+\caption{FFF machines can lay plastic to create a variety of material compositions, ranging from hollow to sparse to solid. Here, we see a variety of compositions, arranged in order of percent(material/air). (from think3d.in)}
+\label{fig:composition}
 \end{figure}
 
 \subsection{Geometry Fabrication}
@@ -97,56 +156,6 @@ Features like overhangs can be challenging to mill using a 2.5D machine, as subt
 \subsubsection{3D internal geometry}
 
 Full control over internal geometry can only be executed via additive manufacturing, and it allows for designed cavities, mechanisms, textures, and more on the interior of objects manufactured in a single pass. Again, this is typically executed by machines that lay sacrificial support material.
-
-\subsection{Materials and Properties}
-
-Beyond geometric properties, the types of materials that can be processed using the various additive and subtractive RP machines is equally broad. Each material lends itself to certain types of manipulations, and different materials may be more easily formed by different machines.
-
-\valkyrie{I wonder if properties would be the better top-level organizing principle, rather than materials:
-so: Appearance: opaque-translucent-transparent
-Appearance: color-no color
-Rigidity: rigid-flexible
-Conductivity: isolator-resistor-conductor ?
-Material fill : solid-sparse-hollow
-Then you could have process x material gives rise to certain properties. add color}
-
-\subsubsection{Plastic (hard)}
-
-Hard plastics---including thermoplastics like acrylonitrile butadiene styrene (more commonly known as ABS) and polylactic acid (known as PLA)---are the materials du jour in the maker community. They come in the form of heatable, extrudable filaments for FFF machines (e.g., Makerbot, Printrbot, Reprap, uPrint). Hard plastics can also be additively processed with other 3D printing techniques, for example photocure plastics in polyjet machines (ABS-like and Vero series for Objet machines) and SLA machines (methacrylates in Form1), or thermoset plastics like epoxy in research systems (e.g., Harvard's system \cite{compton-epoxy}).
-
-Hard plastics can also be subtractively processed through milling and laser cutting, although many plastics are unsafe for laser vaporization (e.g., ABS plastic emits chlorine gas when lasercut).
-
-\subsubsection{Plastic (flexible)}
-
-Flexible plastics are less common than hard ones, though there are some notable materials here: thermoplastic polyurethane (sold as Ninjaflex) is a filament-style flexible material for use in FFF machines, and some polyjet machines likewise have support for flexible plastics (e.g., Tango series for Objet).
-
-Subtractive processing for flexible plastics is possible, though may be more challenging due to different shear parameters than stiffer materials. PVC plastic in the form of vinyl sheets can be cut to shape with a vinyl cutter.
-
-\subsubsection{Plastic (transparent)}
-
-Transparent plastics are not yet available for most maker-class machines, though many SLA-processed resins are optically translucent and polyjet machines offer optically transparent plastics (e.g., VeroClear for Objet). Laser cutters are suitable for processing sheets of transparent acrylic, as well.
-
-\subsubsection{Metal (conductive)}
-
-Conductive metal is relatively simple to process subtractively (e.g., milling circuitboards on a CNC router), even by vinyl cutters which can cut thin metal foils. Certain conductive metals, e.g., steel, can be directly laser-sintered in a high-heat process. Conductive-impregnated filaments for FFF machines do exist in limited use, but they are typically based on graphene (carbon) rather than metals. The new Voxel8 FFF 3D printer \cite{voxel8} uses a silver-based material for conductive purposes.
-
-\subsubsection{Metal (inert)}
-
-Inert metals are processed in essentially the same ways as conductive metals, although they have not been engineered for use in FFF filaments.
-
-\subsubsection{Wood}
-
-Wood-type materials are most commonly subtractively processed (e.g., by CNC routing). Newer processes are available to add wood in the form of sawdust to FFF-compatible filaments (e.g., woodfill by colorfabb), and also to laser sinter with wood chips \cite{materialise-wood}.
-
-\subsubsection{Paper}
-
-Paper is trivially subtractively processed. None of the four main 3D printing methods can use paper-based materials, though one subtractive/additive method uses stacks of cut paper to create 3D paper models (e.g., MCor IRIS).
-
-\subsection{Assembly Characteristics}
-
-\valkyrie{This paragraph is very abstract. I’m not sure what to take away from it.}
-
-Additive digital fabrication methods offer significant freedom in terms of assembly methods. Many types of printers can use multiple materials for the same part, and even blend them. This allows for fabricating parts of multiple colors or shore (hardness/softness) values, or simply creating parts which are pre-assembled and interlocked after support material is removed. 
 
 \section{Single-Sensor Sensing Techniques}
 
