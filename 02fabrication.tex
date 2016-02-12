@@ -2,12 +2,16 @@
 
 
 \begin{quote}
-One of the criticisms we get is, 'Does the world need more plastic crap?' But you have to look beyond the plastic crap, to the design, to the experience, to the empowering nature of [digital fabrication] and the community.
+In addition to the profound repercussions these technologies
+will likely have on the manufacturing industry, the
+democratization they enable promises to unleash creativity
+and innovation at a level comparable to those brought about
+by the personal computer and the internet.
 
---- Bre Pettis
+--- Catarina Mota, \emph{The Rise of Personal Fabrication}
 \end{quote}
 
-This chapter outlines the multitude of digital fabrication techniques currently available, as well as potential characteristics of the artifacts that each process can create. We then align these properties to sensing techniques, describing a space of possible geometry/sensing links for input device design and fabrication. \valkyrie{I would add a little bit of detail here. What does ''link" mean? Just another sentence or two that spells out more explicitly that we want to fabricate objects with properties which can in turn be sensed. Maybe even give an example in here to make this concrete: "For example, different processes can create tine structures (cantilevered beams). Those beams, when struck, vibrate at frequencies determined by their geometry, which can be sensed with a microphone."}
+Our goal is to fabricate input device prototypes whose properties we can predict and sense. This chapter will describe the design space of such devices, covering today's digital fabrication machines, the materials they can process, the properties inherent in those materials, potential characteristics of fabricated objects, and sensor varieties. Further, we will discuss potential ``links'' between object properties and sensors: for example, some processes can create tine structures (cantilevered beams); when struck, these tines vibrate at frequencies determined by their geometry and material, and their vibrations can be sensed and decoded by a microphone.
 
 \valkyrie{Hmm, writing this made me realize that maybe we need to describe more than just the pairing between fab characteristics and sensors? Maybe: 1) user action 2) mechanism 3)material characteristic 4) sensable change from coupling 1 to 2 5) sensor selection. You do this at the very end of this chapter. Maybe we want to bring this into the intro somehow?
 For Midas: 
@@ -15,7 +19,7 @@ For Midas:
 For Sauron:
 1) physical movement (push/slide/rotate); 2) 3d printed mechanism 3) rigidity, color 4) visual motion 5) camera
 For LAmello
-1) physical movement 2) plucking mechanism 3) controlled tine geometry 4) vibration 5) microphone}
+1) physical movement 2) plucking mechanism 3) controlled tine geometry 4) vibration 5) microphone} \valkyrie{My intuition is that making so many levels would be complicated, especially since we have a "none" as one of the steps on one of our projects.}
 
 \section{Definitions}
 
@@ -148,23 +152,32 @@ Additive digital fabrication methods offer significant freedom in terms of assem
 
 One key research area in Human Computer Interaction is designing new techniques and algorithms to help computers accept human input. Thus, while many of the input techniques here could be used in, for example, machine-to-machine communication, we describe how a person's actions might create a usable control signal.
 
-\valkyrie{repeat single-sensor motivation} A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
-%\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
-We organize our discussion around five categories of common sensors: contact, non-contact, electrical, environmental, and biological. In these five categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, and pulse sensors.
+\subsection{Single-sensor Motivation}
 
-\valkyrie{The major categories in the Modern Sensor Handbook are:
-* occupancy and motion
-* position, displacement and level
-* velocity and acceleration
-* force, strain and tactile
-* pressure
-* flow
-* acoustic
-* humidity/moisture
-* light detectors
-* radiation detectors
-* temperature
-* chemical sensors}
+Why use a single sensor? To reduce time spent on each iteration of a prototype performing assembly and calibration, we aim to allow users to fabricate an object and snap on a single sensing module. In the future, it would be interesting to explore multi-sensor modules (e.g., modern smartphones have magnetometers, capacitive screens, microphones, cameras, and more), however as initial work we are exploring one sensor at a time.
+
+\subsection{Sensor Types}
+
+A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
+%\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
+As they represent a vast array of possibilities in terms of actions sensed, physical phenomenon, and more, and there are multiple ways of organizing sensors for discussion purposes. We use the hierarchy proposed by the Modern Sensor Handbook \cite{citation needed!}: it arranges sensors by actions sensed, which neatly aligns with our user-driven prototypes. In these categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, and pulse sensors.
+
+The major categories in the Modern Sensor Handbook are
+\begin{itemize}
+    \item occupancy and motion
+    \item position, displacement and level
+    \item velocity and acceleration
+    \item force, strain and tactile
+    \item pressure
+    \item flow
+    \item acoustic
+    \item humidity/moisture
+    \item light detectors
+    \item radiation detectors
+    \item temperature
+    \item chemical sensors
+\end{itemize}
+
 
 \valkyrie{The physical effects that are the basis of sensors include: capacitance, magnetism, induction, resistance, piezoelectric effect, pyroelectric effect, hall effect, thermoelectric effect, ...}
 
