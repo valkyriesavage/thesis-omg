@@ -14,7 +14,6 @@ Shifting our focus towards mechanisms that can be created only through 3D printi
 To investigate the space of designs that can be built with Sauron along with its limitations, we built prototype devices, evaluated the suitability of existing models for vision sensing, and performed an informal study with three CAD users. While our approach imposes some constraints on device design, results suggest that it is expressive and accessible enough to enable constructing a useful variety of devices.
 
 \section{Introduction}
-\valkyrie{How are mechanical interfaces important?  How are they seen today?}
 
 Our environment is replete with products that have dedicated physical user interfaces like game controllers, musical instruments or personal medical devices. While the ubiquity of smart phones has led to a rise in touchscreen applications, retaining physicality has important benefits such as tactile feedback and high performance manipulation~\cite{klemmer-bodies}. For example, gamers prefer physical input for speed and performance, musicians for virtuosity and control.
 
@@ -196,7 +195,15 @@ Mirrors can also be used to redirect motion to increase its visibility. For exam
 Due to the nature of our sensing approach, we require that designers' models be hollow and contain a hole of suitable size for the lighting and camera rig to be inserted. Many prototypes are designed to be hollow because such designs conserve printing material. However, this requirement places some restrictions on how other elements, e.g., an LCD screen, can be placed inside the model. 
 
 We also require a few steps of assembly to make the prototype suitable for use with our vision pipeline.
-To increase visibility of the input components versus the background, we require the addition of some distinctive material to the input components. This material can be printed in multi-color 3D printers. Alternatively, coloring the bottoms of the input components with a pen is sufficient. We use a silver permanent pen on dark model material or a black permanent pen on light model material (see Figure \ref{fig:sauron-distinctiveness}).
+To increase visibility of the input components versus the background, we require the addition of some distinctive material to the input components. This material can be printed in multi-color 3D printers (see Figure \ref{fig:sauron-objet}). Alternatively, coloring the bottoms of the input components with a pen is sufficient. We use a silver permanent pen on dark model material or a black permanent pen on light model material (see Figure \ref{fig:sauron-distinctiveness}).
+
+\begin{figure}
+\centering
+\includegraphics[width=3.25in]{figures/sauron/objetback.jpg}
+\caption{Using a multi-color 3D printer, we created our video game controller object with distinctive material built in.
+}
+\label{fig:sauron-objet}
+\end{figure}
 
 \begin{figure}
 \centering
