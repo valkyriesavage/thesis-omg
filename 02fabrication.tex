@@ -162,8 +162,7 @@ Why use a single sensor? To reduce time spent on each iteration of a prototype p
 \subsection{Sensor Types}
 
 A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
-%\valkyrie{Card, et al., provide an analysis of the space of input devices based on what is sensed: position, $\Delta$position, angle, $\Delta$angle, force, $\Delta$force, torque, and $\Delta$torque \cite{card-input}. We use this to frame our discussion, but include additional senseable aspects: identity (of a user), bend/$\Delta$bend, and ???. We could also include, for example, \emph{intent}, which is the input of NLP voice systems like Siri, however these types of non-physical input are challenging to conceive of as a part of a physical input device and we therefore ignore them for now.}
-As they represent a vast array of possibilities in terms of actions sensed, physical phenomenon, and more, and there are multiple ways of organizing sensors for discussion purposes. We use the hierarchy proposed by the Modern Sensor Handbook \cite{citation needed!}: it arranges sensors by actions sensed, which neatly aligns with our user-driven prototypes. In these categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, cameras, and pulse sensors.
+As they represent a vast array of actions sensed, physical phenomenon, and other aspects, there are multiple ways of organizing sensors for discussion purposes. We use the hierarchy proposed by the Modern Sensor Handbook \cite{fraden-modernsensors}: it arranges sensors by changes sensed, which neatly aligns with our user-driven prototypes. In these categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, cameras, and pulse sensors.
 
 The major categories in the Modern Sensor Handbook are
 \begin{itemize}
@@ -181,37 +180,18 @@ The major categories in the Modern Sensor Handbook are
     \item chemical sensors
 \end{itemize}
 
+%\valkyrie{The physical effects that are the basis of sensors include: capacitance, magnetism, induction, resistance, piezoelectric effect, pyroelectric effect, hall effect, thermoelectric effect, ...}
 
-\valkyrie{The physical effects that are the basis of sensors include: capacitance, magnetism, induction, resistance, piezoelectric effect, pyroelectric effect, hall effect, thermoelectric effect, ...}
-
-\subsection{Contact sensors}
-
-Contact sensors are mainly used either to sense contact with an object (in the case of switches, capacitance, flex, or force sensing) or used while in contact with an object to sense other forces on it (as in load sensors, accelerometers, and gyroscopes). This kind of sensor can directly sense physical human input.
-
-\subsection{Non-contact sensors}
-
-Non-contact sensors, like the contact variety, can directly sense physical human input. They can, however, do so without being in contact with the human or the input device being sensed. Non-contact sensors rely on waves (e.g., visible for cameras, audible for microphones, radio for RFID) or fields (e.g., magnetic for hall effect) to sense interactions. 
-
-\subsection{Electrical sensors}
-
-Electrically-based sensors like volt-meters and potentiometers can be used as tools for internal monitoring of a circuit, but are also able to sense human input. A potentiometer attached to a knob, for example, will change its resistance value as a user manipulates the knob.
-
-\subsection{Environmental sensors}
-
-Environmental sensors, like pressure and altitude sensors, are generally used to sense ambient details, as opposed to human input. However, certain ambient details can be modified by human presence or activity: for example, human users can output sweat senseable via humidity sensors, and human presence may raise the local temperature of a area.
-
-\subsection{Biological sensors}
-
-Human bodies perform several semi-controllable processes: hearts beat, brains think, etc. Biological sensors detect these processes. They can be used for input by humans, but the user may require some training to be competent at creating distinct signals.
+Curious readers can learn more of their workings from the Handbook \cite{fraden-modernsensors}; we take their triggers and high-level functions to be self-evident here.
 
 \section{Promising Overlaps}
 
-The spaces of both machines and sensors are vast, so we describe some ways to think about combining them to actually fabricate sensing objects.
+The spaces of both material and fabricated properties, and sensors are vast: we describe some ways to think about combining them to actually fabricate sensing objects.
 
 \begin{figure}
 \centering
 \includegraphics[width=6in]{figures/sensing-fab.pdf}
-\caption{Lining up the possibilities of fabricatable properties with sensor types, we can see several areas that are promising for further exploration. We also identify pairings that have been explored previously, as well as pairings explored in this thesis. 1. Capricate \cite{schmitz-capricate}, 2. Flexibend \cite{chien-flexibend}, 3. Stane \cite{murray-smith-stane}, 4. Printed Optics \cite{willis-printedoptics}, 5a. Design by physical composition \cite{doering-composition}, 5b. Dynamic latex buttons \cite{harrison-buttons}, 6. Depth camera as touch sensor \cite{wilson-depthtouch}, 7. Pressure-sensing robot skins \cite{slyper-pressure}}
+\caption{Lining up the possibilities of fabricatable properties with sensor types, we can see several areas that are promising for further exploration. We also identify pairings that have been explored previously, as well as pairings explored in this thesis. 1. Printed Optics \cite{willis-printedoptics}, 2. Acoustruments \cite{laput-acoustruments}, 3. Stane \cite{murray-smith-stane}, 4. Flexibend \cite{chien-flexibend}, 5. Dynamic latex buttons \cite{harrison-buttons}, 6. Pressure-sensing robot skins \cite{slyper-pressure}, 7. Capricate \cite{schmitz-capricate}, 8. Design by physical composition \cite{doering-composition}, 9. Making 3D printed objects interactive with wireless accelerometers \cite{hook-making}}
 \label{fig:range}
 \label{fig:sensing-fab}
 \end{figure}
