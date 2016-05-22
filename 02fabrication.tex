@@ -39,7 +39,7 @@ First, we briefly define words and machines that will be discussed in this chapt
 
 \emph{vinyl cutter} : a vinyl cutter subtractively processes 2D materials with a 2-axis knife blade, cutting patterns into them. Vinyl cutters are typically used for thin, flexible materials.
 
-\emph{laser cutter} : a laser cutter has a 2-axis laser for processing flat materials. Laser cutters can cut or engrave into materials, and are often used for rigid materials $1</4$ inch thick. Some have rotary attachments for etching on circular surfaces like the outside of a glass.
+\emph{laser cutter} : a laser cutter has a 2-axis laser for processing flat materials. Laser cutters can cut or engrave into materials, and are often used for rigid materials $<\frac{1}{4}$ inch thick. Some have rotary attachments for engraving on circular surfaces like the outside of a glass.
 
 \emph{CNC router} : a CNC router uses a 3-axis rotary mill to cut through thick, rigid materials, like wood or certain metals. Some CNC routers are portable and can attach to many materials, while some are stationary with beds into which material is loaded.
 
@@ -47,9 +47,9 @@ First, we briefly define words and machines that will be discussed in this chapt
 
 \section{Digital Fabrication}
 
-Digital fabrication machines are those which can take as input a digital design file, in 2D, 2.5D, or 3D, and output a physical realization of that design. A design created in a computer-aided design (CAD) tool is processed by a computer-aided manufacturing (CAM) tool to create machine instructions to generate the object. This workflow stands in contrast to traditional crafting techniques (which do not require machine code) as well as manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects with each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, even makers can now create custom 3D printed replacement joints and prosthetics that fit particular bodies, e.g., a new hand for a young girl who wants to do monkey bars \cite{myers-sophie}.
+Digital fabrication machines are those which can take as input a digital design file, in 2D, 2.5D, or 3D, and output a physical realization of that design. A design created in a computer-aided design (CAD) tool is processed by a computer-aided manufacturing (CAM) tool to create machine instructions to generate the object. This workflow stands in contrast to traditional crafting techniques (which do not require machine code) as well as traditional manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects on each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, even makers can now create custom 3D printed replacement joints and prosthetics that fit particular bodies, e.g., a new hand for a young girl who wants to play on the playground \cite{myers-sophie}.
 
-The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs where the designer has full 3D control over the external and internal geometry of object. These machines allow their manufactured products to achieve various material and structural properties. We examine materials properties of common digital fabrication inputs (see Figure \ref{table:fab-properties}), as well as the machines that can process them and the compositional properties they make possible (see Figure \ref{table:materials-machines}).
+The joint interests of industry, academia, and hobbyist makers have led to a flourishing ecosystem of digital fabrication and rapid prototyping (RP) machines. These machines describe a continuum from simple vinyl cutters that can subtractively create 2-dimensional stickers to sophisticated multi-material 3D printers that can create multicolor and conductive designs where the designer has full 3D control over the geometry of the object. These machines allow their manufactured products to achieve various material and structural properties. We examine materials properties of common digital fabrication inputs (see Figure \ref{table:fab-properties}), as well as the machines that can process them and the compositional properties they make possible (see Figure \ref{table:materials-machines}).
 
 \begin{figure}
 \centering
@@ -60,11 +60,11 @@ The joint interests of industry, academia, and hobbyist makers have led to a flo
 
 \subsection{Materials and Properties}
 
-Beyond geometric properties, the types of materials that can be processed using the various additive and subtractive RP machines is equally broad. Each material lends itself to certain types of manipulations, and different materials may be more easily formed by different machines.
+Beyond geometric properties, the types of materials that can be processed using the various additive and subtractive RP machines is equally broad. Each material lends itself to certain types of manipulations, and different materials may be more easily formed by different machines. We consider the four main types of materials used in digital fabrication for the purposes of this thesis: wood, plastic, paper, and metal.
 
 \subsubsection{Appearance}
 
-Materials may have a wide variety of appearance characteristics. For example, plastics can be transparent, translucent, or opaque. Paper can have color patterns or be plain white. Appearance characteristics affect the way light travels through an object. \valkyrie{not sure what to say here??}
+Materials may have a wide variety of appearance characteristics. For example, plastics can be transparent, translucent, or opaque. Paper can have color patterns or be plain white. Appearance characteristics affect the way light travels through an object.
 
 \subsubsection{Rigidity}
 
@@ -111,7 +111,7 @@ The varying constructions and methods of additive and subtractive fabrication ma
 \label{table:materials-machines}
 \end{figure}
 
-\subsection{Material Composition}
+\subsubsection{Material Composition}
 
 Additive digital fabrication methods offer significant freedom in terms of assembly methods. While subtractive machines are typically limited to the original composition of the material (material is loaded in as a solid block and parts are removed from it), additive fabrication methods can create objects which are built of solid, sparse, or hollow material (see Figure \ref{fig:composition}). These material compositions give rise to opportunities to design acoustics, airflow, or other wave/fluid systems; additionally they give a designer fine-grained control over object strength and weight.
 
@@ -124,7 +124,7 @@ Additive machines also permit deviation from a material's original characteristi
 \label{fig:composition}
 \end{figure}
 
-\subsection{Geometry Fabrication}
+\subsubsection{Geometry Fabrication}
 
 Digital fabrication machines can support any complexity of geometry, from 2D images on paper (as an inkjet printer produces) to 3D projections of 4D objects (like Shapeways's Klein bottles printed in steel) (see Figure \ref{fig:range}). We describe the possibilities for the various geometries, as well as machines that could produce them. Note that we list machines at the edge of their range: for example, a CNC mill (listed under 3D external) can also make 2.5D or 2D objects.
 
@@ -135,21 +135,13 @@ Digital fabrication machines can support any complexity of geometry, from 2D ima
 \label{fig:range}
 \end{figure}
 
-\subsubsection{2D geometry}
+\emph{2D geometry}: 2D geometry lies flat on a surface, but can manifest as an image printed on paper, a sticker cut from vinyl, or a barcode engraved on granite. Machines that support 2D geometry fabrication include vinyl and paper cutters, as well as inkjet printers.
 
-2D geometry lies flat on a surface, but can manifest as an image printed on paper, a sticker cut from vinyl, or a barcode engraved on granite. Machines that support 2D geometry fabrication include vinyl and paper cutters, as well as inkjet printers.
+\emph{2.5D geometry}: A slight jump from 2D is 2.5D: a 2D shape with additional \emph{depth} information. The canonical machines to create 2.5 objects are 3-axis CNC routers, which mill away material from the surface and can take multiple passes for deeper features.
 
-\subsubsection{2.5D geometry}
+\emph{3D external geometry}: Features like overhangs can be challenging to mill using a 2.5D machine, as subtractive techniques require that the machine tool has unobstructed access to the surface to be milled. Creating such features on a 2.5D machine may require reorienting an object several times. Some machines are capable of creating arbitrary 3D external geometry, including overhangs, without manual reorientation of a part. This is can be accomplished by machines that use both a model material and a sacrificial support material: combining the two materials permits overhangs that may not be possible using only a single material. However, removal of this support material can be challenging, depending on the process used. (See \cite{savage-sot} for a more complete treatment of support material and removal techniques.) 3D printers can produce overhang geometry by laying support material as a part of each 2D object slice, and 5-axis CNC mills can produce overhangs via automatic object reorientation.
 
-A slight jump from 2D is 2.5D: a 2D shape with additional \emph{depth} information. The canonical machines to create 2.5 objects are 3-axis CNC routers, which mill away material from the surface and can take multiple passes for deeper features.
-
-\subsubsection{3D external geometry}
-
-Features like overhangs can be challenging to mill using a 2.5D machine, as subtractive techniques require that the machine tool has unobstructed access to the surface to be milled. Creating such features on a 2.5D machine may require reorienting an object several times. Some machines are capable of creating arbitrary 3D external geometry, including overhangs, without manual reorientation of a part. This is can be accomplished by machines that use both a model material and a sacrificial support material: combining the two materials permits overhangs that may not be possible using only a single material. However, removal of this support material can be challenging, depending on the process used. (See \cite{savage-sot} for a more complete treatment of support material and removal techniques.) 3D printers can produce overhang geometry by laying support material as a part of each 2D object slice, and 5-axis CNC mills can produce overhangs via automatic object reorientation.
-
-\subsubsection{3D internal geometry}
-
-Full control over internal geometry can only be executed via additive manufacturing, and it allows for designed cavities, mechanisms, textures, and more on the interior of objects manufactured in a single pass. Again, this is typically executed by machines that lay sacrificial support material.
+\emph{3D internal geometry}: Full control over internal geometry can only be executed via additive manufacturing, and it allows for designed cavities, mechanisms, textures, and more on the interior of objects manufactured in a single pass. Again, this is typically executed by machines that lay sacrificial support material.
 
 \section{Single-Sensor Sensing Techniques}
 
@@ -162,7 +154,7 @@ Why use a single sensor? To reduce time spent on each iteration of a prototype p
 \subsection{Sensor Types}
 
 A ``single sensor'' can take many forms, ranging from a humble switch which opens and closes to a high-speed video camera which captures 2D visual information at 1000Hz to an accelerometer measuring G-forces in 3 directions.
-As they represent a vast array of actions sensed, physical phenomenon, and other aspects, there are multiple ways of organizing sensors for discussion purposes. We use the hierarchy proposed by the Modern Sensor Handbook \cite{fraden-modernsensors}: it arranges sensors by changes sensed, which neatly aligns with our user-driven prototypes. In these categories, we discuss thirty common varieties of sensors, like capacitance sensors, hall effect sensors, voltage sensors, temperature sensors, cameras, and pulse sensors.
+As they represent a vast array of actions sensed, physical phenomenon, and other aspects, there are multiple ways of organizing sensors for discussion purposes. We use the hierarchy proposed by the Modern Sensor Handbook \cite{fraden-modernsensors}: it arranges sensors by changes sensed, which neatly aligns with our user-driven prototypes.
 
 The major categories in the Modern Sensor Handbook are
 \begin{itemize}
@@ -200,28 +192,26 @@ The spaces of both material and fabricated properties, and sensors are vast: we 
     
     Several principles guide our selections. Namely,
     \begin{itemize}
-      \item for materials: \begin{itemize}
-        \item the material ideally conducts (but at least does not insulate) the signal to be passed. For example, metal conducts electricity, and so is compatible with electrical sensing; paper conducts moisture, and thus could be used with humidity sensing.%; pulse can be sensed optically, so clear material may be compatible with pulse sensing.
-        \item a user's manipulating the material should generate a control signal senseable using the given sensor. For example, bending a flexible plastic generates a signal detectable by a flex sensor. %\valkyrie{actually different from above?. yes.}
-        \end{itemize}
+        \item a user's manipulating the object should generate a control signal senseable using the given sensor. For example, bending a flexible material generates a signal detectable by a displacement sensor. This may require usage of transformation mechanisms, as described above.
+    
+        \item the material can conduct or predictably insulate the control signal: for example, rigid materials conduct sound waves and can be used with microphone sensing, but flexible/soft materials could be used to insulate sound and direct it through an object.
+    
+        \item geometry should work with the sensing abilities of a given technology. For example, an object with a solid core would not admit fluids for flow sensing; 3D internal geometry or a hollow object would make this type of sensing possible.
       
-      \item for geometry: \begin{itemize}
-        \item geometry should work with the sensing abilities of a given technology. For example, an object with a solid core would not allow fluids to sense for particulate sensing; allowing 3D internal geometry would make this sensing possible.
-        \item geometry needs to make it possible for a given type of signal to reach every part of an object without collision. For example, a camera inside a 3D object may require geometry modifications  or mirrors to see around corners. \valkyrie{still chewing on this one...}
-        \end{itemize}
-      
-      \item for assembly characteristics: assembly characteristics of an object may be necessary in combination with particular materials properties to get additional sensing. For example, blending stiff and flexible plastics may allow for more unique degrees of sensing with a flex sensor. \valkyrie{still not clear after previous discussion of assembly techniques}
-      
-      %\item for sensors: to avoid complex machine learning, sensors should measure phenomena which can be mathematically modeled from digital design files. For example, the range from an ultrasonic rangefinder to a moving slider may be easier to model than the force generated by a user flexing a part with a Shore value of 35. \valkyrie{do we need this section? basically all the other sections reference sensor compatibility anyway.} \valkyrie{realistically, a caveat is that I know more about contact/non-contact/electrical sensors than I do about the other things. they are more commonly used in HCI as far as I'm aware, and maybe I just don't have the brain bendability to identify how they could be effectively leveraged using fab.}
+        \item material composition may pair with material properties to get additional sensing. For example, \emph{blending} stiff and flexible plastics may allow for more unique degrees of sensing with a flex sensor than flexible materials alone. 
     \end{itemize}
     
     These principles give rise to the \textbf{x}s marked in Figure \ref{fig:sensing-fab}.
     
 \subsection{The Most Promising Overlaps}
 
-    \valkyrie{choose a few things outside this thesis that we think are the best places to look next. blendable flexy materials + FSR. print electromagnets with conductive material, sense motion with gausssense (sensor block powers magnet channels??)}
+    While clearly several types of overlaps have been extensively explored, we suggest a couple very promising unexplored areas here.
     
-    Thermoelectric effect from multiple types of conductors. Aw yeah. Force and flexible. Hollow and level.
+    One such promising idea uses force sensors with flexible materials. As a user manipulates an input, the stretch, compression, and torque forces they generate disperse through an object. A force sensor located near the center of all inputs should be able to detect these transmitted actions. This may be easiest with polyjetted 3D printed objects, as their materials properties are the most consistent (and therefore easiest to model) due to their fine resolution.
+    
+    Prototype objects could be designed with translucent internal piping and gate-like structures at interaction points: the pipes, when filled with liquid, could be amenable to sensing with a camera or level sensor. This could be thought of as a liquid-state flute. Additionally, the orientation of such an object in space could be calculated using liquid levels, as they would settle based on gravitational forces.
+    
+    Users' bodies maintain a higher temperature than typical room temperatures. This fact could be used in an interactive object which has conductive pathways at interaction points or grip locations, leading to a temperature sensor. This type of sensing would be slower than simple capacitance sensing, but could provide additional passive cues like overall body temperature or time spent in a particular configuration. To properly sense, such an algorithm might require knowledge of the interacting human's temperature in addition to digital geometry knowledge.
     
 \subsection{Overlaps Discussed in this Thesis}
 
@@ -233,6 +223,6 @@ The spaces of both material and fabricated properties, and sensors are vast: we 
     
     Chapter 5 describes Lamello, a technique for creating tines from hard plastic; when struck each tine vibrates at a characteristic frequency which can be classified using a microphone.
     
-    \subsubsection{3D Internal Geometry + Camera}
+    \subsubsection{Multi-color + 3D Internal Geometry + Camera}
     
-    Chapter 6 describes Sauron, a technique leveraging arbitrary internal geometries to create mechanical input devices that can be sensed by a single embedded camera.
+    Chapter 6 describes Sauron, a technique leveraging colored arbitrary internal geometries to create mechanical input devices that can be sensed by a single embedded camera.
