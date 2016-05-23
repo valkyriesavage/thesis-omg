@@ -313,7 +313,7 @@ moving sensors away from the edge and each other.”
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.25in]{figures/midas/routing.png}
+\includegraphics[width=5in]{figures/midas/routing.png}
 \caption{The Midas routing algorithm, based on Lee's \cite{lee-maze}, first selects a source and target point. It then floods the grid, beginning at the source, marking each viable ``pixel'' as one further than its pre-marked neighbor. Once the target has been reached, the algorithm traces back through the marked pixels (we selected to make vertical moves before horizontal) to the source and creates a trace.} 
 \label{fig:midas-routing}
 \end{figure}
@@ -327,10 +327,12 @@ We discuss the components of the Midas hardware: the mechanism of capacitive tou
 
         Midas relies on capacitive touch sensing. The Midas touch controller (Figure~\ref{fig:midas-microcontroller}) is based on an Atmel microcontroller board~\cite{teensy} and capacitive sensing chips from Quantum (QT1106) and Freescale (MPR121) Semiconductors. For discrete inputs, both chips rely on charge-transfer sensing using single-wire electrodes: the electrodes are part of a simple RC circuit in which an output pin is set high, and time is measured until an input pin also reads high. This time is proportional to the capacitance of the circuit: when a person touches an electrode, the circuit capacitance and the charge transfer time both increase. The Quantum chip also implements Bigelow's design to extract continuous position readings from interdigitated electrodes by interpolating based on relative capacitance between neighboring pads~\cite{bigelow-interdigitated}. The microcontroller runs software written in embedded C to interface with the sensor chips and communicates touch data to a connected computer over USB. It recalibrates the touch sensing chips periodically to ensure floating sensor values do not lead to erroneous touch readings.
         
+        Our new Midas touch controller uses an Adafruit Blufruit microcontroller with Bluetooth compatibility. It does not implement Bigelow's interdigitated sensing but could do so in the future; for discrete sensing it leverages the Arduino CapSense library\footnote{\url{playground.arduino.cc/Main/CapacitiveSensor?from=Main.CapSense}} which uses two-wire electrodes; it determines the capacitance by timing the charge transfer time between the pins. The new board design also has sturdy milled connection pads to attach to traces; these can be attached using Z-axis conductive tape (e.g., 3M's Z-Axis Conductive Tape 9703). This board transmits sensed readings directly to a phone over a Bluetooth connection.
+        
         \begin{figure}[b]
         \centering
-\includegraphics[width=3.25in]{figures/midas/microcontroller1.jpg}
-\caption{The Midas touch controller board uses a commercial capacitive charge transfer detection chip to sense touch events. Events are relayed to a computer via a mini USB connection on the back. The ribbon cables are used to connect to the end of routed traces. A US quarter is shown as a size reference.} 
+\includegraphics[width=6in]{figures/midas/microcontrollerz.jpg}
+\caption{The original Midas touch controller board (left) uses a commercial capacitive charge transfer detection chip to sense touch events. Events are relayed to a computer via a mini USB connection on the back. The ribbon cables are used to connect to the end of routed traces. The new board (right) uses an Arduino touch sensing library and a Bluetooth-compatible microcontroller for wireless data transmission and sensing. A US quarter is shown as a size reference.} 
 \label{fig:midas-microcontroller}
 \end{figure}
 
@@ -399,6 +401,9 @@ Our WebSockets server is implemented in node.js using the socket.io library. We 
 
 With our WebSockets architecture (Figure~\ref{fig:midas-socket}), designers open a browser and enter the URL of an HTML file they have placed in the Midas server directory. This file opens a socket connection from the phone browser to Midas. When Midas receives events from the touch controller, it forwards them to the client, which can then show visual feedback.
 
+\subsection{Bluetooth}
+
+Our new touch controller leverages Bluetooth for communication. The detected data are streamed similarly to those in the WebSockets condition, however in this case they are transmitted via Bluetooth, and the receiving device must be paired to the controller.
 
 \section{Evaluation}
 
@@ -482,7 +487,7 @@ we created a papercraft pinball machine which can control a pinball game on a la
     
     Midas is well-suited to prototyping particular kinds of objects. It allows facile testing and iteration on unusual types of touch interactions, for example on the backside of devices: touch screens allow input and output, but adhering a smartphone-like screen to every location a designer wants to sense a touch input is prohibitive. Additionally, unique sensor shapes, like stars or check marks, can be tested with Midas much more simply than with custom-fabricated touchscreens.
     
-    Midas opens opportunities for custom sensors on the surfaces of flat or ruled objects, as well as 3D objects that are developable \cite{dutton-developable}. While pre-fabricated sensors, such as those used for prototyping with Arduino \cite{arduino} or d.tools \cite{hartmann-dtools}, can enable prototyping on flat surfaces, they are typically not flexible and thus cannot be applied to non-flat surfaces. As Midas-generated sensors are flexible, they work well in these situations, and can even be used to sense touch on the surface of flexible and foldable materials like paper. Additionally, Midas allows designers to specify the real size that they desire for their inputs without needing to rely on a kit of pre-made sensors.
+    Midas opens opportunities for custom sensors on the surfaces of flat or singly-curved objects, as well as 3D objects that are developable \cite{dutton-developable}. While pre-fabricated sensors, such as those used for prototyping with Arduino \cite{arduino} or d.tools \cite{hartmann-dtools}, can enable prototyping on flat surfaces, they are typically not flexible and thus cannot be applied to non-flat surfaces. As Midas-generated sensors are flexible, they work well in these situations, and can even be used to sense touch on the surface of flexible and foldable materials like paper. Additionally, Midas allows designers to specify the real size that they desire for their inputs without needing to rely on a kit of pre-made sensors.
 
     \subsection{Limitations}
     
