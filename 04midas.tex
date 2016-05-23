@@ -446,17 +446,10 @@ Wobrrock's EdgeWrite~\cite{wobbrock-edgewrite} is a unistroke text entry techniq
 \end{figure}
 
         \subsubsection{Game Controller}
-To test the responsiveness of Midas's continuous slider, we created a simple game controller for Breakout, in which players horizontally position a paddle to bounce a ball into layers of blocks (see Figure \ref{fig:midas-sliders}). In less than fifteen minutes, we attached the slider and mapped slider position to paddle position using record-and-replay.
+To test the responsiveness of Midas's continuous slider, we created a simple game controller for Breakout, in which players horizontally position a paddle to bounce a ball into layers of blocks (see Figure \ref{fig:midas-dimatix}). In less than fifteen minutes, we attached the slider and mapped slider position to paddle position using record-and-replay.
 The slider is more responsive than individual buttons, and we were able to control the paddle accurately enough for gameplay.  The slider's response is non-linear across certain regions, however. Accounting for this is left to future work; our instinct says that it may be caused by electromagnetic interference from the thin traces and sharp right angles in the design.
 
 We fabricated two versions of this game controller: one from a circuitboard milled slider, and a second from Indium Tin Oxide (ITO)-coated transparent plastic. This underscores the point that only the conductivity of the material is important; whether it is flexible/rigid or opaque/transparent has no bearing on the functionality.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=3.25in]{figures/midas/sliders.png}
-\caption{We created two sliders of different materials to showcase Midas's continuous slider and flexibility for use with other materials.} 
-\label{fig:midas-sliders}
-\end{figure}
 
         \subsubsection{Music Postcard}
 At a recent media festival, a promotional poster printed with conductive ink enabled passersby to select and play music from a number of artists by touching corresponding areas on the poster~\cite{paperposter}. We implemented a postcard-sized version of this poster (Figure ~\ref{fig:midas-poster}).  We scaled back the size to conserve resources; large designs are possible and only restricted by the cutter's bed width. Our version uses six discrete buttons and one continuous slider to control playback and volume of music clips on a desktop computer. We again cut a vinyl mask layer to prevent stray touch events. We used Midas's record-and-replay function to remote control the iTunes music player.
