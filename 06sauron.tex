@@ -85,7 +85,7 @@ In our example, the joystick and direction pad in front of the camera are visibl
 \subsubsection{Model modification} To make the remaining components visible to the camera, the Sauron plugin automatically extrudes the interior portion of the bumper buttons to extend into the camera's field of view (Figure \ref{fig:sauron-step-by-step}C). The rear buttons cannot be extended, as the extrusions would intersect the controller's shell. Detecting this interference, Sauron casts rays from the camera into the 3D scene, reflecting them off the interior of the body, and determines locations where placement of two small mirrors will make the rear buttons visible in the camera image. The plugin visualizes these locations to guide the designer during manual assembly.
 
 \subsubsection{Fabrication and assembly} %Sauron then automatically removes the camera model before generating a file of the entire model suitable for fabrication. 
-The designer sends her file (without the camera model) to her 3D printer (Figure \ref{fig:sauron-step-by-step}D). Once the print is completed, an automatically generated instruction sheet guides her through the process of marking the interior of input components, e.g., with black marker (Figure \ref{fig:sauron-step-by-step}E). Last, he screws the camera into its mounts. 
+The designer sends her file (without the camera model) to her 3D printer (Figure \ref{fig:sauron-step-by-step}D). Once the print is completed, an automatically generated instruction sheet guides her through the process of marking the interior of input components, e.g., with black marker (Figure \ref{fig:sauron-step-by-step}E). Last, she screws the camera into its mounts. 
 
 \subsubsection{Registration and testing} Finally, the designer registers the components with the vision system one at at time: her CAD tool prompts her which component to move, and she moves each through its full range of motion to configure its component-specific recognizers. The system then tracks each component separately (in Figure \ref{fig:sauron-step-by-step}E \& F, components are: extruded bumper buttons on top; joystick and d-pad in the middle, reflected rear buttons in mirrors below). Once all the components are registered, she is ready to test her controller.
 Sauron sends input event data as OpenSoundControl messages, a format that software tools can understand and map to game controller events. Sauron can also deliver events over WebSockets to applications written in HTML and JavaScript.
@@ -123,7 +123,7 @@ Sauron provides a library of components with buttons, sliders, scroll wheels, di
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/sauron/sauron-inputs.png}
-\caption{Sauron currently supports seven types of input components.  The various components have different types of motion trackable by Sauron, from binary up/down of a button, to one-dimensional slider input, to two-dimensional input from a trackball or joystick.  Extrusion features of components are highlighted in red.}
+\caption{Sauron currently supports seven types of input components.  The various components have different types of motion trackable by Sauron, from binary up/down of a button, to one-dimensional slider input, to two-dimensional input from a trackball or joystick. Some components (button, slider, dial) use recorded locations for tracking, others (trackball, scroll wheel) use computer vision, and still others (direction pad, joystick) leverage blob motion and distortion. Extrusion features of components are highlighted in red.}
 \label{fig:sauron-components}
 \end{figure}
 
@@ -161,7 +161,7 @@ Extrusion need not be limited to a single direction straight down from a compone
 \begin{figure}
 \centering
 \includegraphics[width=3.25in]{figures/sauron/extrusion++.png}
-\caption{This prototype component (A) can be extruded in multiple directions to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
+\caption{This prototype push-button component (A) can be extruded in multiple directions to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
 }
 \label{fig:sauron-extrusion-multi}
 \end{figure}
