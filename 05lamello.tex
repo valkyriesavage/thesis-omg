@@ -11,7 +11,7 @@ The name comes from the Latin word ``lamella" for "plate" and the Greek root ``p
 \section{Preamble}
 Moving towards more complex user interactions and sensing mechanisms, this chapter describes Lamello, which predicts the vibrational frequencies of 3D geometry and links those predictions to an acoustic sensing system. Lamello can be used to design interfaces with rich tangible feedback provided by mechanical input components that can be manipulated by users.
 
-We describe \emph{Lamello}, an approach for creating tangible input components that recognize user interaction via passive acoustic sensing. Lamello employs comb-like structures with varying-length tines at interaction points (e.g., along slider paths). Moving a component generates tine strikes; a real-time audio processing pipeline analyzes the resultant sounds and emits high-level interaction events. Our main contributions are in the co-design of the tine structures, information encoding schemes, and audio analysis. We demonstrate 3D printed Lamello-powered buttons, sliders, and dials. 
+%We describe \emph{Lamello}, an approach for creating tangible input components that recognize user interaction via passive acoustic sensing. Lamello employs comb-like structures with varying-length tines at interaction points (e.g., along slider paths). Moving a component generates tine strikes; a real-time audio processing pipeline analyzes the resultant sounds and emits high-level interaction events. Our main contributions are in the co-design of the tine structures, information encoding schemes, and audio analysis. We demonstrate 3D printed Lamello-powered buttons, sliders, and dials. 
 
 \section{Introduction}
 %\valkyrie{How are mechanical interfaces important?  How are they seen today?}
@@ -19,7 +19,7 @@ We describe \emph{Lamello}, an approach for creating tangible input components t
 Tangible input components like buttons and sliders
 have advantages over ``flat'' interfaces like touch screens. They are critical for eyes-free interaction and muscle memory, and can improve task speed and precision \cite{klemmer-bodies}. Such devices typically comprise integrated assemblies of electronics, enclosures, and microcontroller code.
 
-Recently, researchers have begun to explore acoustically sensing interactions---such as scratching---with digitally-fabricated objects that encode information in surface textures~\cite{harrison-acoustic,murray-smith-stane}. In this paper, we extend this line of work from sensing surface features to sensing interactions with tangible components that users can push, slide, and turn.
+Recently, researchers have begun to explore acoustically sensing interactions---such as scratching---with digitally-fabricated objects that encode information in surface textures~\cite{harrison-acoustic,murray-smith-stane}. In this chapter, we extend this line of work from sensing surface features to sensing interactions with tangible components that users can push, slide, and turn.
 
 Our technique, Lamello, integrates algorithmically-generated tine structures into movable components to create passive tangible inputs (Figure \ref{fig:lamello-pretty-components}). Manipulating these inputs creates sounds which can be captured using an inexpensive contact microphone and interpreted using real-time audio signal processing. Lamello predicts the fundamental frequency of each tine based on its geometry: thus, recognition does not require training examples. The decoded high-level events can then be forwarded to interactive applications. The name ``Lamello'' is derived from the Lamellophone family of instruments, which create sound through vibrating tongues of varying lengths. 
 
@@ -118,7 +118,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
             \begin{figure}[b]
  \centering
     \includegraphics[width=3.25in]{figures/lamello/meirovitch-small.png}
- \caption{Three $f_0$s for tines in one print: predicted from model, predicted from post-print measurements, and observed.  Error, model geometry: $\mu=$ 68Hz $\sigma=$ 36Hz, measured geometry: $\mu=$ 47Hz $\sigma=$ 45Hz.}
+ \caption{Three $f_0$s for tines in one print: predicted from model, predicted from post-print measurements, and observed. Error, model geometry: $\mu=$ 68Hz $\sigma=$ 36Hz, measured geometry: $\mu=$ 47Hz $\sigma=$ 45Hz.}
  \label{fig:lamello-freqsgraph}
 \end{figure}
 
@@ -144,7 +144,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
         \begin{figure}
   \centering
     \includegraphics[width=\columnwidth]{figures/lamello/component-schematics.png}
-  \caption{The Lamello technique can be used to sense a variety of physical motions, including up/down on a button, back/forward on a slider, and rotation on a dial or scroll wheel.  Four tines used together can sense up, down, left, and right on a direction pad. %\valkyrie{we could cut parts of this figure, given that we never use buttons or joysticks for experiments.  thoughts?}
+  \caption{The Lamello technique can be used to sense a variety of physical motions, including up/down on a button, back/forward on a slider, and rotation on a dial or scroll wheel. Four tines used together can sense up, down, left, and right on a direction pad. %\valkyrie{we could cut parts of this figure, given that we never use buttons or joysticks for experiments. thoughts?}
   }
   \label{fig:lamello-allcomponents}
 \end{figure}
@@ -165,7 +165,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
 \begin{figure}
   \centering
     \includegraphics[width=\textwidth]{figures/lamello/transient-resonance.png}
-  \caption{Two typical tine strikes (100ms): high-frequency (left) and low-frequency (right).  We mark transients and resonance.  Note the higher frequency has less energy (darker colors) and faster decay (shorter).} 
+  \caption{Two typical tine strikes (100ms): high-frequency (left) and low-frequency (right). We mark transients and resonance. Note the higher frequency has less energy (darker colors) and faster decay (shorter).} 
   \label{fig:lamello-transient}
 \end{figure}
 
@@ -173,11 +173,46 @@ Our evaluation indicates that training-free recognition is possible, though our 
 
     For each frame, we first determine if a tine strike is present using a standard onset detector (with an empirically-determined amplitude threshold). Once an onset is detected, we wait 2 frame hops for the transient response to pass.
     
-    We classify the subsequent frame (computation time: $5ms$). Our best-case onset-to-classification latency is therefore $2 * 50ms + 5ms = 105ms$.  In practice, we have seen latency of $107.3ms$ ($\sigma$=$9.67ms$). Our sound card and the \emph{PySoundCard} driver introduce latency as they collect and report blocks: one could reduce overhead with optimized sound drivers and sample block sizes.
+    We classify the subsequent frame (computation time: $5ms$). Our best-case onset-to-classification latency is therefore $2 * 50ms + 5ms = 105ms$. In practice, we have seen latency of $107.3ms$ ($\sigma$=$9.67ms$). Our sound card and the \emph{PySoundCard} driver introduce latency as they collect and report blocks: one could reduce overhead with optimized sound drivers and sample block sizes.
 
     To classify, we compute a Fast Fourier Transform on the window, then normalize the FFT bin values, such that they represent fractions of overall audio energy. For each possible tine $id_i$, we generate a new measure: the dot product of the scaled FFT and a Gaussian centered at the bin for ${f_0}_i$, which represents the fraction of audio energy $e_i$ in the neighborhood of ${f_0}_i$. To account for lower energy at higher frequencies, we use a scaling factor proportional to the frequency and a $\sigma$ for the Gaussians empirically determined per component, giving an adjusted list of ${e_i}_{adj}$. 
 
     Mapping a recognized tine identity $id_R=argmax({e_i}_{adj})$ to user actions is straightforward. For buttons and joysticks, $id_R$ maps directly to a discrete input (press, up, down, left, or right). Similarly, for dials and sliders that encode position with linearly increasing tine lengths, $id_R$ maps to a unique position. For dials and sliders that use a de Bruijn sequence $D(k, n)$, we use each sequence of $n$ recognized tines to determine the corresponding position within the sequence (i.e., recognized tines are remembered in order, and this order is compared to the known order of tines on the slider to determine a user's position). For buttons and joysticks, $id_R=argmax(p_R)$ maps these tine probabilities directly to a discrete input event (press, up, down, left, or right), while for sliders and dials the recognized tine, history, and layout are considered in order to generate a progress event ($14\%$, $58\%$, etc.).
+    
+    \subsubsection{Sensing Accuracy}
+    
+    To determine whether Lamello tines can be classified reliably, we performed an accuracy test using Lamello controls.
+
+\begin{table}[b] 
+  \begin{center}
+  \small
+  \begin{tabular}{ l || c | c || c | c }
+  
+Control & $P_{4tines}$ & $R_{4tines}$ & $P_{7tines}$ & $R_{7tines}$\\
+\hline
+FDM Slider & 93\% & 90\% & 49\% & 56\% \\  
+FDM Dial & 90\% & 85\% & 63\% & 54\% \\  
+Plucked Delrin & 98\% & 97\% & 72\% & 73\% \\
+  \end{tabular}
+  \end{center}
+  \caption{Recognition precision and recall of our printed input components using model geometry-predicted frequencies.}
+  \label{fig:lamello-recognition}
+  \vspace{-0.1in}
+\end{table}
+
+We recorded 10 strikes for each tine on a printed dial and slider, and a laser-cut Delrin slider. Printed components were actuated with their strikers; Delrin tines were hand-plucked to determine effects of different striking methods. We classified each strike and report classification accuracy in Table~\ref{fig:lamello-recognition}.
+
+We achieve promising accuracy (precision = 93\%, recall = 90\%) with a four-tine slider (predicted frequencies $924$, $1103$, $1340$, and $1662Hz$). This suggests that useful interaction with Lamello is within reach. However, precision and recall rates are much lower on a set of 7 tines with frequencies above $2kHz$: %including frequencies $2116$, $2784$, and $3827Hz$. 
+the recognizer fails to classify higher $f_0$, which have lower energies and shorter decays (Figure ~\ref{fig:lamello-recall_rates}).
+
+\begin{figure}[t]
+  \centering
+    \includegraphics[width=4in]{figures/lamello/fig6.pdf}
+  \caption{Per-tine recall for striking Lamello slider and dial tines. We observe high recall for low-frequency subsets of tines.}
+  \label{fig:lamello-recall_rates}
+\end{figure}
+
+    We also noted that our hand-plucked Delrin tines outperformed tines hit with our striker designs: this suggests that our striker mechanism could use improvement. An additional way of improving these accuracy figures would be to model the way sound travels through \emph{the object itself}. Because we are using contact microphones, we are collecting sound waves travelling through the material rather than through the air. While this reduces sensitivity to outside noise, its accuracy can be affected by the particular designs of the components. In practice, all our different component designs had similar accuracy, which may indicate that for objects on the scale of input components designers need not worry about the particular acoustics of their design. However, for integrating Lamello-style components into larger input devices this may become a concern.
 
     \subsubsection{Fabricating Lamello-compatible Components}
     
@@ -191,8 +226,6 @@ Our evaluation indicates that training-free recognition is possible, though our 
 \end{figure}
     
     Other printing or fabrication processes may not be orientation dependent. We have laser cut tines from Polyoxymethylene (Delrin) sheets, integrating these tine strips into 3D printed components using machine screws as fasteners. Tine sizes are similar between ABS-printed and lasercut objects, as laser cutting caused heat deflection in smaller feature sizes. Smaller tine sizes and higher frequencies may be achievable using different fabrication processes, e.g., injection molding or MEMS micromachining. We leave these investigations to future work.
-    
-    \valkyrie{right now, you're leaving out the entire evaluation section of the original paper. to be fair, that section is about how well the sensing works, rather than how fast/cheap/flexible the technique itself is. however, it likely still needs to go in here. figure out where to put it!}
 
 \section{Evaluation}
 
@@ -214,7 +247,8 @@ Our evaluation indicates that training-free recognition is possible, though our 
     In future work, we hope to improve and deploy the Lamello CAD tool to gain insights about its legibility for users.
 
     \subsection{Flexible}
-    We successfully used Lamello to create a variety of input components: buttons, sliders, dials, and joysticks. By combining and modifying their primitive actions (pushing, sliding, turning, and rocking), a designer could employ Lamello to sense components like scroll wheels or direction pads. \valkyrie{how to expand this section? maybe a diagram of how these primitives work and could combine into other input controls.}
+    We successfully used Lamello to create a variety of input components: buttons, sliders, dials, and joysticks. By combining and modifying their primitive actions (pushing, sliding, turning, and rocking), a designer could employ Lamello to sense components like scroll wheels or direction pads.
+    
     To explore the utility of our technique, we used a Lamello slider and mouse emulation to control a Pong game. The achieved latency was sufficient for simple gameplay; however, Lamello may be better suited to provide input for applications such as volume or lighting control (as described in Design Walkthrough, above), where some latency and occasional misclassified events are acceptable.
 
 \section{Discussion}
