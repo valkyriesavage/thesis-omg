@@ -117,7 +117,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
             
             \begin{figure}[b]
  \centering
-    \includegraphics[width=3.25in]{figures/lamello/meirovitch-small.png}
+    \includegraphics[width=\textwidth]{figures/lamello/meirovitch-small.png}
  \caption{Three $f_0$s for tines in one print: predicted from model, predicted from post-print measurements, and observed. Error, model geometry: $\mu=$ 68Hz $\sigma=$ 36Hz, measured geometry: $\mu=$ 47Hz $\sigma=$ 45Hz.}
  \label{fig:lamello-freqsgraph}
 \end{figure}
@@ -130,7 +130,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
         
         \begin{figure}
   \centering
-    \includegraphics[width=3.25in]{figures/lamello/2sliders-sidebyside.jpg}
+    \includegraphics[width=\textwidth]{figures/lamello/2sliders-sidebyside.jpg}
   \caption{We experimented with two different encoding mechanisms for sliders: linearly increasing sequences (left) and de Bruijn (right). de Bruijn sequences allow classification of fewer tine lengths, but require more consecutive tine recognitions to determine position and direction.}
   \label{fig:lamello-sliders}
 \end{figure}
@@ -143,7 +143,7 @@ Our evaluation indicates that training-free recognition is possible, though our 
         
         \begin{figure}
   \centering
-    \includegraphics[width=\columnwidth]{figures/lamello/component-schematics.png}
+    \includegraphics[width=\textwidth]{figures/lamello/component-schematics.png}
   \caption{The Lamello technique can be used to sense a variety of physical motions, including up/down on a button, back/forward on a slider, and rotation on a dial or scroll wheel. Four tines used together can sense up, down, left, and right on a direction pad. %\valkyrie{we could cut parts of this figure, given that we never use buttons or joysticks for experiments. thoughts?}
   }
   \label{fig:lamello-allcomponents}
@@ -207,7 +207,7 @@ the recognizer fails to classify higher $f_0$, which have lower energies and sho
 
 \begin{figure}[t]
   \centering
-    \includegraphics[width=4in]{figures/lamello/fig6.pdf}
+    \includegraphics[width=\textwidth]{figures/lamello/fig6.pdf}
   \caption{Per-tine recall for striking Lamello slider and dial tines. We observe high recall for low-frequency subsets of tines.}
   \label{fig:lamello-recall_rates}
 \end{figure}
@@ -220,7 +220,7 @@ the recognizer fails to classify higher $f_0$, which have lower energies and sho
     
     \begin{figure}
   \centering
-    \includegraphics[width=3in]{figures/lamello/fab.png}
+    \includegraphics[width=\textwidth]{figures/lamello/fab.png}
   \caption{Tines printed in some orientations may be prone to breaking: in particular, inter-layer adhesion is weaker than within-layer adhesion for 3D printing (left). Breakage can be mitigated by filleting tine corners instead of having them meet the body at right angles (right), but this can require additional details in the frequency prediction model.} 
   \label{fig:lamello-break}
 \end{figure}
@@ -268,7 +268,7 @@ Initial experiments with Lamello are encouraging: components augmented with tine
      We have identified several sources of errors to address in future work:
 
     \subsubsection{Striker mechanism could be more robust}
-    In our experiements, finger-plucked tines had a higher rate of recognition than striker-actuated ones. This suggests that striker-created noise contributes to misclassifications, and future work may explore alternative geometries that create less friction noise.
+    In our experiments, finger-plucked tines had a higher rate of recognition than striker-actuated ones. This suggests that striker-created noise contributes to misclassifications, and future work may explore alternative geometries that create less friction noise.
 
     \subsubsection{Audio signal attenuates as it travels through component body}
     While microphones placed at opposite ends of a printed slider produce similar overall accuracy, tines are more correctly classified by the closer microphone. Though we could not directly correlate microphone distance and signal RMS energy, this fact suggests that minimizing the distance between a microphone and the tines to be sensed may improve accuracy.
@@ -283,4 +283,10 @@ Initial experiments with Lamello are encouraging: components augmented with tine
     We currently also cannot distinguish between the two directions in which a tine can be struck. We believe this could be remedied with ``sided'' tine geometry (i.e., asymmetric tine profiles), however this change would require a more sophisticated predictive model and additional inquiries into suitability for 3D printing.
     
     \subsubsection{Does not support multiple inputs simultaneously}
-    Use of thru-air microphones based in laptop, tablets, or smartphones in the place of contact microphones could open applications beyond prototyping (e.g., custom controllers for tablet games). However, filtering out environmental noise collected by thru-air microphones is a challenge, and de-interlacing multiple simultaenous input components (e.g., if a button and slider are activated at the same time) will require more sophisticated signal processing than we have described here.
+    Use of thru-air microphones based in laptop, tablets, or smartphones in the place of contact microphones could open applications beyond prototyping (e.g., custom controllers for tablet games). However, filtering out environmental noise collected by thru-air microphones is a challenge, and de-interlacing multiple simultaneous input components (e.g., if a button and slider are activated at the same time) will require more sophisticated signal processing than we have described here.
+
+\subsection{Conclusion}
+
+Lamello looks further into the idea of Fabbing to Sense by extending it from object surfaces to manipulable 3D input devices. Lamello links object geometry and simulated fundamental frequencies of vibration to acoustic sensing, which permits fast, cheap, and flexible input component fabrication. Further research will determine how to incorporate these input components into devices.
+
+In the next chapter, we move deeper into three dimensions and describe a technique for optimizing full input devices for vision-based sensing.

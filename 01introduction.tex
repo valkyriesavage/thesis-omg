@@ -68,7 +68,7 @@ Our first exploration examines fabrication of 2D conductive materials sensed cap
 
 \begin{figure}
 \centering
-\includegraphics[width=2in]{figures/midas/midas-intro.jpg}
+\includegraphics[width=3.5in]{figures/midas/midas-callouts-intro.png}
 \caption{A Midas-generated interface with buttons for checking email mounted on the back of a smart phone.}
 \label{fig:midas-intro}
 \end{figure}
@@ -76,13 +76,6 @@ Our first exploration examines fabrication of 2D conductive materials sensed cap
 The advantages of capacitive sensing in this manner are numerous. It can be deployed on any flat, ruled, or developable object's surface (see Figure \ref{fig:midas-intro}). The sensors are cheap and easy to fabricate---whether on a vinyl cutter, using a circuitboard mill, or in inkjet printed conductive ink. Sensor assembly is \emph{fast}: users simply need to attach the sensor dongle's wires to their fabricated sensor pads (e.g., using tape).
 
 In this chapter, we will detail Midas's implementation, as well as discussing possible uses, drawbacks of the current system, and work for the future.
-
-\begin{figure}
-\centering
-\includegraphics[width=3in]{figures/lamello/lamello-intro.jpeg}
-\caption{A Lamello-based interface with a series of plastic tines on a slider, which can be classified by the attached contact microphone.}
-\label{fig:lamello-intro}
-\end{figure}
 
 \subsection{Lamello: Acoustic Sensing of 2D/3D Mechanisms (Chapter 5)}
 
@@ -92,20 +85,27 @@ Leveraging uniform 2D lasercut or 3D printed plastics as sound-creating input de
 
 This chapter details our experiments confirming that our 3D-printed tine structures behave in predictable ways in spite of the non-uniform nature of the materials that comprise them. We also discuss, using several exemplars, techniques for integrating the tines into existing input component designs. Further, we describe information encoding principles for tine generation.
 
+\begin{figure}
+\centering
+\includegraphics[width=5in]{figures/lamello/lamello-intro-callouts.png}
+\caption{A Lamello-based interface with a series of plastic tines on a slider, which can be classified by the attached contact microphone.}
+\label{fig:lamello-intro}
+\end{figure}
+
 \subsection{Sauron: Vision-Based Sensing of 3D Printed Mechanisms (Chapter 6)}
 
 Finally, we explore full 3D input devices sensed using computer vision. Sauron is a design and sensing toolkit for creating 3D printed input devices---which can include components like joysticks or dials---sensed with a single embedded camera. The Sauron tool makes automatic modifications to allow for this sensing, reconfiguring the \emph{interior} parts of the inputs and performing interference simulation (see Figure \ref{fig:sauron-intro}).
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=4in]{figures/sauron/fig1-gamecontroller.jpg}
-\caption{A Sauron-optimized game controller with a joystick, a direction pad, and several buttons.}
-\label{fig:sauron-intro}
-\end{figure}
-
 Sauron's interfaces have additional flexibility over those for Midas or Lamello: they allow \emph{continuous} sensing of user input. They can be fabricated on any 3D printer which can generate support material, and the pre-fabrication simulation process relies only on geometry rather than any particular materials properties for its processing. %\valkyrie{not sure what else to put here...}
 
 In this chapter we describe our implementation of Sauron as a plugin for a commercial CAD tool, as well as the vision sensing code we built. Finally, we elaborate on limitations of the current system and places we may improve it, as well as future work in the area.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6in]{figures/sauron/sauron-intro-callouts.png}
+\caption{A Sauron-optimized game controller with a joystick, a direction pad, and several buttons.}
+\label{fig:sauron-intro}
+\end{figure}
 
 \subsection{Conclusion \& Future Work (Chapter 7)}
 

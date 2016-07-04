@@ -20,7 +20,7 @@ However, such toolkits still require designers to manually assemble printed part
 
 \begin{figure}
 \centering
-\includegraphics[width=1.0\columnwidth]{figures/sauron/fig1-gamecontroller.jpg}
+\includegraphics[width=\textwidth]{figures/sauron/fig1-gamecontroller.jpg}
 \caption{With Sauron, designers create a 3D CAD model of an input device and place a virtual camera in the model. Once printed, they attach a matching physical camera to sense user input on the device.}
 \label{fig:sauron-teaser}
 \end{figure}
@@ -101,11 +101,11 @@ Sauron uses a single camera to sense input on a physical device. In order to det
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/camera-front-and-side.jpg}
+\includegraphics[width=\textwidth]{figures/sauron/camera-front-and-side.jpg}
 \caption{Left: Sauron's USB camera and ring light. Right: Our virtual model of the camera and its field of view.}
 \label{fig:sauron-hardware}
 \vspace{0.2in}
-\includegraphics[width=3.25in]{figures/sauron/pipe-camera2.jpg}
+\includegraphics[width=\textwidth]{figures/sauron/pipe-camera2.jpg}
 \caption{The hardware can be miniaturized, as in this pipe inspection camera with integrated LEDs.}
 \label{fig:sauron-inspectioncam}
 \end{figure}
@@ -137,14 +137,14 @@ When components are outside the field of view, e.g., on a side wall (Figure \ref
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/fig6-extrude-and-dodecahedron.png}
+\includegraphics[width=\textwidth]{figures/sauron/fig6-extrude-and-dodecahedron.png}
 \caption{We measure the distance from the button to the virtual camera's field of view--highlighted in blue (A), then extrude the bottom of the button that distance (B). This technique is useful when creating objects where input components on many faces point different directions, like this dodecahedral ball of buttons (C).}
 \label{fig:sauron-extrusion}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/extrusion-fails.png}
+\includegraphics[width=\textwidth]{figures/sauron/extrusion-fails.png}
 \caption{Extrusion does not work in some cases. The component's base may not point at the camera's field of view (A). The component's base may point at the field of view, but be blocked by the main body (B). One component's base (green), if extruded, would intersect the another component (red) (C).}
 \label{fig:sauron-extrusion-fails}
 \end{figure}
@@ -156,7 +156,7 @@ Extrusion need not be limited to a single direction straight down from a compone
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/extrusion++.png}
+\includegraphics[width=\textwidth]{figures/sauron/extrusion++.png}
 \caption{This prototype push-button component (A) can be extruded in multiple directions to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
 }
 \label{fig:sauron-extrusion-multi}
@@ -170,7 +170,7 @@ We use raytracing to determine how to place mirrors for components where extrusi
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/reflection.png}
+\includegraphics[width=\textwidth]{figures/sauron/reflection.png}
 \caption{An illustration of the raytracing algorithm used for mirror placement. Note that the button in the figure cannot be extruded to meet the field of view cone. A mirror will be glued at the spots where the rays successfully reflect (seen in B) during assembly.}
 \label{fig:sauron-raytracing}
 \end{figure}
@@ -195,7 +195,7 @@ To increase visibility of the input components versus the background, we require
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/objetback.png}
+\includegraphics[width=\textwidth]{figures/sauron/objetback.png}
 \caption{Using a multi-color 3D printer (Stratasys Objet Connex 260), we created our video game controller object with distinctive material built in.
 }
 \label{fig:sauron-objet}
@@ -203,14 +203,14 @@ To increase visibility of the input components versus the background, we require
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/distinctive-materials.png}
+\includegraphics[width=\textwidth]{figures/sauron/distinctive-materials.png}
 \caption{Components with reflective ink on black material (left) and black ink on white material (right).}
 \label{fig:sauron-distinctiveness}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=2in]{figures/sauron/button-spring.jpg}
+\includegraphics[width=\textwidth]{figures/sauron/button-spring.jpg}
 \caption{Our components are designed so that springs may be inserted to restore components after user interaction: here is a spring inserted under a button.}
 \label{fig:sauron-spring}
 \end{figure}
@@ -221,7 +221,7 @@ Sauron generates a basic set of step-by-step instructions, automatically display
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/directions.PNG}
+\includegraphics[width=\textwidth]{figures/sauron/directions.PNG}
 \caption{Sauron generates instructions that include screenshots of the designer's component with each relevant piece highlighted, as well as instructions for post-print marking and assembly.}
 \label{fig:sauron-instructions}
 \end{figure}
@@ -232,7 +232,7 @@ We run each camera frame through a series of steps: binarization, connected comp
 
 \begin{figure}
 \centering
-\includegraphics[width=4.5in]{figures/sauron/vision-slider.png}
+\includegraphics[width=\textwidth]{figures/sauron/vision-slider.png}
 \caption{Sauron's SolidWorks plugin highlights each model component in turn and asks the designer to move it. The vision software creates a bounding box as the component moves through its range and also saves any information required by the component type. For example, to determine slider position later the vision software saves the two most extreme tracked center points (the red and green dots).}
 \label{fig:sauron-vision-process}
 \end{figure}
@@ -268,7 +268,7 @@ Messages are passed between SolidWorks and OpenFrameworks via the OpenSoundContr
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/arch2outlined.pdf}
+\includegraphics[width=\textwidth]{figures/sauron/arch2outlined.pdf}
 \caption{SolidWorks and OpenFrameworks exchange messages via OpenSoundControl. OpenFrameworks also sends OSC messages containing processed data to a WebSockets server to deliver events to a user's application.}
 \label{fig:sauron-arch}
 \end{figure}
@@ -301,7 +301,7 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
     
     \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/study.png}
+\includegraphics[width=\textwidth]{figures/sauron/study-markup.jpeg}
 \caption{Our three user study participants prototyped DJ mixing boards using our component library. Each had a very different strategy for ensuring the camera could see all components. The assembly on the bottom (with interior cutaway view at right) was designed to have the camera inside reflecting off mirrors placed on the back wall.}
 \label{fig:sauron-study}
 \end{figure}
@@ -322,14 +322,14 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
 
     \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/reasonable-model.png}
+\includegraphics[width=\textwidth]{figures/sauron/reasonable-model.png}
 \caption{This model found online would work well with Sauron's sensing technique; all components are centrally located within a body that is not superlatively shallow.}
 \label{fig:sauron-wouldwork}
 \end{figure}
 
     \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/shallow-models.png}
+\includegraphics[width=\textwidth]{figures/sauron/shallow-models.png}
 \caption{These models found online were too shallow to sense with Sauron---occlusion and curvature would prevent correct sensing with computer vision.}
 \label{fig:sauron-premade}
 \end{figure}
@@ -346,7 +346,7 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
         
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/ergomouse.png}
+\includegraphics[width=\textwidth]{figures/sauron/ergomouse.png}
 \caption{Our ergonomic mouse prototype has a trackball the user can manipulate with his thumb as well as two buttons and a scroll wheel. On the right is the camera's view of the inside of the mouse.}
 \label{fig:sauron-ergomouse}
 \end{figure}
@@ -356,7 +356,7 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
         
         \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/sauron/DJ-controller-action.JPG}
+\includegraphics[width=\textwidth]{figures/sauron/DJ-controller-action.JPG}
 \caption{Our DJ mixing board, based on one of our users's designs, has sliders and two dial configurations: raised knobs for easy manipulation of volume, and a larger flat wheel for seeking and scratching songs. The different types of dials share a sensing algorithm, however, as their interior parts are similar.}
 \label{fig:sauron-djmixer}
 \end{figure}

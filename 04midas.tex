@@ -99,7 +99,7 @@ not be obscured during connection routing.
 
 \begin{figure}[b!]
 \centering
-\includegraphics[width=3.5in]{figures/midas/ui.png}
+\includegraphics[width=\textwidth]{figures/midas/ui.png}
 \caption{Midas's sensor editor takes its cues from GUI editors: designers first lay out sensing areas through direct manipulation; they later define interactions for each sensor using a property inspector.} 
 \label{fig:midas-editor}
 \end{figure}
@@ -261,14 +261,14 @@ sliders is possible with additional engineering effort.
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/midas/pad-templates.png}
+\includegraphics[width=\textwidth]{figures/midas/pad-templates.png}
 \caption{Midas can generate four different types of sensors: discrete buttons, discrete sliders, continuous sliders, and 2D pads. The pad uses row-column scanning and requires multi-layer construction because traces cross.} 
 \label{fig:midas-templates}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/midas/2dgrid.jpg}
+\includegraphics[width=\textwidth]{figures/midas/2dgrid.jpg}
 \caption{2D pad sensors are fabricated in two different layers that are then superimposed. Because each copper layer has a vinyl backing, no other inter-layer masking is required.} 
 \label{fig:midas-layering}
 \end{figure}
@@ -315,7 +315,7 @@ moving sensors away from the edge and each other.”
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=5in]{figures/midas/routing.png}
+\includegraphics[width=\textwidth]{figures/midas/routing.png}
 \caption{The Midas routing algorithm, based on Lee's \cite{lee-maze}, first selects a source and target point. It then floods the grid, beginning at the source, marking each viable ``pixel'' as one further than its pre-marked neighbor. Once the target has been reached, the algorithm traces back through the marked pixels (we selected to make vertical moves before horizontal) to the source and creates a trace.} 
 \label{fig:midas-routing}
 \end{figure}
@@ -333,7 +333,7 @@ We discuss the components of the Midas hardware: the mechanism of capacitive tou
         
         \begin{figure}[b]
         \centering
-\includegraphics[width=6in]{figures/midas/microcontrollerz.jpg}
+\includegraphics[width=\textwidth]{figures/midas/microcontrollerz.jpg}
 \caption{The original Midas touch controller board (left) uses a commercial capacitive charge transfer detection chip to sense touch events. Events are relayed to a computer via a mini USB connection on the back. The ribbon cables are used to connect to the end of routed traces. The new board (right) uses an Arduino touch sensing library and a Bluetooth-compatible microcontroller for wireless data transmission and sensing. A US quarter is shown as a size reference.} 
 \label{fig:midas-microcontroller}
 \end{figure}
@@ -390,7 +390,7 @@ In record-and-replay, the user selects a sensor and records a sequence of mouse 
 
 \begin{figure}[b]
 \centering
-\includegraphics[width=3.25in]{figures/midas/socket-events.png}
+\includegraphics[width=\textwidth]{figures/midas/socket-events.png}
 \caption{Midas's socket event output enables designers with programming knowledge to create web applications in HTML and JavaScript that react to touch input outside the screen area of a phone or tablet.} 
 \label{fig:midas-socket}
 \end{figure}
@@ -433,7 +433,7 @@ All participants successfully designed media players (Figure~\ref{fig:midas-stud
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.25in]{figures/midas/study1.jpg}
+\includegraphics[width=\textwidth]{figures/midas/study1.jpg}
 \caption{A study participant's sensor layout for a PC media player peripheral.} 
 \label{fig:midas-study1}
 \end{figure}
@@ -447,7 +447,7 @@ Wobrrock's EdgeWrite~\cite{wobbrock-edgewrite} is a unistroke text entry techniq
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.25in]{figures/midas/edgewrite.jpg}
+\includegraphics[width=\textwidth]{figures/midas/edgewrite.jpg}
 \caption{We implemented Wobbrock's Edgewrite on the back of a cell phone using a 2x2 pad and WebSocket events sent to a web page.} 
 \label{fig:midas-edgewrite}
 \end{figure}
@@ -463,7 +463,7 @@ At a recent media festival, a promotional poster printed with conductive ink ena
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=3.25in]{figures/midas/poster3.jpg}
+\includegraphics[width=\textwidth]{figures/midas/poster3.jpg}
 \caption{Our music postcard lets users sample tracks by different artists. Left: Circuit and mask layer; Right: assembled postcard.} 
 \label{fig:midas-poster}
 \end{figure}
@@ -475,7 +475,7 @@ we created a papercraft pinball machine which can control a pinball game on a la
 
 \begin{figure}
 \centering
-\includegraphics[width=3.25in]{figures/midas/pinball-horizontal.png}
+\includegraphics[width=\textwidth]{figures/midas/pinball-horizontal.png}
 \caption{For our papercraft pinball machine, we defined the negative space in the template as an obstacle to restrict sensor routing.} 
 \label{fig:midas-pinball}
 \end{figure}
@@ -509,3 +509,9 @@ Midas does not offer on-device output; a designer must have access to a screen. 
 
 \subsubsection{Does not Support all Object Surfaces}
 The sensor editor supports only flat, ruled, and developable device surfaces. Future work could investigate the creation of a plugin for a CAD tool that would aid designers in creating more complex 3D sensor surfaces.
+
+\subsection{Conclusion}
+
+Midas serves as a first exploration of Fabbing to Sense. By linking conductive copper fabricated on a vinyl cutter to a capacitive touch controller board, we can help designers to create interactive elements on object surfaces. In addition, this link can also aid a designer in ensuring that their assembly was correctly performed. We assessed whether Midas constitutes a fast, cheap, and flexible prototyping method, and determined that it meets all of these criteria sufficiently.
+
+Next, we will discuss a process for prototyping devices which can incorporate 2D and 3D geometry into tangible input devices that extend beyond a flat surface.

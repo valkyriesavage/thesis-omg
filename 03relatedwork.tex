@@ -6,11 +6,11 @@ If I have seen further, it is only by standing upon the shoulders of giants.
 --- Isaac Newton
 \end{quote}
 
-Situating this thesis in the realm of prior work, we draw heavily on work from four major traditions: graphics and optimization, sensing, 3D modeling, and prototyping tools.
+Situating this thesis in the realm of prior work, we draw heavily on work from four major traditions: simulation, sensing, 3D modeling, and prototyping tools.
 
 \subsection{Simulation}
 
-    The simulation community was one of the first to rally around digital fabrication: they have delved extensively into digital simulation of materials and behaviors, and the advent of hyper-precise 3D printers like the Objet Connex line allowed for a variety of real-world manifestations of these simulations.
+    The simulation community was one of the first to rally around digital fabrication: they have delved extensively into digital simulation of materials and behaviors, and the advent of hyper-precise 3D printers like the Objet Connex line\footnote{At time of publication, the Connex3 allowed for XY resoltion of $600$dpi, Z resolution of $1600$dpi, and accuracy of 20-85 microns. \url{http://www.stratasys.com/~/media/Main/Files/Machine_Spec_Sheets/PSS_PJ_Connex3.ashx}} allowed for a variety of real-world manifestations of these simulations.
     
     Mathematical simulation for structural analysis existed before digital fabrication, e.g. \cite{fleury-optimization}, and supported CNC machining. Some of the very earliest work on fabrication-related simulation focused on optimizing toolpaths, for example to ensure good coverage from robotic spray heads without occlusion from model features \cite{gursoz-noodles}. Other early work examined and accounted for deformities in models produced using different 3D printing technologies \cite{brown-simulate,hsu-numerical}, or ensuring printability of 3D models \cite{barequet-gaps,bohn-shellclosure}. More recently, visual simulation (i.e., graphics) researchers have investigated modeling and fabrication of deformation behavior \cite{bickel-deformation}, as well as subsurface scattering \cite{hasan-subsurface} and subsurface reflectance \cite{weyrich-reflectance}. Precision fabrication machines allow for creating tiny structural elements that can contribute to an object's overall appearance \cite{lan-appearance}.
     
@@ -31,7 +31,7 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
 
 \subsection{Sensing Techniques}
 
-    \valkyrie{not all of these are for fabbed objects, but a slightly broader swath of sensing techniques definitely needs to be discussed here. segmenting into fabbed vs. not doesn't really draw a bright line of any kind, though, so... how to structure this part?}
+    %\valkyrie{not all of these are for fabbed objects, but a slightly broader swath of sensing techniques definitely needs to be discussed here. segmenting into fabbed vs. not doesn't really draw a bright line of any kind, though, so... how to structure this part?}
     Research has likewise investigated a variety of ways for sensing manually- and digitally-fabricated devices, ranging from switches that close when a flexible object is bent \cite{slyper-structure} to audio frequencies swept through fabricated flutes \cite{laput-acoustruments}.
 
     \subsubsection{Using machine learning}
@@ -57,3 +57,7 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
     Circuitry, and thus any existing electronics, can be integrated directly into a 3D printed object by laying down conductive material \cite{sells-reprap,voxel8,sarik-tracebrush}, or by leaving voids to be filled with conductive material post-print \cite{savage-sot}; this still constrains designers to what already exists. Techniques like adding stick-on sensors or sensing tags \cite{maynes-aminzade-eyepatch,yeo-stickear} can mitigate this challenge, however they lead to one-off prototypes: with digital fabrication, designers can create a design, test it, then modify it digitally to create an improved design; they can even share it with coworkers without rebuilding it by hand each time. A more general purpose sensing \emph{core} can be added to new prototypes, necessitating that only the body of the design change each time \cite{doering-composition}: we build on this idea and leverage our knowledge of an object's geometry to improve it.
     
     We also examine another important question: how is functionality defined in interactive prototypes? Software can be automated using screenshots as in Sikuli \cite{yeh-sikuli}, or with visual ``block''-based programming languages that are accessible to even children \cite{resnick-scratch}. Programming by demonstration can also aid novices in developing interactive applications with sensor components \cite{hartmann-dtools}, similarly functionality can be inferred from wireframe mockups of applications \cite{li-framewire}. To integrate hardware and software functionality, some researchers have explored augmented reality \cite{nam-AR} or projection \cite{akaoka-displayobjects} techniques to allow interactions to be defined only in code without functional hardware; recent online tools like 123D Circuits allow for simulating hardware and testing code for it without requiring the physical circuit be built \cite{123dcircuits}.
+    
+\subsection{Conclusion}
+
+We have discussed related work from simulation, sensing, 3D modeling, and prototyping tools, and described how our work fits into and links these different research areas. We will now dive into each of our projects.
