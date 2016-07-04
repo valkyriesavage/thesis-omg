@@ -1,4 +1,4 @@
-\chapter{Conclusions \& Future Work}
+\chapter{Future Work \& Concluding Remarks}
 
 \begin{quote}
 When I look into the future, it's so bright it burns my eyes.
@@ -8,19 +8,19 @@ When I look into the future, it's so bright it burns my eyes.
 
 This thesis has presented techniques for leveraging and modifying digital geometry of objects to aid in creating fast, cheap, and flexible prototyping tools. We conclude with a restatement of our contributions, as well as pointers to future work.
 
-\section{Restatement of Contributions}
+%\section{Restatement of Contributions}
 
-We presented a design space describing how to interlink geometry and sensing for digitally-fabricated prototype objects, as well as a series of explorations in promising areas of the design space. Specifically, we contributed:
+%We presented a design space describing how to interlink geometry and sensing for digitally-fabricated prototype objects, as well as a series of explorations in promising areas of the design space. Specifically, we contributed:
 
-\input{contributions}
+%\input{contributions}
 
 \section{Future Work}
 
-Over the course of describing this thesis's contributions, we have pointed to a variety of limitations and possible improvements per-project. In general, we see open sourcing the projects and making their prototypes more mobile to be interesting engineering and research tasks. All three projects use sensing types common to today's mobile smart phones (capacitive touch, microphone-based audio, and camera-based video), and additional engineering could better leverage those and other sensors already available to designers from within their environment.
+Over the course the thesis, we have pointed to a variety of limitations and possible improvements per-project. In general, we see open sourcing the projects and making their prototypes more mobile to be interesting engineering and research tasks. All three projects use sensing types common to today's mobile smart phones (capacitive touch, microphone-based audio, and camera-based video), and additional engineering could better leverage those and other sensors already available to designers from within their environment.
 
 Beyond per-project improvements, we have laid out a design space for linking geometry to sensing. Midas, Lamello, and Sauron each represent a single point in this design space, and fuller exploration of the space may lead to companion projects to those described here. In particular, the advent of multi-material polyjet 3D printers seems to open a wide variety of options for exploring colors, transparency, and flexibility as features in a sensing design space, and the Voxel8 \cite{voxel8} printer, which can lay arbitrary conductive materials and plastic together in a single pass, points to opportunities to explore induction or magnetism as sensing operations.
 
-Overall, we recognize that there are several assumptions made by the projects presented in this dissertation. Namely, our projects leverage a \emph{single fabrication machine} \valkyrie{lamello doesn't have to} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer and sensed by a \emph{single} sensor. We discuss possibilities opened by willfully subverting each of these assumptions in turn.
+Overall, we recognize that there are several assumptions made by the projects presented in this dissertation. Namely, our projects leverage a \emph{single fabrication machine} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer and sensed by a \emph{single} sensor. We discuss possibilities opened by willfully subverting each of these assumptions in turn.
 
 \subsection{Cooperation among fabrication machines}
 
@@ -36,11 +36,11 @@ The projects described in this dissertation have largely focused on single fabri
 
 \subsection{Branching prototypes}
 
-One important benefit of digital models of prototypes is that they become like code: they can be stored, shared, replicated, versioned, and unit-tested. Version-control website github \cite{github} in 2013 added a built-in viewer for STL files in user repositories on the site, offering a powerful tool for those who wished to version their physical designs. However, each design is hand-crafted by the designer. In the future, we would like to explore tools which can create likely \emph{spaces} of prototype designs given an initial seed from a designer, and which then allow testing multiple similar designs in parallel. Given the nature of the sensing performed by the toolkits presented, this type of small multiples testing should be as straightforward as re-attaching the sensing module to the new prototype; sensing interfaces and interactivity definitions are sufficiently divorced from the designer as to be portable across multiple physical instantiations of a design \valkyrie{that won't make sense to anyone but you}.
+One important benefit of digital models of prototypes is that they become like code: they can be stored, shared, replicated, versioned, and unit-tested. Version-control website github \cite{github} in 2013 added a built-in viewer for STL files in user repositories on the site, offering a powerful tool for those who wished to version their physical designs. However, each design is hand-crafted by the designer. In the future, we would like to explore tools which can create likely \emph{spaces} of prototype designs given an initial seed from a designer, and which then allow testing multiple similar designs in parallel. Given the nature of the sensing performed by the toolkits presented, this type of small multiples testing should be as straightforward as re-attaching the sensing module to the new prototype.
 
 \subsection{Machine-optimized prototype designs}
 
-While describing a design space and smartly selecting points in it to test in parallel seems cool \valkyrie{obviously reword}, another opportunity lies in automatic generation of digital interfaces to suit particular people and/or tasks. This is similar in theory to Cogtool \cite{john-cogtool}, which allows designers of web applications to demonstrate tasks for their interfaces, then optimizes the interface to make completion of those tasks as quick as possible for end-users.
+While describing a design space and smartly \emph{exploring} points in it to test in parallel could support a designer who has something in mind, another opportunity lies in automatic \emph{generation} of digital interfaces to suit particular people and/or tasks. This is similar in theory to Cogtool \cite{john-cogtool}, which allows designers of web applications to demonstrate tasks for their interfaces, then optimizes the interface to make completion of those tasks as quick as possible for end-users.
 
 We believe that there is significant territory to be explored in modeling users' individual capabilities as relevant to tangible input devices, as well as understanding how to create optimal inputs devices suited to specific tasks.
 
@@ -58,4 +58,6 @@ In the interest of reducing assembly time, all of our projects leverage a \emph{
 
 \section{Closing Remarks}
 
-As computing moves off the desktop and into the world, we see an exploration of many varieties of input devices designed to suit new tasks. These new devices necessitate a new kind of prototyping, that does not rely fully on software but which can help create functional physical objects in a fast, cheap, and flexible way. Over the course of this dissertation, we have described digital fabrication as a means of accomplishing this: by linking a digital design to a completed physical object, we can shorten the drudgery associated with each iteration cycle. The research presented in this dissertation empowers designers to better envision and realize a broader range of such alternative futures for the post-desktop computing age. \valkyrie{harhar, that last sentence is bjoern's}
+As computing moves off the desktop and into the world, we see an exploration of many varieties of input devices designed to suit new and specific tasks. These new devices necessitate a new kind of prototyping, that does not rely fully on software but which can help create functional \emph{physical} objects in a fast, cheap, and flexible way. This dissertation has described digital fabrication as a means of accomplishing this: by linking a digital design to a completed physical object, we can shorten the drudgery associated with each iteration cycle. We have presented three examples of this: Midas performed sensor routing and used this knowledge to pre-program its capacitive sensor microcontroller and ensure assembly correctness. Lamello used 3D geometry to predict tines’ resonant frequencies for audio sensing. Sauron manipulated an object’s digital model to ensure that a single camera would be able to sense all the components inside, as well as to keep pieces from colliding in the hands of an end-user.
+
+This suite of tools, and the space that they explore, will hopefully empower designers to invent and hone designs for the future of interaction.
