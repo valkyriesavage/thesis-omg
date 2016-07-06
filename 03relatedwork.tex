@@ -8,7 +8,7 @@ If I have seen further, it is only by standing upon the shoulders of giants.
 
 Situating this thesis in the realm of prior work, we draw heavily on work from four major traditions: simulation, sensing, 3D modeling, and prototyping tools.
 
-\subsection{Simulation}
+\section{Simulation}
 
     The simulation community was one of the first to rally around digital fabrication: they have delved extensively into digital simulation of materials and behaviors, and the advent of hyper-precise 3D printers like the Objet Connex line\footnote{At time of publication, the Connex3 allowed for XY resoltion of $600$dpi, Z resolution of $1600$dpi, and accuracy of 20-85 microns. \url{http://www.stratasys.com/~/media/Main/Files/Machine_Spec_Sheets/PSS_PJ_Connex3.ashx}} allowed for a variety of real-world manifestations of these simulations.
     
@@ -20,7 +20,7 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
     
     This thesis will draw on the same theme of pre-fabrication simulation of materials and models. Certain types of sensing necessitate guaranteeing that a prototype will have specific material properties, however our focus does not end with the fabricated object itself. We use information from the model to inform our sensing techniques and to develop interactive prototypes.
     
-\subsection{3D CAD Tools}
+\section{3D CAD Tools}
     Tools for 3D modeling are becoming more useful and usable as 3D printers become more accessible. Powerful industrial modeling tools, like SolidWorks \cite{solidworks}, AutoCAD \cite{autocad}, ProEngineer \cite{proe}, and Rhino \cite{rhino}, have existed for years and served industrial designers and professional engineers very well. Makers find lower-threshold, lower-ceiling tools like Meshmixer \cite{schmidt-meshmixer} suitable for their needs. However, research has investigated more accessible ways of modeling objects.
     
     Creating an object that fits with existing hardware has been explored using Kinect-based scans of objects \emph{in situ} \cite{molyneaux-kinectfusion, weichel-mixfab} or photographs \cite{lau-modeling}, or intelligent capture of object dimensions with measuring tapes \cite{lee-handscape,weichel-spata}. Other work has explored tangible manipulation of building blocks \cite{anderson-tangible, gupta-duplotrack} or clay models \cite{savage-mmarks}. 3D models can even be created from sketches, by exploiting prior knowledge of post-fabrication material properties \cite{mori-plushie, saul-sketchchair}. Our work touches on 3D modeling, however we focus on augmenting existing 3D models with sensing rather than creating new ones from scratch.
@@ -29,7 +29,7 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
     
     Sensing modules can be the primary driver of an object's form factor, for example by allowing designers to drag the modules around digitally and re-forming a shape that will hold them all \cite{weichel-enclosed}. This technique could be useful as an add-on for our tools, but we focus on sensing rather than authoring 3D case forms. Pipe structures for joining sensors to microcontroller boards can allow for additional flexibility in design \cite{savage-sot}, however this requires that the designer has intimate knowledge of the sensing techniques to be used. Our tools build in knowledge of the sensing paradigm, relieving that burden from designers and allowing additional redesign flexibility versus one-off, hand-created sensor routings \cite{navarrette-gps, park-microchannels}.
 
-\subsection{Sensing Techniques}
+\section{Sensing Techniques}
 
     %\valkyrie{not all of these are for fabbed objects, but a slightly broader swath of sensing techniques definitely needs to be discussed here. segmenting into fabbed vs. not doesn't really draw a bright line of any kind, though, so... how to structure this part?}
     Research has likewise investigated a variety of ways for sensing manually- and digitally-fabricated devices, ranging from switches that close when a flexible object is bent \cite{slyper-structure} to audio frequencies swept through fabricated flutes \cite{laput-acoustruments}.
@@ -48,7 +48,7 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
         
         Actual user interaction with digitally fabricated objects has been explored, as well, most notably by Willis, et al. Printed Optics allows for sensing fabricated mechanisms (like sliders and buttons) via light shining through tiny channels embedded in a print \cite{willis-printedoptics}. This work inspired our own, though Printed Optics does not offer a design tool or a way of providing this sensing without extensive hand-programming.
 
-\subsection{Prototyping Tools}
+\section{Prototyping Tools}
 
     Our investigations in this thesis are ultimately looking at techniques for prototyping. There are many different types of prototypes: typically they are split into role, look-and-feel, and implementation \cite{houde-prototypes}. Within each of these types of prototype, there are opportunities to explore high-fidelity prototypes and low-fidelity prototypes. Our work seeks to help with high-fidelity look-and-feel and role prototypes; we recognize that our sensing techniques have some drawbacks as tools for final implementation (for example, the processing time required to recognize interactions using computer vision or audio).
     
@@ -58,6 +58,6 @@ Situating this thesis in the realm of prior work, we draw heavily on work from f
     
     We also examine another important question: how is functionality defined in interactive prototypes? Software can be automated using screenshots as in Sikuli \cite{yeh-sikuli}, or with visual ``block''-based programming languages that are accessible to even children \cite{resnick-scratch}. Programming by demonstration can also aid novices in developing interactive applications with sensor components \cite{hartmann-dtools}, similarly functionality can be inferred from wireframe mockups of applications \cite{li-framewire}. To integrate hardware and software functionality, some researchers have explored augmented reality \cite{nam-AR} or projection \cite{akaoka-displayobjects} techniques to allow interactions to be defined only in code without functional hardware; recent online tools like 123D Circuits allow for simulating hardware and testing code for it without requiring the physical circuit be built \cite{123dcircuits}.
     
-\subsection{Conclusion}
+\section{Conclusion}
 
 We have discussed related work from simulation, sensing, 3D modeling, and prototyping tools, and described how our work fits into and links these different research areas. We will now dive into each of our projects.
