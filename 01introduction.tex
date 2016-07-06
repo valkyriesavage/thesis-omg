@@ -11,20 +11,20 @@ Our environment is replete with products that have dedicated physical user inter
 
 \begin{figure}
 \centering
-\includegraphics{figures/3dcases.png}
-\caption{Makers use 3D printing to explore case form factors for interactive objects, like Dave Mellis's mouse (left) or Thingiverse author srepmub's game controller (center). Even professional designers like those at Microsoft use 3D printing for form-finding (right). However, this technique requires two separate processes: designing the case, then designing the functionality, typically in the form of circuitboards.}
+\includegraphics[width=\textwidth]{figures/3dcases.png}
+\caption{Makers use 3D printing to explore case form factors for interactive objects, like Dave Mellis's mouse (left, from \url{https://www.flickr.com/photos/mellis/5644225593/in/album-72157626129511674/}, CC BY) or Thingiverse author srepmub's game controller (center, from \url{http://www.thingiverse.com/thing:337896}, by permission). Even professional designers use 3D printing for form-finding. However, this technique requires two separate processes: designing the case, then designing the functionality, typically in the form of circuitboards.}
 \label{fig:3dcases}
 \end{figure}
 
-Existing research has developed electronic toolkits that lower the threshold of making physical prototypes interactive \cite{arduino,greenberg-phidgets}. However, such toolkits still require makers to manually assemble printed parts and sensors. Such assembly may also require significant changes to a 3D model (e.g., to add fasteners or split an enclosure into two half shells). Detailed electro-mechanical co-design is time-consuming and cumbersome and mismatched with the spirit of rapid prototyping. Alternatively, makers may instrument their  \emph{environments} with sensors \cite{akaoka-displayobjects,wilson-depthtouch} to add interactivity, but these approaches limit interactive testing to the lab in small, restricted areas.
+Existing research has developed electronic toolkits that lower the threshold of making physical prototypes interactive \cite{arduino,greenberg-phidgets}. However, such toolkits still require makers to manually assemble printed parts and sensors. Such assembly may also require significant changes to a 3D model (e.g., to add fasteners or split an enclosure into two half shells). Detailed electro-mechanical co-design is time-consuming and cumbersome and mismatched with the spirit of rapid prototyping. Alternatively, makers may instrument their  \emph{environments} with sensors \cite{akaoka-displayobjects,wilson-depthtouch}, setting up specially-calibrated cameras and projectors to add interactivity, but these approaches limit interactive testing to the lab in small, restricted areas.
 
-\emph{We aim to uncover the most cost-effective, fast, and flexible ways of sensing rapid-prototyped input devices.} This suggests several requirements:
+\emph{We aim to uncover the most cost-effective, fast, and flexible ways of sensing digitally-fabricated input devices.} This suggests several requirements:
 \begin{enumerate}
 \item \textbf{cost-effective} : we substitute commodity sensors available in laptops and smartphones for custom electronic parts where possible. We focus on \emph{single-sensor} techniques, where sensing of multiple user inputs can be achieved by affixing a sensing apparatus to a single point, thereby reducing cost and assembly overhead.
-\item \textbf{fast} : fabrication and assembly of senseable devices should not take significantly longer than comparable passive devices, and necessary digital modifications should be performed automatically when complex or be reduced to templates when simple.
+\item \textbf{fast} : fabrication and assembly of senseable devices should not take significantly longer than comparable passive devices. Necessary digital modifications should be performed automatically when they involve complex or global changes, or be reduced to templates that the user may drag in when simple.
 \item \textbf{flexible} : the means of sensing a prototype object should not impose undue burden on the physical designs of that object. Sensing techniques should accommodate a wide variety of input types (e.g., buttons, sliders, and dials) and body types (e.g., convex, concave, 3D).
 \end{enumerate}
-We propose a novel way of ensuring these properties: users create digital design files, which our tools modify automatically based on knowledge of the sensing technique that will ultimately be used. Users then fabricate their modified models using digital fabrication machines. Because the physical models are precisely fabricated based on the digital design files, this process creates a \emph{link between the digital and physical models}. Post-fabrication, we leverage this link to inform sensor processing: this allows us to \emph{avoid training} and/or \emph{improve sensing} for the interactive prototype.
+We propose a novel way of ensuring these properties: users create digital design files, which our tools modify automatically based on knowledge of the sensing technique that will ultimately be used. Users then fabricate their modified models using digital fabrication machines. Because the physical models are precisely fabricated based on the digital design files, this process creates a \emph{link between the digital and physical models}. Post-fabrication, we leverage this link to inform sensor processing: that is, we feed digital model data to our sensing algorithm, from which the algorithm extracts information about dimensions and input components, predicts information about properties, or calculates other relevant details. This allows us to \emph{avoid training} and/or \emph{improve sensing} for the interactive prototype.
 
 \section{Contributions}
 
@@ -36,13 +36,13 @@ This thesis explores the realm of physically prototyping tangible input devices 
 
 This section presents a brief outline of the structure of this dissertation by chapters.
 
-This dissertation first investigates the capabilities of modern digital fabrication machines and discusses sensing techniques compatible with those capabilities. Second, a solid foundation of related work is laid out. We then discuss three instances of analysis and design tools that help users design, fabricate, assemble, and \emph{use} input devices sensed in a variety of ways; for each technique we demonstrate its flexibility for use in many types of input devices. Finally, we conclude with suggestions for future work.
+This dissertation first investigates the capabilities of modern digital fabrication machines and discusses sensing techniques compatible with those capabilities. Second, we lay out a solid foundation of related work. We then discuss three instances of analysis and design tools that help users design, fabricate, assemble, and \emph{use} input devices sensed in a variety of ways; for each technique we demonstrate its flexibility for use in many types of input devices. Finally, we conclude with suggestions for future work.
 
 \subsection{Fabrication \& Sensing (Chapter 2)}
 
 This chapter explores modern digital fabrication machines---3D printers, laser cutters, and CNC mills, among others---and the properties that can be employed in objects they fabricate. We break down these properties, specifying which are inherent to materials, which are inherent to particular production processes, and which machines can currently realize objects with which properties.
 
-Chapter 2 further discusses sensing techniques compatible with those capabilities, as well as what makes each technique promising. Again, we focus on techniques which require a single sensing apparatus attached to a single point on an object. For example, we discuss the potential combination of 3D printed conductive metal with Hall effect sensors; inducing a current through the object could create a magnetic field detectable by the sensors. This thesis ultimately selects a few points to further examine in this space, described in Chapters 4-6.
+Chapter 2 further discusses sensing techniques compatible with those capabilities, as well as what makes each technique promising for further investigation as a technique for sensing fabricated input device prototypes. Again, we focus on techniques which require a single sensing apparatus attached to a single point on an object. For example, we discuss the potential combination of 3D printed conductive metal with Hall effect sensors; running a current through the object could generate a magnetic field detectable by the sensors. This thesis ultimately selects a few points to further examine in this space, described in Chapters 4-6.
 
 \subsection{Related Work (Chapter 3)}
 
@@ -123,3 +123,5 @@ In particular, Midas's routing features were implemented by Xiaohan Zhang, and t
 My advisor, Bj\"orn Hartmann, provided invaluable advice and guidance on all projects detailed in this document.
 
 This dissertation is partially based on papers previously published in ACM conference proceedings; I am the primary author on all publications. In particular, Midas was published at UIST 2012 \cite{savage-midas}; Lamello at CHI 2014 \cite{savage-lamello}; and Sauron at UIST 2013 \cite{savage-sauron}.
+
+So, let's do this thing.

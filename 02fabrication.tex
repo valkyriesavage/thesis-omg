@@ -8,12 +8,26 @@ democratization they enable promises to unleash creativity
 and innovation at a level comparable to those brought about
 by the personal computer and the internet.
 
---- Catarina Mota, \emph{The Rise of Personal Fabrication}
+--- Catarina Mota, \emph{The Rise of Personal Fabrication}\cite{mota-riseof}
 \end{quote}
 
-Our goal is to enable simple construction of input devices. The route that we choose to take for this is digital fabrication, as it allows us to create prototypes whose properties we can predict, control, and thereby sense. In essence, each input device takes a user action and transforms it through some type of mechanism. The mechanism is constructed from materials with various properties, and the combination of materials properties, user interaction, and transformative mechanism lead to a senseable change; all that's left is to select a sensor that can detect it. Thanks to digital fabrication, we can use our knowledge of the mechanism to be fabricated along with its predicted properties to make sensing easier.  For example, perhaps we desire to sense a user's physical movement (e.g., pushing, sliding, or turning). Some processes can create tine structures (cantilevered beams); when struck, these tines vibrate at frequencies determined by their geometry and material, so we place these tines under a printed mechanism that translates a user's action into tine plucks. Finally, we can sense the tines' vibrations with a microphone, and decode the signal for use in our application. We need not train the algorithm beyond giving it the digital design file---we can predict the tines' vibrational frequency from that and our knowledge of our selected material's properties.
+Our goal is to enable simple construction of input devices. The route that we choose to take for this is digital fabrication, as it allows us to create prototypes whose properties we can modify, predict, and thereby sense. As a framework to consider how this will work, we lay out the puzzle in five pieces:
 
-Stu Card, et al., describe the design space of input devices using movement operators (linear/rotary, absolute/relative, movement/force) and composition operators (merge, layout, connect); they represent each input device by detailing user manipulation, the input space, the device's current state, the resolution or mapping function from input space to output space, the output space, and ``additional aspects of how a device works'' \cite{card-input}. Since our focus is on the \emph{construction} of such input devices, we refer the interested reader to Card, et al.,'s description of user inputs and possible mechanisms therefor. This chapter will describe the spaces of materials properties, modern digital fabrication machines, and sensors. Further, we will discuss potential ``links'' between these, as in the tine example above.
+\begin{enumerate}
+    \item User action
+    \item Transformative mechanism
+    \item Material characteristic
+    \item Senseable change
+    \item Sensor selection
+\end{enumerate}
+
+Each input device designed under our paradigm takes a user action and transforms it through some type of mechanism. The mechanism is constructed from materials with various properties, and the combination of materials properties, user interaction, and transformative mechanism lead to a senseable change; all that's left is to select a sensor that can detect it.
+
+Thanks to digital fabrication, we can use our knowledge of the mechanism to be fabricated along with its predicted properties to make sensing easier. For example, perhaps we desire to sense a user's physical \emph{action} (e.g., pushing, sliding, or turning). Some processes can create tine structures (cantilevered beams); we place these tines under a printed mechanism that \emph{transforms} a user's action into tine plucks. When struck, these tines vibrate at frequencies determined by their geometry and \emph{material}; the knowledge of these two things and the fact that our chosen material is rigid and sound-conducting means that we have a senseable \emph{change} in the form of vibration (sound). We can \emph{sense} the tines' vibrations with a microphone, and decode the signal for use in our application. We need not train the algorithm beyond giving it the digital design file---we can predict the tines' vibrational frequency from that and our knowledge of our selected material's properties.
+
+\section{User Actions and Transformative Mechanisms}
+
+Stu Card, et al., describe the design space of input devices using movement operators (linear/rotary, absolute/relative, movement/force) and composition operators (merge, layout, connect); they represent each input device as a tuple detailing user manipulation, the input space, the device's current state, the resolution or mapping function from input space to output space, the output space, and ``additional aspects of how a device works'' \cite{card-input}. Since our focus is on the \emph{construction} of such input devices, we refer the interested reader to Card, et al.,'s description of user inputs and possible transformative mechanisms therefor. This chapter will describe the spaces of materials properties (and how they relate to modern digital fabrication machines) and sensors. Further, we will discuss potential ``links'' between these, as in the tine example above.
 
 \section{Definitions}
 
@@ -49,9 +63,9 @@ First, we briefly define words and machines that will be discussed in this chapt
 
 \end{description}
 
-These definitions are duplicated for convenience in Appendix A.
+These definitions are duplicated for convenience in Appendix B.
 
-\section{Digital Fabrication}
+\section{Material Characteristics (and Digital Fabrication)}
 
 Digital fabrication machines are those which can take as input a digital design file, in 2D, 2.5D, or 3D, and output a physical realization of that design. A design created in a computer-aided design (CAD) tool is processed by a computer-aided manufacturing (CAM) tool to create machine instructions to generate the object. This workflow stands in contrast to traditional crafting techniques (which do not require machine code) as well as traditional manufacturing techniques (which require ``tooling'' for each design created). The true power of digital fabrication lies in its ability to create unique objects on each machine run \emph{without} the extensive setup and tooling necessary to change the product created by, for example, an injection moulding machine. This comes with the blessing and curse that each instance of an object costs as much to manufacture as the one before it, but allows for variations between instances without additional cost. For example, even makers can now create custom 3D printed prosthetics that fit particular bodies, e.g., a new hand for a young girl who wants to play on the playground \cite{myers-sophie}.
 
@@ -74,7 +88,7 @@ Materials may have a wide variety of appearance characteristics. For example, pl
 
 \subsubsection{Rigidity and Hardness}
 
-A material's rigidity or hardness affords particular kinds of actions: in particular bending (also known as flexure) can be afforded by either an object's geometry or its material properties. Geometrically, a long thin object can often can be bent whether it is flexible or rigid.  However, most objects fabricated from flexible materials can be bent, while more rigid ones typically do not encourage bending actions. Hardness, which describes a material's resistance to permanent shape change when compressed, can be measured using Shore hardness.
+A material's rigidity or hardness affords particular kinds of actions: in particular bending (also known as flexure) can be afforded by either an object's geometry or its material properties. Geometrically, a long thin object can often can be bent whether it is flexible or rigid. However, most objects fabricated from flexible materials can be bent, while more rigid ones typically do not encourage bending actions. Hardness, which describes a material's resistance to permanent shape change when compressed, can be measured using Shore hardness.
 
 \subsubsection{Conductivity}
 
@@ -130,7 +144,7 @@ Additive machines also permit deviation from a material's original characteristi
 \begin{figure}
 \centering
 \includegraphics[width=4in]{figures/infills.jpg}
-\caption{FFF machines can lay plastic to create a variety of material compositions, ranging from hollow to sparse to solid. Here, we see a variety of compositions, arranged in order of percent(material/air). (from think3d.in)}
+\caption{FFF machines can lay plastic to create a variety of material compositions, ranging from hollow to sparse to solid. Here, we see a variety of compositions, arranged in order of percent(material/air) (Thingiverse user CreativeTools, from \url{http://www.thingiverse.com/thing:85711}, CC BY)}
 \label{fig:composition}
 \end{figure}
 
@@ -141,7 +155,7 @@ Digital fabrication machines can support any complexity of geometry, from 2D ima
 \begin{figure}
 \centering
 \includegraphics[width=4in]{figures/range.png}
-\caption{The range of objects produceable via digital fabrication is huge: from 2D images on paper (left, from Amazon), to 3D projections of 4D objects (right, from Bathsheba on Shapeways).}
+\caption{The range of objects produceable via digital fabrication is huge: from 2D images on paper (left, David Mellis on Flickr, from \url{https://www.flickr.com/photos/mellis/5298037920/}, CC BY) \valkyrie{swap out this image!}, to 3D projections of 4D objects (right, Bathsheba on Shapeways, from \url{http://www.shapeways.com/product/LR5J593S8/klein-bottle-opener}, by permission).}
 \label{fig:range}
 \end{figure}
 
@@ -244,4 +258,3 @@ The spaces of materials, properties, geometries, and sensors are vast: we lay ou
 \section{Conclusion}
 
 We have laid out the current state of digital fabrication, as well as listed material and geometric properties achievable using the various methods currently available. Further, we described ways of combining these properties with sensors that could detect user input in order to create human input devices. Now, we will move on to discussing related work, then our design tests one at a time.
-

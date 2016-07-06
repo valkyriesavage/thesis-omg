@@ -1,21 +1,6 @@
 \begin{enumerate}
 \item Fabbing to sense: a model and sensing co-design technique which uses knowledge of a particular sensing paradigm to automatically modify digital design files before fabrication, allowing improved or training-free sensing of the fabricated prototype. We offer three exemplars of this technique: Midas, Lamello, and Sauron.
-\item Midas, a method for automatically generating custom capacitive touch sensors---cut from adhesive-backed conductive foil---by synthesizing sensor pads and routing connections from a high-level graphical specification:
-%which allows a designer to author a high-level graphical specification of an object---and from that creates custom-shaped, flexible capacitive touch sensors by synthesizing sensor pads, auto-routing connections, and generating instructions for assembly and use: 
-\begin{enumerate}
-    \item a design tool using this method to enable users to to fabricate, program, and share touch-sensitive prototypes
-    \item an evaluation demonstrating Midas's expressivity and utility to designers
-    \end{enumerate}
-\item Lamello, a technique using passive plastic tine structures, 3D printed at interaction points and with predictable vibrational frequencies, to create passive tangible inputs sensed via audio:
-%a technique which integrates algorithmically-generated audio-producing tine structures into movable components, creating passive tangible inputs---sensed by a microphone which classifies the tine-generated audio---that do not require training examples for accurate sensing:
-\begin{enumerate}
-    \item a design pipeline which predicts tine frequencies (and an evaluation that they can be accurately predicted) and senses user manipulation of components in real time
-    \item a discussion of information encoding techniques useful for this technique, and a series of scripts to generate parts utilizing these encodings
-    \end{enumerate}
-\item Sauron, a design tool enabling users to rapidly turn 3D models of input devices into interactive 3D printed prototypes where a single camera senses input: %\valkyrie{this is the clearest description. modify others to be like this!}
-\begin{enumerate}
-    \item a method for tracking human input on physical components using a single camera placed inside a hollow object
-    \item two algorithms for analyzing and modifying a 3D model's internal geometry to increase the range of manipulations that can be detected by a single camera.
-    \item an informal evaluation of our implementation of these techniques usable on models constructed in a professional CAD tool.
-    \end{enumerate}
+\item Midas, a method for automatically generating custom capacitive touch sensors---cut from adhesive-backed conductive foil---by synthesizing sensor pads and routing connections from a high-level graphical specification. We also demonstrate a \emph{design tool} using this method to enable users to fabricate, program, and share touch-sensitive prototypes. Using our tool, we describe an evaluation demonstrating Midas's expressivity and utility to designers
+\item Lamello, a technique using passive plastic tine structures, 3D printed at interaction points and with predictable vibrational frequencies, to create passive tangible inputs sensed via audio. We describe a \emph{design pipeline} which predicts tine frequencies (and an evaluation that they can be accurately predicted) and senses user manipulation of components in real time. We also include a discussion of information encoding techniques useful for this technique, and a series of scripts to generate parts utilizing these encodings.
+\item Sauron, a design tool enabling users to rapidly turn 3D models of input devices into interactive 3D printed prototypes where a single camera senses input. We detail our method for tracking human input on physical components using a single camera placed inside a hollow object, and two algorithms for analyzing and modifying a 3D model's internal geometry to increase the range of manipulations that can be detected by a single camera. Finally, we describe an informal evaluation of our \emph{implementation} of these techniques usable on models constructed in a professional CAD tool.
 \end{enumerate}
