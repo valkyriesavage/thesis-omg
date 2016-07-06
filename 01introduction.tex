@@ -28,7 +28,7 @@ We propose a novel way of ensuring these properties: users create digital design
 
 \section{Contributions}
 
-This thesis explores the realm of physically prototyping tangible input devices using digital fabrication machines. We have built several prototype design and sensing systems designed to test different parts of the design space. Thus, this thesis makes the following contributions:
+This thesis explores the realm of physically prototyping tangible input devices using digital fabrication machines, pushing towards a world in which prototyping physical interactive devices is as easy as prototyping GUI devices is today. We have built several prototype design and sensing systems designed to test different parts of the design space. Thus, this thesis makes the following contributions:
 
 \input{contributions}
 
@@ -49,7 +49,7 @@ Chapter 2 further discusses sensing techniques compatible with those capabilitie
 We lay out the existing research landscape, describing which parts may have been overlooked and explaining which areas we explore in this thesis. In general, we draw heavily on work from four major traditions: simulation, sensing digitally-fabricated devices, modeling 3D objects, and creating prototypes.
 
 \subsubsection{Simulation}
-Simulation was one of the first hooks into fabrication research. Pre-fabrication simulation can ensure good coverage from robotic spray heads without occlusion from model features \cite{gursoz-noodles}, or account for deformities from specific printing processes \cite{hsu-numerical}. More recently, computer graphics researchers have leveraged pre-print simulation of multi-material printers to control post-print deformation behaviors \cite{bickel-deformation} and appearance \cite{lan-appearance}. We, too, perform pre-print simulation and optimization of 3D models, but for the purpose of creating \emph{interactive} objects.
+Pre-fabrication simulation was one of the first explorations fabrication research. This kind of pre-processing can, for example, account for deformities from specific printing processes \cite{hsu-numerical}, or ensure occlusion-free toolpaths \cite{gursoz-noodles}. More recently, computer graphics researchers have leveraged pre-print simulation of multi-material printers to control post-print deformation behaviors \cite{bickel-deformation} and appearance \cite{lan-appearance}. We, too, perform pre-print simulation and optimization of 3D models, but for the purpose of creating \emph{interactive} objects.
 
 \subsubsection{3D CAD Tools}
 Many professional tools for 3D modeling exist \cite{solidworks, rhino}, and they serve their target users well. Researchers have made significant strides in inventing new styles of more accessible interactions for 3D modeling, for example by capturing users' hand-carving processes and converting them to toolpaths \cite{willis-interactive} or scanning, augmenting, and reproducing clay models \cite{savage-mmarks}. For the purposes of our investigations in this thesis, we created design tools to help author objects compatible with our sensing techniques: they are a complement to, rather than a replacement for, existing CAD tools research.
@@ -58,13 +58,13 @@ Many professional tools for 3D modeling exist \cite{solidworks, rhino}, and they
 Sensing forms a key component of interactive devices, and thus has been significantly explored in the past. One common technique for sensing objects uses machine learning and guided manual training to detect interactions using sound \cite{ono-touchandactivate,laput-acoustruments}, capacitance \cite{sato-touche} or other signals. Our techniques focus on sensing done without machine learning, and often without any training at all. Inspired by ``Sensing through Structure'' \cite{slyper-structure}, we design objects whose properties we know, which can inform how we sense them.
 
 \subsubsection{Prototyping Tools}
-Abundant research has examined questions around the types of prototypes that designers build in the course of designing a new object \cite{houde-prototypes}. Other work looks further into more facile ways of creating electronic and functional, for example using snap-together circuits \cite{littleBits, hartmann-dtools, villar-gadgeteer} or smart circuit substrates \cite{villar-voodooio}. One important limitation of these investigations is that they are limited to a constrained library of manufactured components: designers must make do with what they can buy. We conversely focus on customizable inputs that can be configured exactly as a designer wants them. Once an object is assembled, its functionality must be defined. We leverage techniques like programming by demonstration (PBD) \cite{myers-pbd, hartmann-dtools} to help users define their objects' interactivity.
+Abundant research has examined questions around the types of prototypes that designers build in the course of designing a new object \cite{houde-prototypes}. Other work looks further into more facile ways of creating functional electronic devices, for example using snap-together circuits \cite{littleBits, hartmann-dtools, villar-gadgeteer} or smart circuit substrates \cite{villar-voodooio}. One important limitation of these investigations is that they are limited to a constrained library of manufactured components: designers must make do with what they can buy. We conversely focus on customizable inputs that can be configured exactly as a designer wants them, and these customizations can be performed \emph{in software} on a digital model. Once an object is assembled, its functionality must be defined. We leverage techniques like programming by demonstration (PBD) \cite{myers-pbd, hartmann-dtools} to help users define their objects' interactivity, however our focus is on design of the objects themselves.
 
 %% \valkyrie{bjoern's these are really long... how long do they need to be??}
 
 \subsection{Midas: Capacitive Sensing of Custom 2D Layouts (Chapter 4)}
 
-Our first exploration examines fabrication of 2D conductive materials sensed capacitively. Midas pushes towards a world in which prototyping physical interactive devices is as easy as prototyping GUI devices. Midas's sensing is capacitive, building on the popular capacitive touch sensing built in to smart phones and other touch-screen devices, but it explores how to prototype touch-based interactions where input and output are \emph{not} co-located, as they are on touch screens. Designers are given a drag-and-drop authoring system to create capacitive touchpads on the surface of objects, and from these designs generates 2D design files for fabrication. These files can then be cut from a conductive material and sensed using an automatically-configured microcontroller board. Midas also offers support for programming the input devices designed via PBD and websockets.
+Our first exploration examines fabrication of 2D conductive materials sensed capacitively. Midas explores how to prototype touch-based interactions where input and output are \emph{not} co-located, as they are on touch screens. Designers are given a drag-and-drop authoring system to create capacitive touchpads on the surface of objects, and from these designs generates 2D design files for fabrication. These files can then be cut from a conductive material and sensed using an automatically-configured microcontroller board. Midas also offers support for programming the input devices designed via PBD and websockets.
 
 \begin{figure}
 \centering
@@ -73,7 +73,7 @@ Our first exploration examines fabrication of 2D conductive materials sensed cap
 \label{fig:midas-intro}
 \end{figure}
 
-The advantages of capacitive sensing in this manner are numerous. It can be deployed on any flat, ruled, or developable object's surface (see Figure \ref{fig:midas-intro}). The sensors are cheap and easy to fabricate---whether on a vinyl cutter, using a circuitboard mill, or in inkjet printed conductive ink. Sensor assembly is \emph{fast}: users simply need to attach the sensor dongle's wires to their fabricated sensor pads (e.g., using tape).
+The advantages of capacitive sensing in this manner are numerous. It can be deployed on any flat, singly curved, or developable object's surface (see Figure \ref{fig:midas-intro}). The sensors are cheap and easy to fabricate---whether on a vinyl cutter, using a circuitboard mill, or in inkjet printed conductive ink. Sensor assembly is \emph{fast}: users simply need to attach the sensor dongle's wires to their fabricated sensor pads (e.g., using Z-axis transfer tape).
 
 In this chapter, we will detail Midas's implementation, as well as discussing possible uses, drawbacks of the current system, and work for the future.
 
@@ -96,7 +96,7 @@ This chapter details our experiments confirming that our 3D-printed tine structu
 
 Finally, we explore full 3D input devices sensed using computer vision. Sauron is a design and sensing toolkit for creating 3D printed input devices---which can include components like joysticks or dials---sensed with a single embedded camera. The Sauron tool makes automatic modifications to allow for this sensing, reconfiguring the \emph{interior} parts of the inputs and performing interference simulation (see Figure \ref{fig:sauron-intro}).
 
-Sauron's interfaces have additional flexibility over those for Midas or Lamello: they allow \emph{continuous} sensing of user input. They can be fabricated on any 3D printer which can generate support material, and the pre-fabrication simulation process relies only on geometry rather than any particular materials properties for its processing. %\valkyrie{not sure what else to put here...}
+Sauron's interfaces have additional flexibility over those for Midas or Lamello: they allow \emph{continuous} sensing of user input. Sliders need not be composed of individual capacitive sensors or a series of tines, but any arbitrary position along the track may be sensed. They can be fabricated on any 3D printer which can generate support material, and the pre-fabrication simulation process relies only on geometry rather than any particular materials properties for its processing. %\valkyrie{not sure what else to put here...}
 
 In this chapter we describe our implementation of Sauron as a plugin for a commercial CAD tool, as well as the vision sensing code we built. Finally, we elaborate on limitations of the current system and places we may improve it, as well as future work in the area.
 
@@ -107,9 +107,11 @@ In this chapter we describe our implementation of Sauron as a plugin for a comme
 \label{fig:sauron-intro}
 \end{figure}
 
+In this chapter we describe our implementation of Sauron as a plugin for a commercial CAD tool, as well as the vision sensing code we built. Finally, we elaborate on limitations of the current system and places we may improve it, as well as future work in the area.
+
 \subsection{Conclusion \& Future Work (Chapter 7)}
 
-The final piece of this thesis reviews the contributions described and re-evaluates assumptions made in the projects constituting its main chapters. Namely, our projects leverage a \emph{single fabrication machine} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer and sensed by a \emph{single} sensor. Re-evaluating these leads to interesting pointers for future work in cooperation among fabrication machines, branching prototypes, machine-optimized prototype designs, and usage of combination sensors that can still be mounted at a single point.
+The final piece of this thesis reviews the contributions described and re-evaluates assumptions made in the projects constituting its main chapters. Namely, our projects leverage a \emph{single fabrication machine} for creating \emph{one prototype} at a time, which is \emph{hand-optimized} by a designer and sensed by a \emph{single} sensor. Re-evaluating these leads to interesting pointers for future work in ecologies of multiple fabrication machines, branching prototypes, machine-optimized prototype designs, and usage of combination sensors that can still be mounted at a single point.
 
 \section{Statement of Multiple Authorship and Prior Publication}
 
