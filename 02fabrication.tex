@@ -21,9 +21,16 @@ Our goal is to enable simple construction of input devices. The route that we ch
     \item Sensor selection
 \end{enumerate}
 
-Each input device designed under our paradigm takes a user action and transforms it through some type of mechanism. The mechanism is constructed from materials with various properties, and the combination of materials properties, user interaction, and transformative mechanism lead to a senseable change; all that's left is to select a sensor that can detect it.
+Each input device designed under our paradigm takes a user action and transforms it through some type of mechanism. The mechanism is constructed from materials with various properties, and the combination of materials properties, user interaction, and transformative mechanism lead to a senseable change; all that's left is to select a sensor that can detect it. This flow relates to the concept that input devices are like onions, with many transformative layers between a user's action and the use of the sensed data (see Figure \ref{fig:onions}).
 
-Thanks to digital fabrication, we can use our knowledge of the mechanism to be fabricated along with its predicted properties to make sensing easier. For example, perhaps we desire to sense a user's physical \emph{action} (e.g., pushing, sliding, or turning). Some processes can create tine structures (cantilevered beams); we place these tines under a printed mechanism that \emph{transforms} a user's action into tine plucks. When struck, these tines vibrate at frequencies determined by their geometry and \emph{material}; the knowledge of these two things and the fact that our chosen material is rigid and sound-conducting means that we have a senseable \emph{change} in the form of vibration (sound). We can \emph{sense} the tines' vibrations with a microphone, and decode the signal for use in our application. We need not train the algorithm beyond giving it the digital design file---we can predict the tines' vibrational frequency from that and our knowledge of our selected material's properties.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/onions.png}
+\caption{Input devices are like onions, with many layers of processing between the user's action and actual interface code (from \cite{follmer-input}, by permission).} 
+\label{fig:onions}
+\end{figure}
+
+Thanks to digital fabrication, we can use foreknowledge of the mechanism to be fabricated along with its predicted properties to make sensing easier. For example, perhaps we desire to sense a user's physical \emph{action} (e.g., pushing, sliding, or turning). Some processes can create tine structures (cantilevered beams); we place these tines under a printed mechanism that \emph{transforms} a user's action into tine plucks. When struck, these tines vibrate at frequencies determined by their geometry and \emph{material}; the knowledge of these two things and the fact that our chosen material is rigid and sound-conducting means that we have a senseable \emph{change} in the form of vibration (sound). We can \emph{sense} the tines' vibrations with a microphone, and decode the signal for use in our application. We need not train the algorithm beyond giving it the digital design file---we can predict the tines' vibrational frequency from that and our knowledge of our selected material's properties.
 
 \section{User Actions and Transformative Mechanisms}
 
