@@ -179,7 +179,7 @@ We begin by assuming that all device surfaces are candidates for mirror placemen
 20x20 rays because of limitations of the SolidWorks API, in which a single trace takes up to 250ms. A more efficient reimplementation can increase rays to one per camera pixel.
 
 The raytracing algorithm also finds occlusions. If a component %, after being extruded or ``found'' by a mirror, 
-is not the first object hit by any direct rays cast or any rays reflected off the main body, the user is alerted that the component needs to be moved or manually modified because it is out of the camera's view. For example, in a case with two buttons in a row and the camera's view parallel to the row, if mirror placement is not possible then the rear button would trigger this alert because all rays cast from the camera hit the front button first.
+is not the first object hit by any direct rays cast or any rays reflected off the main body, the user is alerted that the component needs to be moved or manually modified because it is out of the camera's view. For example, in a case with two buttons in a row and the camera's view parallel to the row, if mirror placement is not possible then the rear button would trigger this alert because all rays cast from the camera hit the front button first. Some cases of this type may be solveable using extrusion after the occlusion is detected: we did not implement this multi-stage correction in our prototype.
 
 Mirrors can also be used to redirect motion to increase its visibility. For example, buttons moving along the Z-axis (toward the camera) are harder to track than buttons that move in the XY plane. A 45 degree mirror placed next to the button can redirect visible motion. Our prototype does not automatically calculate the locations of these mirrors yet.
 
@@ -208,14 +208,7 @@ To increase visibility of the input components versus the background, we require
 \label{fig:sauron-distinctiveness}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=3in]{figures/sauron/button-spring.jpg}
-\caption{Our components are designed so that springs may be inserted to restore components after user interaction: here is a spring inserted under a button.}
-\label{fig:sauron-spring}
-\end{figure}
-
-Because most current materials used for 3D printing are too brittle to create small compliant parts, users must add springs manually after printing (e.g., to restore buttons after being pressed). This limitation is not unique to Sauron. We designed our buttons to allow for insertion of springs using tweezers (see Figure \ref{fig:sauron-spring}). Any mirrors will need to be inserted as well. We use small craft mirrors which we affix to the printed device's interior surface with epoxy.
+Because most current materials used for 3D printing are too brittle to create small compliant parts, users must add springs manually after printing (e.g., to restore buttons after being pressed). This limitation is not unique to Sauron. We designed our buttons to allow for insertion of springs using tweezers (see Figure \ref{fig:sauron-instructions}, bottom right). Any mirrors will need to be inserted as well. We use small craft mirrors which we affix to the printed device's interior surface with epoxy.
 
 Sauron generates a basic set of step-by-step instructions, automatically displayed in the designer's browser, to assist in correct model assembly. These instructions include automatically-created screenshots of the model highlighting parts that require their attention and example images showing them how to apply mirrors and how to mark components (see Figure \ref{fig:sauron-instructions}).% for successful sensing.
 
