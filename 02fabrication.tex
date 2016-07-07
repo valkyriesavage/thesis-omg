@@ -53,6 +53,8 @@ First, we briefly define words and machines that will be discussed in this chapt
 
 \item[SLS] SLS (selective laser sintering) 3D printers contain a bed of material (e.g., metal powder) which is compacted and formed into a solid mass of material by heat and/or pressure without melting to the point of liquefaction. Excess material can be brushed off and reused.
 
+\item[binder jetting] Binder jetting is a powder-based printing technique similar to SLS, but instead of melting a powder together to create layers this method uses inkjet heads that drip a binder (e.g., epoxy) to adhere the powder particles. Unbound powder can be brushed off and reused.
+
 \item[PolyJet] PolyJet printers have print heads similar to those of inkjet printers which sweep across the build area depositing material. Following the printer head is a UV light, which cures deposited material droplets.
 
 \item[vinyl cutter] A vinyl cutter subtractively processes 2D materials with a 2-axis knife blade, cutting patterns into them. Vinyl cutters are typically used for thin, flexible materials.
@@ -88,9 +90,11 @@ Fabricated objects may afford certain types of manipulations and interactions du
 
 Materials may have a wide variety of appearance characteristics. For example, plastics can be transparent, translucent, or opaque. Paper can have color patterns or be plain white. Appearance characteristics affect the way light travels through an object: the object may reflect the light, scatter it, or allow it to pass through. By matching an object's index of refraction to the fluid surrounding it, the object can even appear to disappear.
 
-\subsubsection{Rigidity and Hardness}
+\subsubsection{Rigidity, Hardness, and Strength}
 
 A material's rigidity or hardness affords particular kinds of actions: in particular bending (also known as flexure) can be afforded by either an object's geometry or its material properties. Geometrically, a long thin object can often can be bent whether it is flexible or rigid. However, most objects fabricated from flexible materials can be bent, while more rigid ones typically do not encourage bending actions. Hardness, which describes a material's resistance to permanent shape change when compressed, can be measured using Shore hardness.
+
+Strength is related to rigidity and hardness, but rather than being a property of a material it is typically a property of a structure.
 
 \subsubsection{Conductivity}
 
@@ -98,7 +102,7 @@ Electrical properties may allow a material to be used as a part of a circuit. Me
 
 \subsection{Materials}
 
-The types of materials that can be processed using the various additive and subtractive RP machines is broad, and different materials may be more easily formed by different machines. We consider the four main types of materials used in digital fabrication for the purposes of this thesis: wood, plastic, paper, and metal. We also discuss common properties, as above, that they may exhibit and how these can affect options for fabricating them.
+The types of materials that can be processed using the various additive and subtractive RP machines is broad, and different materials may be more easily formed by different machines. We consider the four main types of materials used in digital fabrication for the purposes of this thesis: wood, plastic, paper, plaster, and metal. We also discuss common properties, as above, that they may exhibit and how these can affect options for fabricating them.
 
 \subsubsection{Plastic}
 
@@ -124,7 +128,11 @@ Wood-type materials are most commonly subtractively processed (e.g., by CNC rout
 
 \subsubsection{Paper}
 
-Paper is trivially subtractively processed. None of the four main 3D printing methods can use paper-based materials, though one subtractive/additive method uses stacks of cut paper to create 3D paper models (e.g., IRIS\footnote{Sold by MCor Technologies, \url{http://mcortechnologies.com/3d-printers/iris/}.}).
+Paper is trivially subtractively processed. None of the major 3D printing methods can use paper-based materials, though one subtractive/additive method uses stacks of cut paper to create 3D paper models (e.g., IRIS\footnote{Sold by MCor Technologies, \url{http://mcortechnologies.com/3d-printers/iris/}.}).
+
+\subsubsection{Plaster}
+
+Plaster (and its cousin, concrete) tend to be more rarely used than plastic, wood, paper, and metal, but they are gaining traction as researchers and engineers investigate the use of 3D printing for constructing large-scale structures like buildings. Plaster is typically used as a powder for binder jetting, as in ZCorp printers\footnote{ZCorp is now owned by 3D Systems, \url{www.zcorp.com/es/Products/3D-Printers/ZPrinter-650/spage.aspx}}, and can be colored by varying the color of the binder. On the other hand, concrete is typically fabricated by FFF printers: they extrude the concrete in its liquid state.
 
 \subsection{Machine Abilities}
 
