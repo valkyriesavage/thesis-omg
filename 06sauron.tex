@@ -73,7 +73,7 @@ Our main contribution is a design tool enabling users to rapidly turn 3D models 
 
 \subsubsection{Modeling} The designer creates a 3D model of her controller in a CAD tool like SolidWorks, placing buttons and joysticks from a library of available controls Sauron provides (Figure \ref{fig:sauron-step-by-step}A). Each library element is parameterized and customizable.
 
-\subsubsection{Adding a virtual camera} Using the Sauron CAD plug-in, she adds a 3D model of Sauron's camera to his assembly. This camera can be positioned anywhere on the model's surface, pointing inwards, into the interior of the hollow model. The designer then adds mount points for the camera so it can be attached with screws once she fabricates her controller.
+\subsubsection{Adding a virtual camera} Using the Sauron CAD plug-in, she adds a 3D model of Sauron's camera to her assembly. This camera can be positioned anywhere on the model's surface, pointing inwards, into the interior of the hollow model. The designer then adds mount points for the camera so it can be attached with screws once she fabricates her controller.
 
 \subsubsection{Visibility analysis} Sauron provides a ``quick check'' feature which allows the designer to quickly determine if components are directly within view of the camera or if they will require model modifications (Figure \ref{fig:sauron-step-by-step}B). %additional processing (extrusion or mirrors). 
 In our example, the joystick and direction pad in front of the camera are visible, so they are colored green. The bumper and rear buttons are not: they lie outside the camera's field of view and are marked red. 
@@ -157,7 +157,7 @@ Extrusion need not be limited to a single direction straight down from a compone
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/sauron/extrusion++.png}
-\caption{This prototype push-button component (A) can be extruded in multiple directions to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
+\caption{This prototype push-button component (A) can be extruded in multiple directions (i.e., along any of the parameterized base cylinders) to meet the camera's FOV cone (B). This offers more flexibility than the reflection solution, as it is fully printable without assembly.
 }
 \label{fig:sauron-extrusion-multi}
 \end{figure}
@@ -235,7 +235,7 @@ We run each camera frame through a series of steps: binarization, connected comp
 Users have to register components before they can be tracked. During the registration process, regions of interest for each component are determined. A designer is prompted by SolidWorks to actuate each of his components in turn, and a bounding region is created that encompasses all the points through which the component moved (Figure \ref{fig:sauron-vision-process}). These regions determine the relative position of the component within its bounds during the testing phase.
 
 In future work, we would like to explore more detailed simulation in the CAD environment. This could eliminate the physical registration phase by either generating and printing visual markers (and using sensing similar to \cite{doering-composition}) in a contrasting material, or by predicting the position of the components in the camera's image and sending that information to the vision software.
-
+\newpage
 \emph{Tracking}
 
 After registration, different detection algorithms apply to each input component. The techniques we use for each component are visualized in Figure \ref{fig:sauron-vision}.
@@ -323,7 +323,7 @@ In order to demonstrate that Sauron's sensing and fabrication technique fits our
     \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/sauron/shallow-models.png}
-\caption{These models found online were too shallow to sense with Sauron---occlusion and curvature would prevent correct sensing with computer vision. (Left, by user Mohamad Zulkiffli Bin Kamaruddin on GrabCAD, from \url{https://grabcad.com/library/ikhwani}, by permission. Right, by user Kevin Schneider on GrabCAD, from \url{https://grabcad.com/library/game-controler}, by permission.)}
+\caption{These models found online were too shallow to sense with Sauron---occlusion and curvature would prevent correct sensing with computer vision. (By user Kevin Schneider on GrabCAD, from \url{https://grabcad.com/library/game-controler}, by permission.)}
 \label{fig:sauron-premade}
 \end{figure}
 
