@@ -294,7 +294,7 @@ Midas employs an auto-routing algorithm to generate conductive
 traces connecting electrodes to the Midas touch controller.
 User-defined obstacles are avoided. We implement
 Lee's breadth-first maze routing algorithm for single layer
-paths \cite{lee-maze} (see Figure \ref{fig:midas-routing}). This algorithm selects a source and target (the source is the trace anchor for connecting to the microcontroller, the target is all pixels on the perimeter of the sensor). Then, beginning at the source, floods the grid by marking each viable pixel---i.e., pixels which are not on obstacles and which will not touch other sensors---with its distance from the source. When any of the target locations are reached, the algorithm traces back through the marked pixels, maintaining straight traces as much as possible, and generating a trace along the path selected. For 2D pads, we perform two independent routings:
+paths \cite{lee-maze} (see Figure \ref{fig:midas-routing}). This algorithm randomly selects a source and target (the source is the trace anchor for connecting to the microcontroller, the target is all pixels on the perimeter of the sensor). Then, beginning at the source, floods the grid by marking each viable pixel---i.e., pixels which are not on obstacles and which will not touch other sensors---with its distance from the source. When any of the target locations are reached, the algorithm traces back through the marked pixels, maintaining straight traces as much as possible, and generating a trace along the path selected. For 2D pads, we perform two independent routings:
 one for the row layer and one for the column layer. Our
 current algorithm does not generate vias (connections between
 different conductive layers). When auto-routing fails,
